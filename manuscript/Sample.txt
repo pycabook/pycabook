@@ -1,0 +1,3 @@
+part_0_introduction/chapter_01_introduction.md
+part_0_introduction/chapter_02_about_the_book.md
+part_0_introduction/chapter_03_setup_a_python_project.md
