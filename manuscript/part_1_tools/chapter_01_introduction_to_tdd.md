@@ -738,7 +738,7 @@ class Calc:
 {icon: github}
 B> Git tag: [step-7-float-division](https://github.com/pycabook/calc/tree/step-7-float-division)
 
-If you run the test suite again all the test should pass. There is a second requirement about this operation, however, that states that division by zero shall return the string `"inf"`. Now, this is obviously a requirement that I introduced for the sake of giving some interesting and simple problem to solve with TDD, as an API that returns either floats of strings is not really the best idea.
+If you run the test suite again all the test should pass. There is a second requirement about this operation, however, that states that division by zero shall return the string `"inf"`. Now, this is obviously a requirement that I introduced for the sake of giving some interesting and simple problem to solve with TDD, as an API that returns either floats or strings is not really the best idea.
 
 The test that comes from the requirement is simple
 
