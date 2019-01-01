@@ -185,7 +185,7 @@ Here, the `myobj.MyObj` class needs to connect to an external object, for exampl
  
 So the first thing we do in this test is to instantiate the mock object. This is a fake version of the external object, and its only purpose is to accept calls from the `MyObj` object under test and possibly return sensible values. Then we instantiate the `MyObj` class passing the external object. We expect the class to call the `connect` method so we express this expectation calling `external_obj.connect.assert_called_with()`.
 
-What happens behind the scenes? The `MyObj` class receives the fake external object and somewhere is its initialization process calls the `connect` method of the mock object. This call creates the method itself as a mock object. This new mock records the parameters used to call it and the subsequent call to its `assert_called_with` method checks that the method was called and that no parameters were passed.
+What happens behind the scenes? The `MyObj` class receives the fake external object and somewhere in its initialization process calls the `connect` method of the mock object. This call creates the method itself as a mock object. This new mock records the parameters used to call it and the subsequent call to its `assert_called_with` method checks that the method was called and that no parameters were passed.
 
 In this case an object like
 
@@ -486,7 +486,7 @@ def test_get_info():
 
 You clearly see the context in which the patching happens, as it is enclosed in a `with` statement. Inside this statement the module `os.path.abspath` will be replaced by a mock created by the function `patch` and called `abspath_mock`. So, while Python executes the lines of code enclosed by the `with` statement any call to `os.path.abspath` will return the `abspath_mock` object.
 
-The first this we can do, then, is to give the mock a known `return_value`. This way we solve the issue that we had with the initial code, that is using an external component that returns an unpredictable result. The line
+The first thing we can do, then, is to give the mock a known `return_value`. This way we solve the issue that we had with the initial code, that is using an external component that returns an unpredictable result. The line
 
 ``` python
         abspath_mock.return_value = test_abspath
@@ -696,7 +696,7 @@ When you try to execute this test you will get the following error
 TypeError: can't set attributes of built-in/extension type 'datetime.datetime'
 ```
 
-which is raised because patching tries to replace the `now` function in `datetime.datetime` with a mock, and being the module immutable this operation fails.
+which is raised because patching tries to replace the `now` function in `datetime.datetime` with a mock, and the module being immutable this operation fails.
 
 {icon: github}
 B> Git tag: [initial-logger-not-working](https://github.com/pycabook/fileinfo/tree/initial-logger-not-working)
@@ -740,7 +740,7 @@ Mocks are a good way to approach parts of the system that are not under test but
 
 In this cases we definitely crossed the barrier between unit testing and integration testing. You may see mocks as the bridge between the two, as they allow you to keep unit-testing parts that are naturally connected ("integrated") with external systems, but there is a point where you need to recognise that you need to change approach.
 
-This threshold is not fixed, and I can't give you a rule to recognise it, but I can give you some advice. First of all keep an eye on how many things you need to mock to make a test run, as an increasing number of mocks in a signle test is definitely a sign of something wrong in the testing approach. My rule of thumb is that when I have to create more than 3 mocks, an alarm goes off in my mind and I start questioning what I am doing.
+This threshold is not fixed, and I can't give you a rule to recognise it, but I can give you some advice. First of all keep an eye on how many things you need to mock to make a test run, as an increasing number of mocks in a single test is definitely a sign of something wrong in the testing approach. My rule of thumb is that when I have to create more than 3 mocks, an alarm goes off in my mind and I start questioning what I am doing.
 
 The second advice is to always consider the complexity of the mocks. You may find yourself patching a class but then having to create monsters like `cls_mock().func1().func2().func3.assert_called_with(x=42)` which is a sign that the part of the system that you are mocking is deep into some code that you cannot really access, because you don't know it's internal mechanisms. This is the case with ORMs, for example, and I will discuss it later in the book.
 
