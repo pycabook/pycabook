@@ -445,7 +445,7 @@ This solution makes both tests pass, so the entire suite runs without errors.
 {icon: github}
 B> Git tag: [step-2-adding-three-numbers](https://github.com/pycabook/calc/tree/step-2-adding-three-numbers)
 
-I can see your face, your are probably frowning at the fact that it took us 10 minutes to write a method that performs the addition of two or three numbers. On the one hand, keep in mind that I'm going at a very slow pace, being this an introduction, and for these first tests it is better to take the time to properly understand every single step. Later, when you will be used to TDD, some of these steps will be implicit. On the other hand, TDD is slower than untested development. After all you will write tests (sometimes many tests) for just a couple of lines of code, but here you
+I can see your face, your are probably frowning at the fact that it took us 10 minutes to write a method that performs the addition of two or three numbers. On the one hand, keep in mind that I'm going at a very slow pace, this being an introduction, and for these first tests it is better to take the time to properly understand every single step. Later, when you will be used to TDD, some of these steps will be implicit. On the other hand, TDD _is_ slower than untested development, but the time that you invest writing tests now is usually nothing compared to the amount of time you might spend trying to indentify and fix bugs later.
 
 ## Step 3 - Adding multiple numbers
 
