@@ -31,7 +31,7 @@ The second part introduces **the clean architecture**. The first chapter discuss
 
 ## Typographic conventions
 
-This book uses Python, so the majority of the code samples will being this language, either `inline` or in a specific code block
+This book uses Python, so the majority of the code samples will be in this language, either `inline` or in a specific code block
 
 ``` python
 def example():
