@@ -511,7 +511,7 @@ Pay attention here, please. In TDD a solution is not correct when it is beautifu
 
 [^testit]: yes, you can test it running a function and measuring the execution time. This however, depends too much on external conditions, so typically performance testing is done in a completely different way.
 
-Part of the TDD methodology, then, deals with "refactoring", which means changing the code in a way that doesn't change the outputs, which in turns means that all your tests keep passing. Once you have a proper test suite in place, you can focus on the beauty of the code, or you can introduce smart solutions according to which the language allows you to do.
+Part of the TDD methodology, then, deals with "refactoring", which means changing the code in a way that doesn't change the outputs, which in turns means that all your tests keep passing. Once you have a proper test suite in place, you can focus on the beauty of the code, or you can introduce smart solutions according to what the language allows you to do.
 
 {icon: graduation-cap}
 B> **TDD rule number 4**
@@ -851,7 +851,7 @@ B> Git tag: [step-8-multiply-by-zero](https://github.com/pycabook/calc/tree/step
 
 ## Step 9 - A more complex set of requirements
 
-Until now the requirements were pretty simple, so it's time to try to tackle a more complex problem. The remaining requirements say that the class has to provide a function to compute the average of an iterable, and that this function shall accepts two optional upper and lower thresholds to remove outliers.
+Until now the requirements were pretty simple, so it's time to try to tackle a more complex problem. The remaining requirements say that the class has to provide a function to compute the average of an iterable, and that this function shall accept two optional upper and lower thresholds to remove outliers.
 
 Let's break this two requirements into a set of simpler ones
 
@@ -1225,9 +1225,9 @@ In this chapter we developed the project from scratch, so the challenge was to c
 
 From the TDD point of view both a bug and a missing feature are a case not currently covered by a test, so I will refer to them collectively as bugs, but don't forget that I'm talking about the second ones as well. 
 
-The first thing you need to do is to write tests that expose the bug. This way you can easily decide when the code that you wrote is correct or good enough. For example, let's assume that a user file an issue on the `Calc` project saying: "The `add` function doesn't work with negative numbers". Your should definitely try to get a concrete example from the user that wrote the issue and some information about the execution environment (as it is always possible that the problem come from a different source, like for example an old version of a library your package relies on), but in the meanwhile you can come up with at least 3 tests: one that involves two negative numbers, one with a negative number as the first argument, and one with a negative numbers as the second argument.
+The first thing you need to do is to write tests that expose the bug. This way you can easily decide when the code that you wrote is correct or good enough. For example, let's assume that a user file an issue on the `Calc` project saying: "The `add` function doesn't work with negative numbers". You should definitely try to get a concrete example from the user that wrote the issue and some information about the execution environment (as it is always possible that the problem come from a different source, like for example an old version of a library your package relies on), but in the meanwhile you can come up with at least 3 tests: one that involves two negative numbers, one with a negative number as the first argument, and one with a negative numbers as the second argument.
 
-You shouldn't write down all al them at once. Write the first test that you think might expose the issue and see if it fails. If it doesn't, discard it and write a new one. From the TDD point of view, if you don't have a failing test there is no bug, so you have to come up with at least one test that exposes the issue you are trying to solve.
+You shouldn't write down all of them at once. Write the first test that you think might expose the issue and see if it fails. If it doesn't, discard it and write a new one. From the TDD point of view, if you don't have a failing test there is no bug, so you have to come up with at least one test that exposes the issue you are trying to solve.
 
 At this point you can move on and try to change the code. Remember that you shouldn't have more than one failing test at a time, so start doing this as soon as you discover a test case that shows there is a problem in the code.
 
