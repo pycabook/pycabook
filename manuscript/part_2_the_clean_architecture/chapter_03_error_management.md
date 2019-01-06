@@ -743,7 +743,7 @@ As you can see the first thing that the `execute()` method does is to check if t
 
 ## Integrating external systems
 
-I want to point out a big problem represented by mocks. As qwe are testing objects using mocks for external systems, like the repository, no tests fail at the moment, but trying to run the Flask development server would certainly return an error. As a matter of fact, neither the repository nor the HTTP server are in sync with the new API, but this cannot be shown by unit tests, if these are properly written. This is the reason why we need integration tests, since the real components are running only at that point, and this can raise issues that were masked by mocks.
+I want to point out a big problem represented by mocks. As we are testing objects using mocks for external systems, like the repository, no tests fail at the moment, but trying to run the Flask development server would certainly return an error. As a matter of fact, neither the repository nor the HTTP server are in sync with the new API, but this cannot be shown by unit tests, if these are properly written. This is the reason why we need integration tests, since the real components are running only at that point, and this can raise issues that were masked by mocks.
 
 For this simple project my integration test is represented by the Flask development server, which at this point crashes with this exception
 
