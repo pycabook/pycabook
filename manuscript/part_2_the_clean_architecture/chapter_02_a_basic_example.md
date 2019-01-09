@@ -38,7 +38,7 @@ $ pip install -r requirements/dev.txt
 
 Try to run `py.test -svv` to check that everything is working correctly, and then remove the files `tests/test_rentomatic.py` and `rentomatic/rentomatic.py`.
 
-In this chapter I will not explicitly state that I run the test suite, as I consider it part of the standard workflow. Every time we write a test you should run the suite and check that you get an error (or more), and the code that I give as a solution should make the test suite pass. You are free to try to implement your own code before copying my solution, obvioously.
+In this chapter I will not explicitly state that I run the test suite, as I consider it part of the standard workflow. Every time we write a test you should run the suite and check that you get an error (or more), and the code that I give as a solution should make the test suite pass. You are free to try to implement your own code before copying my solution, obviously.
 
 ## Domain models
 
@@ -186,9 +186,9 @@ B> Git tag: [chapter-2-domain-models-step-4](https://github.com/pycabook/rentoma
 
 Outer layers can use the `Room` model, but if you want to return the model as a result of an API call you need a serializer.
 
-The typical serialization format is JSON, as this is a broadly accepted standard for web-based API. The serializer is not part of the model, but is an external specialized class that receives the model instance and produces a representation of its structure and values.
+The typical serialization format is JSON, as this is a broadly accepted standard for web-based APIs. The serializer is not part of the model, but is an external specialized class that receives the model instance and produces a representation of its structure and values.
 
-To test the JSON serialization of our `Room` class put in the `tests/serializers/test_room_json_serializer.py` file the following code
+To test the JSON serialization of our `Room` class put the following code into the file `tests/serializers/test_room_json_serializer.py`:
 
 ``` python
 import json
@@ -349,7 +349,7 @@ The storage lives in the third layer of the clean architecture, the external sys
 
 To clarify the matter in terms of concrete technologies, SQLAlchemy is a wonderful tool to abstract the access to an SQL database, so the internal implementation of the repository could use it to access a PostgreSQL database, for example. But the external API of the layer is not that provided by SQLAlchemy. The API is a reduced set of functions that the use cases call to get the data, and the internal implementation can use a wide range of solutions to achieve the same goal, from raw SQL queries to a complex system of remote calls through a RabbitMQ network.
 
-A very important feature of the repository is that it can return domain models, and this is in line with what framework ORMs usually do. The element in the third layer have access to all the elements defined in the internal layers, which means that domain models and use cases can be called and used directly from the repository.
+A very important feature of the repository is that it can return domain models, and this is in line with what framework ORMs usually do. The elements in the third layer have access to all the elements defined in the internal layers, which means that domain models and use cases can be called and used directly from the repository.
 
 For the sake of this simple example we will not deploy and use a real database system. Given what we said, we are free to implement the repository with the system that better suits our needs, and in this case I want to keep everything simple. We will thus create a very simple in-memory storage system loaded with some predefined data.
 
@@ -687,7 +687,7 @@ The first part contains imports and sets up a room from a dictionary. This way w
 def test_get(mock_use_case, client):
 ```
 
-This is the only test that we have for the time being. During the whole test we mock the use case, as we are not interested in running it. We are however interested in checking the arguments it is called with, and a mock can provide this information. The test receives the mock from the the `patch` decorator and `client`, which is one of the fixtures provided by `pytest-flask`. The `client` fixture automatically loads the `app` one, which we defined in `conftst.py`, and is an object that simulates an HTTP client that can access the API endpoints and store the responses of the server.
+This is the only test that we have for the time being. During the whole test we mock the use case, as we are not interested in running it. We are however interested in checking the arguments it is called with, and a mock can provide this information. The test receives the mock from the the `patch` decorator and `client`, which is one of the fixtures provided by `pytest-flask`. The `client` fixture automatically loads the `app` one, which we defined in `conftest.py`, and is an object that simulates an HTTP client that can access the API endpoints and store the responses of the server.
 
 ``` python
     mock_use_case().execute.return_value = rooms

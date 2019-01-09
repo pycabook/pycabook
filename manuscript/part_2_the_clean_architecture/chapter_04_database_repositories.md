@@ -1131,7 +1131,7 @@ MongoDB server version: 4.0.4
 >
 ```
 
-THe initialisation file is similar to the one I created for PostgreSQL, and like that one it borrows code from the fixtures that run in the test suite. The file is named `initial_mongo_setup.py` and is saved in the main project directory.
+The initialisation file is similar to the one I created for PostgreSQL, and like that one it borrows code from the fixtures that run in the test suite. The file is named `initial_mongo_setup.py` and is saved in the main project directory.
 
 ``` python
 import pymongo
