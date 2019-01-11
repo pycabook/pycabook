@@ -732,7 +732,7 @@ When we mock systems we break this assumption. In particular we need to open the
 
 This also means that writing a test for the object before writing the implementation of the object itself is difficult. Pretty often, thus, such objects are built with TDD but iteratively, where mocks are introduced after the code has been written.
 
-While this is a violation of the strict TDD methodology, I don't consider it a bad practice. TDD helps us to write code that doesn't solve a real problem, but this can be done even without tests, which means that breaking it for a small part of the code (patching objects) will not undermine the correctness of the outcome, a test suite capable of detecting regressions or the removal of important features in the future.
+While this is a violation of the strict TDD methodology, I don't consider it a bad practice. TDD helps us to write better code consistently, but good code can be written even without tests. The real outcome of TDD is a test suite that is capable of detecting regressions or the removal of important features in the future. This means that breaking strict TDD for a small part of the code (patching objects) will not affect the real result of the process, only change the way we achieve it.
 
 ## A warning
 
