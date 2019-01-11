@@ -65,8 +65,8 @@ As you can understand, such objects are the perfect tool to mimic other objects 
 The simplest thing a mock can do for you is to return a given value every time you call one of its methods. This is configured setting the `return_value` attribute of a mock object
 
 ``` python
->>> m.some attribute.return_value = 42
->>> m.some attribute()
+>>> m.some_attribute.return_value = 42
+>>> m.some_attribute()
 42
 ```
 
@@ -88,7 +88,7 @@ As you can see calling `some_attribute()` just returns the value stored in `retu
 
 ## Complex return values
 
-The `side_effect` parameter of mock objects is a very powerful tool. It accepts three different flavours of objects, callables, iterables, and exceptions, and changes its behaviour accordingly.
+The `side_effect` parameter of mock objects is a very powerful tool. It accepts three different flavours of objects: callables, iterables, and exceptions, and changes its behaviour accordingly.
 
 If you pass an exception the mock will raise it
  
@@ -166,7 +166,7 @@ Value: 26
 
 ## Asserting calls
 
-As I explained in the previous chapter outgoing commands shall be tested checking the correctness of the message argument. This can be easily done with mocks, as these objects record every call that they receive and the argument passed to it.
+As I explained in the previous chapter outgoing commands shall be tested checking the correctness of the message argument. This can be easily done with mocks, as these objects record every call that they receive and the arguments passed to it.
 
 Let's see a practical example
 
@@ -237,7 +237,7 @@ E           Actual call: setup(cache=True)
 
 Which I consider a very clear explanation of what went wrong during the test execution.
 
-As you can read in the official documentation, the `Mock` object provides other methods and attributes, like `assert_called_once_with`, `assert_any_call`, `assert_has_calls`, `assert_not_called`, `called`, `call_count`, and many others. Each of those explores a different aspect of the mock behaviour concerning calls, make sure to read their description and go through the examples.
+As you can read in the official documentation, the `Mock` object provides other methods and attributes, like `assert_called_once_with`, `assert_any_call`, `assert_has_calls`, `assert_not_called`, `called`, `call_count`, and many others. Each of those explores a different aspect of the mock behaviour concerning calls. Make sure to read their description and go through the examples.
 
 ## A simple example
 
@@ -245,7 +245,7 @@ To learn how to use mocks in a practical case, let's work together on a new modu
 
 The class contains a `get_data` method that queries the remote server and returns the data, and a method `average_mass` that uses the `Calc.avg` method to compute the average mass of the meteorites and return it. In a real world case, like for example in a scientific application, I would probably split the class in two. One class manages the data, updating it whenever it is necessary, and another one manages the statistics. For the sake of simplicity, however, I will keep the two functionalities together in this example.
 
-Let's see a quick example of what is supposed to happend inside our code. An excerpt of the file provided from the server is
+Let's see a quick example of what is supposed to happen inside our code. An excerpt of the file provided from the server is
 
 ``` json
 [
@@ -318,7 +318,7 @@ def test_average_mass():
 
 This little test contains however two big issues. First of all the `get_data` method is supposed to use the Internet connection to get the data from the server. This is a typical example of an outgoing query, as we are not trying to change the state of the web server providing the data. You already know that you should not test the return value of an outgoing query, but you can see here why you shouldn't use real data when testing either. The data coming from the server can change in time, and this can invalidate your tests. 
 
-In this case, however, testing the code is simple. Since the class has a public method `get_data` that interacts with the external component, it is enogh to temporarily replace it with a mock that provides sensible values. Create the `tests/test_meteorites.py` file and put this code in it
+In this case, however, testing the code is simple. Since the class has a public method `get_data` that interacts with the external component, it is enough to temporarily replace it with a mock that provides sensible values. Create the `tests/test_meteorites.py` file and put this code in it
 
 ``` python
 from unittest import mock
@@ -400,7 +400,7 @@ B> Git tag: [meteoritestats-class-added](https://github.com/pycabook/calc/tree/m
 
 Mocks are very simple to introduce in your tests whenever your objects accept classes or instances from outside. In that case, as shown in the previous sections, you just have to instantiate the `Mock` class and pass the resulting object to your system. However, when the external classes instantiated by your library are hardcoded this simple trick does not work. In this case you have no chance to pass a fake object instead of the real one.
 
-This is exactly the case addressed by patching. Patching, in a testing framework, means to replace a globally reachable object with a mock, thus achieving the target of having the code run unmodified, while part of it has been hot swapped, that is, replaced at run time.
+This is exactly the case addressed by patching. Patching, in a testing framework, means to replace a globally reachable object with a mock, thus achieving the goal of having the code run unmodified, while part of it has been hot swapped, that is, replaced at run time.
 
 ### A warm-up example
 
@@ -545,7 +545,7 @@ As you can see the `patch` decorator works like a big `with` statement for the w
 
 ## Multiple patches
 
-You can patch more that one object in the same test. For example, consider the case where the `get_info` method calls `os.path.getsize` in addition to `os.path.abspath`, because it needs it to return the size of the file. You have at this point two different outgoing queries, and you have to replace both with mocks to make your class working during the test.
+You can patch more that one object in the same test. For example, consider the case where the `get_info` method calls `os.path.getsize` in addition to `os.path.abspath`, because it needs it to return the size of the file. You have at this point two different outgoing queries, and you have to replace both with mocks to make your class work during the test.
 
 This can be easily done with an additional `patch` decorator
 
@@ -633,7 +633,7 @@ Using more than one `with` statement, however, makes the code difficult to read,
 
 The most widespread version of Python is CPython, which is written, as the name suggests, in C. Part of the standard library is also written in C, while the rest is written in Python itself.
 
-The objects (classes, modules, functions, etc) that are implemented in C are shared between interpreters[^interpreters], and this requires those objects to be immutable, so that you cannot alter them at runtime from a single interpreter.
+The objects (classes, modules, functions, etc.) that are implemented in C are shared between interpreters[^interpreters], and this requires those objects to be immutable, so that you cannot alter them at runtime from a single interpreter.
 
 [^interpreters]: having multiple interpreters is something that you achieve embedding the Python interpreter in a C program, for example.
 
@@ -649,7 +649,7 @@ AttributeError: 'int' object attribute 'conjugate' is read-only
 
 Here I'm trying to replace a method with an integer, which is pointless, but nevertheless shows the issue we are facing.
 
-What has this immutability to do with patching? What `patch` does is actually to temporarily replace an attribute of an object (method of a class, class of a module, etc), which also means that is we try to replace an attribute in an immutable object the patching action will fail.
+What has this immutability to do with patching? What `patch` does is actually to temporarily replace an attribute of an object (method of a class, class of a module, etc.), which also means that if we try to replace an attribute in an immutable object the patching action will fail.
 
 A typical example of this problem is the `datetime` module, which is also one of the best candidates for patching, since the output of time functions is by definition time-varying.
 
@@ -696,7 +696,7 @@ When you try to execute this test you will get the following error
 TypeError: can't set attributes of built-in/extension type 'datetime.datetime'
 ```
 
-which is raised because patching tries to replace the `now` function in `datetime.datetime` with a mock, and the module being immutable this operation fails.
+which is raised because patching tries to replace the `now` function in `datetime.datetime` with a mock, and since the module is immutable this operation fails.
 
 {icon: github}
 B> Git tag: [initial-logger-not-working](https://github.com/pycabook/fileinfo/tree/initial-logger-not-working)
@@ -722,15 +722,15 @@ B> Git tag: [correct-patching](https://github.com/pycabook/fileinfo/tree/correct
 
 If you run the test now, you can see that the patching works. What we did was to inject our mock in `fileinfo.logger.datetime.datetime` instead of `datetime.datetime.now`. Two things changed, thus, in our test. First, we are patching the module imported in the `logger.py` file and not the module provided globally by the Python interpreter. Second, we have to patch the whole module because this is what is imported by the `logger.py` file. If you try to patch `fileinfo.logger.datetime.datetime.now` you will find that it is still immutable.
 
-Another possible solution to this problem is to create a function that invokes the immutable object and returns its value. This last function can be easily patched, because it just uses the builtin objects and thus is not immutable. This solution, however, requires to change the source code to allow testing, which is far from being optimal. Obviously it is better to introduce a small change in the code and have it tested than to leave it untested, but whenever is possible I try as much as possible to avoid solutions that introduce code which wouldn't be required without tests.
+Another possible solution to this problem is to create a function that invokes the immutable object and returns its value. This last function can be easily patched, because it just uses the builtin objects and thus is not immutable. This solution, however, requires changing the source code to allow testing, which is far from being optimal. Obviously it is better to introduce a small change in the code and have it tested than to leave it untested, but whenever is possible I try as much as possible to avoid solutions that introduce code which wouldn't be required without tests.
 
 ## Mocks and proper TDD
 
 Following a strict TDD methodology means writing a test before writing the code that passes that test. This can be done because we use the object under test as a black box, interacting with it through its API, and thus not knowing anything of its internal structure.
 
-When we mock systems we break this assumption, in particular we need to open the black box every time we need to patch an hardcoded external system. Let's say, for example, that the object under test creates a temporary directory to perform some data processing. This is a detail of the implementation and we are not supposed to know it while testing the object, but since we need to mock the file creation to avoid interaction with the external system (storage) we need to become aware of what happens internally.
+When we mock systems we break this assumption. In particular we need to open the black box every time we need to patch an hardcoded external system. Let's say, for example, that the object under test creates a temporary directory to perform some data processing. This is a detail of the implementation and we are not supposed to know it while testing the object, but since we need to mock the file creation to avoid interaction with the external system (storage) we need to become aware of what happens internally.
 
-This also means that writing a test for the object before writing the implementation of the object itself is difficult. Pretty often, thus, such objects are built with TDD but iteratively, where mocks are often introduced after the code has been written.
+This also means that writing a test for the object before writing the implementation of the object itself is difficult. Pretty often, thus, such objects are built with TDD but iteratively, where mocks are introduced after the code has been written.
 
 While this is a violation of the strict TDD methodology, I don't consider it a bad practice. TDD helps us to write code that doesn't solve a real problem, but this can be done even without tests, which means that breaking it for a small part of the code (patching objects) will not undermine the correctness of the outcome, a test suite capable of detecting regressions or the removal of important features in the future.
 
@@ -748,6 +748,6 @@ The third advice is to consider mocks as "hooks" that you throw at the external 
 
 ## Recap
 
-Mocks are a very powerful tool that allows us to test code that contains outgoing messages, in particular they allow us to test the arguments of outgoing commands. Patching is a good way to overcome the fact that some external components are hardcoded in our code and are thus unreachable through the arguments passed to the classes or the methods under analysis.
+Mocks are a very powerful tool that allows us to test code that contains outgoing messages. In particular they allow us to test the arguments of outgoing commands. Patching is a good way to overcome the fact that some external components are hardcoded in our code and are thus unreachable through the arguments passed to the classes or the methods under analysis.
 
 Mocks are also the most complex part of testing, so don't be surprised if you are still a bit confused by them. Review the chapter once, maybe, but then try to go on, as in later chapters we will use mocks in very simple and practical examples, which may shed light upon the whole matter.
