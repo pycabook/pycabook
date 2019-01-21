@@ -859,7 +859,7 @@ Let's break this two requirements into a set of simpler ones
 2. The function accepts an optional upper threshold. It must remove all the values that are greater than the threshold before computing the average, i.e. `avg([2, 5, 12, 98], ut=90) == avg([2, 5, 12])`
 3. The function accepts an optional lower threshold. It must remove all the values that are less then the threshold before computing the average, i.e. `avg([2, 5, 12, 98], lt=10) == avg([12, 98])`
 4. The upper threshold is not included in the comparison, i.e. `avg([2, 5, 12, 98], ut=98) == avg([2, 5, 12, 98])`
-5. The lower threshold is not included in the comparison, i.e. `avg([2, 5, 12, 98], ut=5) == avg([5, 12, 98])`
+5. The lower threshold is not included in the comparison, i.e. `avg([2, 5, 12, 98], lt=5) == avg([5, 12, 98])`
 6. The function works with an empty list, returning `0`, i.e. `avg([]) == 0`
 7. The function works if the list is empty after outlier removal, i.e. `avg([12, 98], lt=15, ut=90) == 0`
 8. The function outlier removal works if the list is empty, i.e. `avg([], lt=15, ut=90) == 0`
