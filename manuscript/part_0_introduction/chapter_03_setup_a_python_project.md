@@ -14,7 +14,7 @@ Ultimately, the idea is that it is cheaper and simpler (at least in 2018) to cop
 
 The starting point to become familiar with virtual environments is the [official documentation](https://docs.python.org/3/tutorial/venv.html), but if you experience issues with a specific version of your operating system you will find plenty of resources on Internet that may clarify the matter.
 
-In general, my advice is to have a different virtual environment for each Python project. You may prefer to keep them inside or outside the project's directory. In the latter case the name of the virtual environment shall reflect in some way the associated project. There are packages to manage the virtual environments any simplify your interaction with them, and the most famous one is [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/).
+In general, my advice is to have a different virtual environment for each Python project. You may prefer to keep them inside or outside the project's directory. In the latter case the name of the virtual environment shall reflect in some way the associated project. There are packages to manage the virtual environments and simplify your interaction with them, and the most famous one is [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/).
 
 I used to create my virtual environments inside the directory of my Python projects. Since I started using Cookiecutter (see next section) to create new projects, however, I switched to a different setup. Keeping the virtual environment outside the project allows me to install Cookiecutter in the virtualenv, instead of being forced to install it system-wide, which sometimes prevents me from using the latest version.
 
