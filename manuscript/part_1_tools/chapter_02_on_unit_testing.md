@@ -78,7 +78,7 @@ An incoming query is a message that an external actor sends to get a value from 
 
 ### Incoming commands
 
-And incoming command comes from an external actor that wants to change the status of the system. There should be a way for an external actor to check the status, which translates into the need of having either a companion incoming query message that allows to extract the status (or at least the part of the status affected by the command), or the knowledge that the change is going to affect the behaviour of another query. A simple example might be a method that sets the precision (number of digits) of the division in the `Calc` object. Setting that value changes the result of a query, which can be used to test the effect of the incoming command.
+An incoming command comes from an external actor that wants to change the status of the system. There should be a way for an external actor to check the status, which translates into the need of having either a companion incoming query message that allows to extract the status (or at least the part of the status affected by the command), or the knowledge that the change is going to affect the behaviour of another query. A simple example might be a method that sets the precision (number of digits) of the division in the `Calc` object. Setting that value changes the result of a query, which can be used to test the effect of the incoming command.
 
 ### Private queries
 

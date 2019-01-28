@@ -24,7 +24,7 @@ The actual implementation of request and response objects is completely free, th
 
 ## Basic requests and responses
 
-We can implement structures requests before we expand the use case to accept filters. We just need a `RoomListRequestObject` that can be initialised without parameters, so let us create the file `tests/request_objects/test_room_list_request_objects.py` and put there a test for this object.
+We can implement structured requests before we expand the use case to accept filters. We just need a `RoomListRequestObject` that can be initialised without parameters, so let us create the file `tests/request_objects/test_room_list_request_objects.py` and put there a test for this object.
 
 ``` python
 from rentomatic.request_objects import room_list_request_object as req
@@ -712,7 +712,7 @@ def test_room_list_handles_bad_request():
     }
 ```
 
-Change the file `rentomatic/use_cases/room_list_use_cases.py` to contain the new use case implementation that makes all the test pass
+Change the file `rentomatic/use_cases/room_list_use_cases.py` to contain the new use case implementation that makes all the tests pass
 
 ``` python
 from rentomatic.response_objects import response_objects as res
@@ -834,7 +834,7 @@ as `execute` should receive as an argument a request with empty filters. The `te
 ``` python
     assert args[0].filters == {'price__gt': '2', 'price__lt': '6'}
 ```
-Both the tests are passed by a new version of the `room` endpoint in the `rentomatic/rest/room.py` file
+Both the tests pass with a new version of the `room` endpoint in the `rentomatic/rest/room.py` file
 
 ``` python
 import json
@@ -1035,7 +1035,7 @@ def test_repository_list_with_price_between_filter(room_dicts):
     assert repo_rooms[0].code == '913694c6-435a-4366-ba0d-da5334a611b2'
 ```
 
-As you can see, I added many tests. One test for each of the four accepted filters (`code__eq`, `price__eq`, `price__lt`, `price__gt`, see `rentomatic/request_objects/room_list_request_object.py`), and one final test that tries two fidderent filters at the same time. The new version of the `rentomatic/repository/memrepo.py` file that passes all the tests is
+As you can see, I added many tests. One test for each of the four accepted filters (`code__eq`, `price__eq`, `price__lt`, `price__gt`, see `rentomatic/request_objects/room_list_request_object.py`), and one final test that tries two different filters at the same time. The new version of the `rentomatic/repository/memrepo.py` file that passes all the tests is
 
 ``` python
 from rentomatic.domain import room as r

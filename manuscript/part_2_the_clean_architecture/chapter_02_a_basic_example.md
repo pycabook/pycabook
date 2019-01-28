@@ -7,7 +7,7 @@ B> - Wargames (1983)
 
 ## Project overview
 
-The goal of the "Rent-o-matic" project (fans of "Day of the Tentacle" may get the reference) is to create a simple search engine on top of a dataset of objects which are described by some quantities. The search engine shall allow to set some filters to narrow the search.
+The goal of the "Rent-o-matic" project (fans of "Day of the Tentacle" may get the reference) is to create a simple search engine on top of a dataset of objects which are described by some quantities. The search engine allows setting some filters to narrow the search.
  
 The objects in the dataset are houses for rent described by the following quantities:
  
@@ -224,7 +224,7 @@ def test_serialize_domain_room():
     assert json.loads(json_room) == json.loads(expected_json)
 ```
 
-Here, we create the `Room` object and write the expected JSON output (with some annoying escape sequences like `{{` and `}}` due to the clash with the `{}` syntax of Python strings `format` methos). Then we dump the `Room` object to a JSON string and compare the two. To compare the two we load them again into Python dictionaries, to avoid issues with the order of the attributes. Comparing Python dictionaries, indeed, doesn't consider the order of the dictionary fields, while comparing strings obviously does.
+Here, we create the `Room` object and write the expected JSON output (with some annoying escape sequences like `{{` and `}}` due to the clash with the `{}` syntax of Python strings `format` methods). Then we dump the `Room` object to a JSON string and compare the two. To compare the two we load them again into Python dictionaries, to avoid issues with the order of the attributes. Comparing Python dictionaries, indeed, doesn't consider the order of the dictionary fields, while comparing strings obviously does.
 
 Put in the `rentomatic/serializers/room_json_serializer.py` file the code that makes the test pass
 
@@ -259,7 +259,7 @@ It's time to implement the actual business logic that runs inside our applicatio
 
 The simplest use case we can create is one that fetches all the rooms stored in the repository and returns them. In this first part we will not implement the filters to narrow the search. That part will be introduced in the next chapter when we will discuss error management.
 
-The repository is our storage component, and according to the clean architecture it will be implemented in an outer level (external systems). We will access it as an interface, which in Python means that we will receive an object that we expect will expose a certain API. From the testing point of view the best way to run code that accesses an interface is to mock this latter. Put this code in the `tests/use_cases/test_room_list_use_case.py`
+The repository is our storage component, and according to the clean architecture it will be implemented in an outer level (external systems). We will access it as an interface, which in Python means that we will receive an object that we expect will expose a certain API. From the testing point of view the best way to run code that accesses an interface is to mock the latter. Put this code in the `tests/use_cases/test_room_list_use_case.py`
 
 I will make use of pytest's powerful fixtures, but I will not introduce them. I highly recommend reading the [official documentation](https://docs.pytest.org/en/latest/fixture.html), which is very good and covers many different use cases.
 
@@ -449,7 +449,7 @@ print(result)
 {icon: github}
 B> Git tag: [chapter-2-command-line-interface-step-1](https://github.com/pycabook/rentomatic/tree/chapter-2-command-line-interface-step-1)
 
-You can execute this file with `python cli.py` or, if you prefer, run `chmod +x cli.py` (which make it executable) and then run it with `./cli.py` directly. The expected result is an empty list
+You can execute this file with `python cli.py` or, if you prefer, run `chmod +x cli.py` (which makes it executable) and then run it with `./cli.py` directly. The expected result is an empty list
 
 ``` sh
 $ ./cli.py
@@ -466,7 +466,7 @@ use_case = uc.RoomListUseCase(repo)
 result = use_case.execute()
 ```
 
-which initialise the repository, use it to initialise the use case, and run this latter. This is in general how you end up using your clean architecture in whatever external system you will plug into it. You initialise other systems, you initialise the use case, and you collect the results.
+which initialise the repository, use it to initialise the use case, and run the latter. This is in general how you end up using your clean architecture in whatever external system you will plug into it. You initialise other systems, you initialise the use case, and you collect the results.
 
 For the sake of demonstration, let's define some data in the file and load them in the repository
 
@@ -599,7 +599,7 @@ def create_app(config_object=DevConfig):
     return app
 ```
 
-Before we create the proper setup of the webserver we want to create the endpoint that will be exposed. Endpoints are ultimately functions that are run when a use sends a request to a certain URL, so we can still work with TDD, as the final goal is to have code that produces certain results.
+Before we create the proper setup of the webserver we want to create the endpoint that will be exposed. Endpoints are ultimately functions that are run when a user sends a request to a certain URL, so we can still work with TDD, as the final goal is to have code that produces certain results.
 
 The problem we have testing an endpoint is that we need the webserver to be up and running when we hit the test URLs. This time the webserver is not an external system, that we can mock to test the correct use of its API, but is part of our system, so we need to run it. This is what the `pytest-flask` extension provides, in the form of pytest fixtures, in particular the `client` fixture.
 
@@ -607,7 +607,7 @@ This fixture hides a lot of automation, so it might be considered a bit "magic" 
 
 Fixtures can be defined directly in your tests file, but if we want a fixture to be globally available the best place to define it is the file `conftest.py` which is automatically loaded by pytest. As you can see there is a great deal of automation, and if you are not aware of it you might be surprised by the results, or frustrated by the errors.
 
-Lets create the file `tests/conftest.py`
+Let's create the file `tests/conftest.py`
 
 ``` python
 import pytest
@@ -700,7 +700,7 @@ This is the only test that we have for the time being. During the whole test we 
     assert http_response.mimetype == 'application/json'
 ```
 
-The first line initialises the `execute` method of the mock. Pay attention that `execute` is run on an instence of the `RoomListUseCase` class, and not on the class itself, which is why we call the mock (`mock_use_case()`) before accessing the method.
+The first line initialises the `execute` method of the mock. Pay attention that `execute` is run on an instance of the `RoomListUseCase` class, and not on the class itself, which is why we call the mock (`mock_use_case()`) before accessing the method.
 
 The central part of the test is the line where we `get` the API endpoint, which sends an HTTP GET requests and collects the server's response.
 
@@ -808,7 +808,7 @@ app = create_app()
 {icon: github}
 B> Git tag: [chapter-2-http-api-step-3](https://github.com/pycabook/rentomatic/tree/chapter-2-http-api-step-3)
 
-When the Flask Command Line Interface (http://flask.pocoo.org/docs/1.0/cli/) runs it looks for a file named `wsgi.py` and lods it, expecting it to contain an `app` variable that is an instance of the `Flask` object. As the `create_app` is a factory we just need to execute it.
+When the Flask Command Line Interface (http://flask.pocoo.org/docs/1.0/cli/) runs it looks for a file named `wsgi.py` and loads it, expecting it to contain an `app` variable that is an instance of the `Flask` object. As the `create_app` is a factory we just need to execute it.
 
 At this point you can execute `flask run` in the directory that contains this file and you should see a nice message like
 
