@@ -391,7 +391,7 @@ def pg_session(pg_session_empty, pg_data):
 
 Note that this last fixture has a `function` scope, thus it is run for every test. Therefore, we delete all rooms after the yield returns, leaving the database in the same state it had before the test. This is not strictly necessary in this particular case, as during the tests we are only reading from the database, so we might add the rooms at the beginning of the test session and just destroy the container at the end of it. This doesn't however work in general, for instance when tests add entries to the database, so I preferred to show you a more generic solution.
 
-We can test this whole setup changing the `test_dummy` function so that is fetches all the rows of the `Room` table and verifying that the query returns 4 values.
+We can test this whole setup changing the `test_dummy` function so that it fetches all the rows of the `Room` table and verifying that the query returns 4 values.
 
 The new version of `tests/repository/postgres/test_postgresrepo.py` is 
 
@@ -881,9 +881,9 @@ def mg_database(mg_database_empty, mg_data):
     collection.delete_many({})
 ```
 
-As you can see these functions are very similar to the ones that we defined for Postgres. The `mg_is_responsive` function is tasked with monitoring the MondoDB container and return True when this latter is ready. The specific way to do this is different from the one employed for PostgreSQL, as these are solutions tailored to the specific technology. The `mg_client` function is similar to the `pg_engine` developed for PostgreSQL, and the same happens for `mg_database_empty`, `mg_data`, and `mg_database`. While the SQLAlchemy package works through a session, PyMongo library creates a client and uses it directly, but the overall structure is the same.
+As you can see these functions are very similar to the ones that we defined for Postgres. The `mg_is_responsive` function is tasked with monitoring the MongoDB container and return True when this latter is ready. The specific way to do this is different from the one employed for PostgreSQL, as these are solutions tailored to the specific technology. The `mg_client` function is similar to the `pg_engine` developed for PostgreSQL, and the same happens for `mg_database_empty`, `mg_data`, and `mg_database`. While the SQLAlchemy package works through a session, PyMongo library creates a client and uses it directly, but the overall structure is the same.
 
-SInce we are importing the PyMongo library, remember to add `pymongo` to the `requirements/prod.txt` file and run `pip` again. We need to change the `tests/repository/conftest.py` to add the configuration of the MongoDB container. Unfortunately, due to a limitation of the `pytest-docker` package it is impossible to define multiple versions of `docker_compose_file`, so we need to add the MongoDB configuration alongside the PostgreSQL one. The `docker_setup` fixture becomes
+Since we are importing the PyMongo library, remember to add `pymongo` to the `requirements/prod.txt` file and run `pip` again. We need to change the `tests/repository/conftest.py` to add the configuration of the MongoDB container. Unfortunately, due to a limitation of the `pytest-docker` package it is impossible to define multiple versions of `docker_compose_file`, so we need to add the MongoDB configuration alongside the PostgreSQL one. The `docker_setup` fixture becomes
 
 ``` python
 @pytest.fixture(scope='session')
@@ -1293,4 +1293,4 @@ B> Git tag: [chapter-4-a-repository-based-on-mongodb-step-3](https://github.com/
 
 This chapter concludes the overview of the clean architecture example. Starting from scratch, we created domain models, serializers, use cases, an in-memory storage system, a command line interface and an HTTP endpoint. We then improved the whole system with a very generic request/response management code, that provides robust support for errors. Last, we implemented two new storage systems, using both a relational and a NoSQL database.
 
-This is by no means a little achievement. Our architecture covers a very small use case, but is robust and fully tested. Whatever error we might find in the way we dealt with data, databases, requests, and so on, can be isolated and tamed much faster than in a system which doesn't have tests. Moreover, the decoupling philosophy allows us to provide support for multiple storage systems, but also to quickly implement new access protocols, or new serialisations for out objects.
+This is by no means a little achievement. Our architecture covers a very small use case, but is robust and fully tested. Whatever error we might find in the way we dealt with data, databases, requests, and so on, can be isolated and tamed much faster than in a system which doesn't have tests. Moreover, the decoupling philosophy not only allows us to provide support for multiple storage systems, but also to quickly implement new access protocols, or new serialisations for our objects.
