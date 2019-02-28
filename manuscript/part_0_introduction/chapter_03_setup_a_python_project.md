@@ -20,6 +20,8 @@ I used to create my virtual environments inside the directory of my Python proje
 
 If you create the virtual environment in the project directory you have to configure your version control and other tools to ignore it. In particular, add it to [`.gitignore`](https://git-scm.com/docs/gitignore) if you use Git and to [`pytest.ini`](https://docs.pytest.org/en/latest/reference.html#confval-norecursedirs) if you use the pytest testing framework (as I do in the rest of this book).
 
+Another tool that you should consider is [pipenv](https://pipenv.readthedocs.io/en/latest/), which can greatly help you to manage a complex project. it is officially recommended by the [Python Packaging User Guide](https://packaging.python.org/guides/tool-recommendations/).
+
 ## Python projects with Cookiecutter
 
 Creating a Python project from scratch is not easy. There are many things to configure and I would only suggest manually writing all the files if you strongly need to understand how the Python distribution code works. If you want to focus on your project, instead, it's better to use a template.
