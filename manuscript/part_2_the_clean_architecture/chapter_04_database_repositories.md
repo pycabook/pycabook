@@ -529,6 +529,18 @@ class PostgresRepo:
         self.engine = create_engine(connection_string)
         Base.metadata.bind = self.engine
 
+    def _create_room_objects(self, results):
+        return [
+            room.Room(
+                code=q.code,
+                size=q.size,
+                price=q.price,
+                latitude=q.latitude,
+                longitude=q.longitude
+            )
+            for q in results
+        ]
+
     def list(self, filters=None):
         DBSession = sessionmaker(bind=self.engine)
         session = DBSession()
@@ -536,7 +548,7 @@ class PostgresRepo:
         query = session.query(Room)
 
         if filters is None:
-            return query.all()
+            return self._create_room_objects(query.all())
 
         if 'code__eq' in filters:
             query = query.filter(Room.code == filters['code__eq'])
@@ -550,16 +562,7 @@ class PostgresRepo:
         if 'price__gt' in filters:
             query = query.filter(Room.price > filters['price__gt'])
 
-        return [
-            room.Room(
-                code=q.code,
-                size=q.size,
-                price=q.price,
-                latitude=q.latitude,
-                longitude=q.longitude
-            )
-            for q in query.all()
-        ]
+        return self._create_room_objects(query.all())
 ```
 
 {icon: github}
