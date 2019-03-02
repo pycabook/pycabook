@@ -786,7 +786,7 @@ def test_get(mock_use_case, client):
 
     assert json.loads(http_response.data.decode('UTF-8')) == [room_dict]
 
-    mock_use_case().execute.assert_called
+    mock_use_case().execute.assert_called()
     args, kwargs = mock_use_case().execute.call_args
     assert args[0].filters == {}
 
@@ -802,7 +802,7 @@ def test_get_with_filters(mock_use_case, client):
 
     assert json.loads(http_response.data.decode('UTF-8')) == [room_dict]
 
-    mock_use_case().execute.assert_called
+    mock_use_case().execute.assert_called()
     args, kwargs = mock_use_case().execute.call_args
     assert args[0].filters == {'price__gt': '2', 'price__lt': '6'}
 
@@ -824,7 +824,7 @@ def test_get(mock_use_case, client):
 and the second is the assertion on the call of the same method. It should be called with a properly formatted request, but since we can't compare requests we need a way to look into the call arguments. This can be done with
 
 ``` python
-    mock_use_case().execute.assert_called
+    mock_use_case().execute.assert_called()
     args, kwargs = mock_use_case().execute.call_args
     assert args[0].filters == {}
 ```
