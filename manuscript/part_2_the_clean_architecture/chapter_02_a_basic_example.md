@@ -622,7 +622,7 @@ def app():
     return create_app(TestConfig)
 ```
 
-First of all the fixture has been defined with the scope of a function, which means that it will be recreated for each test. This is good, as tests should be isolated, and we do not want to resuse the application that another test has already tainted.
+First of all the fixture has been defined with the scope of a function, which means that it will be recreated for each test. This is good, as tests should be isolated, and we do not want to reuse the application that another test has already tainted.
 
 The function itself runs the app factory to create a Flask app, using the `TestConfig` configuration from `flask_settings`, which sets the `TESTING` flag to `True`. You can find the description of these flags in the [official documentation](http://flask.pocoo.org/docs/1.0/config/).
 
