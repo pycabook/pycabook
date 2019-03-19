@@ -622,7 +622,7 @@ def app():
     return create_app(TestConfig)
 ```
 
-First of all the fixture has been defined with the scope of a function, which means that it will be recreated for each test. This is good, as tests should be isolated, and we do not want to resuse the application that another test has already tainted.
+First of all the fixture has been defined with the scope of a function, which means that it will be recreated for each test. This is good, as tests should be isolated, and we do not want to reuse the application that another test has already tainted.
 
 The function itself runs the app factory to create a Flask app, using the `TestConfig` configuration from `flask_settings`, which sets the `TESTING` flag to `True`. You can find the description of these flags in the [official documentation](http://flask.pocoo.org/docs/1.0/config/).
 
@@ -687,7 +687,7 @@ The first part contains imports and sets up a room from a dictionary. This way w
 def test_get(mock_use_case, client):
 ```
 
-This is the only test that we have for the time being. During the whole test we mock the use case, as we are not interested in running it. We are however interested in checking the arguments it is called with, and a mock can provide this information. The test receives the mock from the the `patch` decorator and `client`, which is one of the fixtures provided by `pytest-flask`. The `client` fixture automatically loads the `app` one, which we defined in `conftest.py`, and is an object that simulates an HTTP client that can access the API endpoints and store the responses of the server.
+This is the only test that we have for the time being. During the whole test we mock the use case, as we are not interested in running it. We are however interested in checking the arguments it is called with, and a mock can provide this information. The test receives the mock from the `patch` decorator and `client`, which is one of the fixtures provided by `pytest-flask`. The `client` fixture automatically loads the `app`, which we defined in `conftest.py`, and is an object that simulates an HTTP client that can access the API endpoints and store the responses of the server.
 
 ``` python
     mock_use_case().execute.return_value = rooms
