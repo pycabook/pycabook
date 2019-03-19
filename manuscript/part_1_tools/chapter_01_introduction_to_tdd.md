@@ -1192,6 +1192,74 @@ This test doesn't fail. So, according to the TDD methodology, we should justify 
 {icon: github}
 B> Git tag: [step-9-8-empty-list-before-thresholds](https://github.com/pycabook/calc/tree/step-9-8-empty-list-before-thresholds)
 
+### Step 9.9 - Zero as lower/upper threshold
+
+This is perhaps the most important step of the whole chapter, for two reasons. First of all, the test added in this step was added by two readers[^two-readers], and this is shows a real TDD workflow. After you published you package (or your book, in this case) someone notices a wrong behaviour in some use case. This might be a big flaw or a tiny corner case, but in any case they can come up with a test that exposes the bug, and maybe even with a patch to the code, but the most important part is the test.
+
+[^two-readers]: [Faust Gertz](https://github.com/faustgertz) and [Michael O'Neill](https://github.com/IrishPrime) with [this](https://github.com/pycabook/pycabook/issues/13) pull request.
+
+Whoever discovers the bug has a clear way to show it, and you, as an author/maintainter/developer can add that test to your suite and work on the code until that passes. The rest of the test suite will block any change in the code that disrupts an already tested behaviour. As I stressed multiple times in this part of the book, we could do the same without TDD, but if we need to change a substantial amount of code there is nothing like a test suite that can guarantee we are not re-introducing bugs.
+
+Second, this step shows an important part of the TDD workflow: checking corner cases. In general you should pay a lot of attention to the boundaries of a domain, and test the behaviour of the code in those cases.
+
+This test shows that the code doesn't manage zero-valued lower thresholds correctly
+
+``` python
+def test_avg_manages_zero_value_lower_outlier():
+    c = Calc()
+
+    res = c.avg([-1, 0, 1], lt=0)
+
+    assert res == 0.5
+```
+
+The reason is that the `avg` function contains a check like `if lt:`, which fails when `lt` is 0, as that is a false value. The check should be `if lt is not None:`, so that part of the `avg` function becomes
+
+``` python
+        if lt is not None:
+            _it = [x for x in _it if x >= lt]
+```
+
+It is immediately clear that the upper threshold has the same issue, so the two tests I added are
+
+``` python
+def test_avg_manages_zero_value_lower_outlier():
+    c = Calc()
+
+    res = c.avg([-1, 0, 1], lt=0)
+
+    assert res == 0.5
+
+
+def test_avg_manages_zero_value_upper_outlier():
+    c = Calc()
+
+    res = c.avg([-1, 0, 1], ut=0)
+
+    assert res == -0.5
+```
+
+and the final version of `avg` is
+
+``` python
+    def avg(self, it, lt=None, ut=None):
+        _it = it[:]
+
+        if lt is not None:
+            _it = [x for x in _it if x >= lt]
+
+        if ut is not None:
+            _it = [x for x in _it if x <= ut]
+
+        if not len(_it):
+            return 0
+
+        return sum(_it)/len(_it)
+```
+
+{icon: github}
+B> Git tag: [step-9-9-zero-as-lower-upper-threshold](https://github.com/pycabook/calc/tree/step-9-9-zero-as-lower-upper-threshold)
+
 ## Recap of the TDD rules
 
 Through this very simple example we learned 6 important rules of the TDD methodology. Let us review them, now that we have some experience that can make the words meaningful
