@@ -10,6 +10,7 @@ I will track here changes between releases of the book, following [Semantic Vers
 
 **Version 1.0.8 (2019-03-19)**
 * GitHub users [Faust Gertz](https://github.com/faustgertz) and [Michael "Irish" O'Neill](https://github.com/IrishPrime) spotted a bug in the code of the `calc` example, chapter 1 of part 1. Thanks!
+* GitHub user [Ahmed Ragab](https://github.com/Ragabov) fixed some typos. Thank you so much!
 
 **Version 1.0.7 (2019-03-02)**
 * GitHub user [penguindustin](https://github.com/penguindustin) suggested adding `pipenv` in the tools section as it is officially recommended by the Python packaging User Guide. Thanks!
