@@ -24,7 +24,7 @@ This poses a big problem, as interacting with external systems is definitely to 
 
 ## Tests should be isolated
 
-In computer science _isolation_ means that a component shall not change its behaviour depending on something that happens externally. In particular it shouldn't be affected by the execution of other components in the system (spatial isolation) and by previous execution of the component itself (temporal isolation). Each test should run as much as possible in an isolated universe.
+In computer science _isolation_ means that a component shall not change its behaviour depending on something that happens externally. In particular it shouldn't be affected by the execution of other components in the system (spatial isolation) and by the previous execution of the component itself (temporal isolation). Each test should run as much as possible in an isolated universe.
 
 While this is easy to achieve for small components, like we did with the `Calc` class, it might be almost impossible to do in more complex cases. Whatever routine you will write that deals with time, for example, be it the current date or a time interval, you are faced with something that flows incessantly and that cannot be stopped or slowed down. This is also true in other cases, for example if you are testing a routine that accesses an external service like a website. If the website is not reachable the test will fail, but this failure comes from an external source, not from the code under test.
 
@@ -34,7 +34,7 @@ Mocks are again a good tool to enforce isolation in tests that need to communica
 
 It is important to understand that the above definitions (idempotency, isolation) depend on the scope of the test. You should consider _external_ whatever part of the system is not directly involved in the test, even though you need to use it to run the test itself. You should also try to reduce the scope of the test as much as possible.
 
-Let me give you an example. Consider a web application and imagine a test that check that a user can log in. The login process involves many layers: the user inputs the username and the password in a GUI and submits the form, the GUI communicates with the core of the application that finds the user in the DB and checks the password hash against the one stored there, then sends back a message that grants access to the user, and the GUI stores a cookie to keep the user logged in. Suppose now that the test fails. Where is the error? Is it in the query that retrieves the user from the DB? Or in the routine that hashes the password? Or is it just an issue in the connectivity between the application and the database?
+Let me give you an example. Consider a web application and imagine a test that checks that a user can log in. The login process involves many layers: the user inputs, the username and the password in a GUI and submits the form, the GUI communicates with the core of the application that finds the user in the DB and checks the password hash against the one stored there, then sends back a message that grants access to the user, and the GUI stores a cookie to keep the user logged in. Suppose now that the test fails. Where is the error? Is it in the query that retrieves the user from the DB? Or in the routine that hashes the password? Or is it just an issue in the connectivity between the application and the database?
 
 As you can see there are too many possible points of failure. While this is a perfectly valid _integration test_, it is definitely not a _unit test_. Unit tests try to test the smallest possible units of code in your system, usually simple routines like functions or object methods. Integration tests, instead, put together whole systems that have already been tested and test that they can work together.
 
@@ -115,5 +115,5 @@ We want to be sure, however, that our component uses the API of the external act
 
 ## Conclusions
 
-Since the discovery of TDD few thing changed the way I write code more than these considerations on what I am supposed to test. Out of 6 different type of tests we discovered that 2 shouldn't be tested, 2 of them require a very simple technique based on assertions, and the last 2 are the only ones that requires an advanced technique (mocks). This should cheer you up, as for once a good methodology doesn't add new rules and further worries, but removes one third of them, forbidding you to implement them!
+Since the discovery of TDD few things changed the way I write code more than these considerations on what I am supposed to test. Out of 6 different types of tests we discovered that 2 shouldn't be tested, 2 of them require a very simple technique based on assertions, and the last 2 are the only ones that requires an advanced technique (mocks). This should cheer you up, as for once a good methodology doesn't add new rules and further worries, but removes one third of them, forbidding you to implement them!
 
