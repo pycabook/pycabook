@@ -7,7 +7,7 @@ B> - Wargames (1983)
 
 ## Project overview
 
-The goal of the "Rent-o-matic" project (fans of "Day of the Tentacle" may get the reference) is to create a simple search engine on top of a dataset of objects which are described by some quantities. The search engine allows setting some filters to narrow the search.
+The goal of the "Rent-o-Matic" project (fans of "Day of the Tentacle" may get the reference) is to create a simple search engine on top of a dataset of objects which are described by some quantities. The search engine allows setting some filters to narrow the search.
  
 The objects in the dataset are houses for rent described by the following quantities:
  
