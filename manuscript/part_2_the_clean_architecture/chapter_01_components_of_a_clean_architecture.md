@@ -34,7 +34,7 @@ This layer contains the use cases implemented by the system. Use cases are the p
 
 A use case should be as small a possible. It is very important to isolate small actions in use cases, as this makes the whole system easier to test, understand and maintain.
 
-Use cases know the entities, so they can instantiate them directly and use them. They can also call each other, and it is common to create complex use cases that put together other simpler ones.
+Use cases know the entities, so they can instantiate them directly and use them. They can also call each other, and it is common to create complex use cases that put together simpler ones.
 
 ### External systems
 
