@@ -22,11 +22,11 @@ Let's have a look at the main layers of a clean architecture, keeping in mind th
 
 ### Entities
 
-This layer of the clean architecture contains a representation of the domain models, that is everything your project needs to interact with and is sufficiently complex to require a specific representation. For example, strings in Python are complex and very powerful objects. They provide many methods out of the box, so in general it is useless to create a domain model for them. If your project is a tool to analyse medieval manuscripts, however, you might need to isolate sentences and at this point maybe you need a specific domain model.
+This layer of the clean architecture contains a representation of the domain models, that is everything your project needs to interact with and is sufficiently complex to require a specific representation. For example, strings in Python are complex and very powerful objects. They provide many methods out of the box, so in general, it is useless to create a domain model for them. If your project is a tool to analyse medieval manuscripts, however, you might need to isolate sentences and at this point maybe you need a specific domain model.
 
 Since we work in Python, this layer will contain classes, with methods that simplify the interaction with them. It is very important, however, to understand that the models in this layer are different from the usual models of frameworks like Django. These models are not connected with a storage system, so they cannot be directly saved or queried using methods of their classes, they don't contain methods to dump themselves to JSON strings, they are not connected with any presentation layer. They are so-called lightweight models.
 
-This is the inmost layer. Entities have a mutual knowledge since they live in the same layer, so the architecture allows them to interact directly. This means that one of your Python classes can use another one directly, instantiating it and calling its methods. Entities don't know anything that lives in outer layers, however. For example, entities don't know details about the external interfaces, and they only work with interfaces.
+This is the inmost layer. Entities have mutual knowledge since they live in the same layer, so the architecture allows them to interact directly. This means that one of your Python classes can use another one directly, instantiating it and calling its methods. Entities don't know anything that lives in outer layers, however. For example, entities don't know details about the external interfaces, and they only work with interfaces.
   
 ### Use cases
 
