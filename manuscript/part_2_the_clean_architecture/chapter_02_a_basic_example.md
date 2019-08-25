@@ -16,7 +16,7 @@ The objects in the dataset are houses for rent described by the following quanti
 * A renting price in Euro/day
 * Latitude and longitude
 
-The description of the house is purposely minimal, so that the whole project can easily fit in a chapter. The concepts that I will show are however easily extendable to more complex cases.
+The description of the house is purposely minimal so that the whole project can easily fit in a chapter. The concepts that I will show are however easily extendable to more complex cases.
 
 As pushed by the clean architecture model, we are interested in separating the different layers of the system.
 
@@ -38,13 +38,13 @@ $ pip install -r requirements/dev.txt
 
 Try to run `py.test -svv` to check that everything is working correctly, and then remove the files `tests/test_rentomatic.py` and `rentomatic/rentomatic.py`.
 
-In this chapter I will not explicitly state that I run the test suite, as I consider it part of the standard workflow. Every time we write a test you should run the suite and check that you get an error (or more), and the code that I give as a solution should make the test suite pass. You are free to try to implement your own code before copying my solution, obviously.
+In this chapter, I will not explicitly state that I run the test suite, as I consider it part of the standard workflow. Every time we write a test you should run the suite and check that you get an error (or more), and the code that I give as a solution should make the test suite pass. You are free to try to implement your own code before copying my solution, obviously.
 
 ## Domain models
 
 Let us start with a simple definition of the `Room` model. As said before, the clean architecture models are very lightweight, or at least they are lighter than their counterparts in common web frameworks.
 
-Following the TDD methodology the first thing that I write are the tests. Create the `tests/domain/test_room.py` and put this code inside it
+Following the TDD methodology, the first thing that I write are the tests. Create the `tests/domain/test_room.py` and put this code inside it
 
 ``` python
 import uuid
@@ -63,7 +63,7 @@ def test_room_model_init():
     assert room.latitude == 51.75436293
 ```
 
-Remember to create an `__init__.py` file in every subdirectory of `tests/`, so in this case create `tests/domain/__init__.py`. This test ensures that the model can be initialised with the correct values. All the parameters of the model are mandatory. Later we could want to make some of them optional, and in that case we will have to add the relevant tests.
+Remember to create an `__init__.py` file in every subdirectory of `tests/`, so in this case, create `tests/domain/__init__.py`. This test ensures that the model can be initialised with the correct values. All the parameters of the model are mandatory. Later we could want to make some of them optional, and in that case, we will have to add the relevant tests.
 
 Now let's write the `Room` class in the `rentomatic/domain/room.py` file.
 
@@ -80,7 +80,7 @@ class Room:
 {icon: github}
 B> Git tag: [chapter-2-domain-models-step-1](https://github.com/pycabook/rentomatic/tree/chapter-2-domain-models-step-1)
 
-The model is very simple, and requires no further explanation. Given that we will receive data to initialise this model from other layers, and that this data is likely to be a dictionary, it is useful to create a method that initialises the model from this type of structure. The test for this method is 
+The model is very simple and requires no further explanation. Given that we will receive data to initialise this model from other layers, and that this data is likely to be a dictionary, it is useful to create a method that initialises the model from this type of structure. The test for this method is 
 
 ``` python
 def test_room_model_from_dict():
@@ -118,7 +118,7 @@ while the implementation inside the `Room` class is
 {icon: github}
 B> Git tag: [chapter-2-domain-models-step-2](https://github.com/pycabook/rentomatic/tree/chapter-2-domain-models-step-2)
 
-As you can see one of the benefits of a clean architecture is that each layer contains small pieces of code that, being isolated, shall perform simple tasks. In this case the model provides an initialisation API and stores the information inside the class.
+As you can see, one of the benefits of a clean architecture is that each layer contains small pieces of code that, being isolated, shall perform simple tasks. In this case, the model provides an initialisation API and stores the information inside the class.
 
 It is often useful to compare models, and we will use this feature later in the project. The comparison operator can be added to any Python object through the `__eq__` method that receives another object and returns either `True` or `False`. Comparing `Room` fields might however result in a very big `and` chain of statements, so the first things I will do is to write a method to convert the object in a dictionary. The test goes in `tests/domain/test_room.py`
 
@@ -186,7 +186,7 @@ B> Git tag: [chapter-2-domain-models-step-4](https://github.com/pycabook/rentoma
 
 Outer layers can use the `Room` model, but if you want to return the model as a result of an API call you need a serializer.
 
-The typical serialization format is JSON, as this is a broadly accepted standard for web-based APIs. The serializer is not part of the model, but is an external specialized class that receives the model instance and produces a representation of its structure and values.
+The typical serialization format is JSON, as this is a broadly accepted standard for web-based APIs. The serializer is not part of the model but is an external specialized class that receives the model instance and produces a representation of its structure and values.
 
 To test the JSON serialization of our `Room` class put the following code into the file `tests/serializers/test_room_json_serializer.py`:
 
@@ -257,9 +257,9 @@ Providing a class that inherits from `json.JSONEncoder` let us use the `json.dum
 
 It's time to implement the actual business logic that runs inside our application. Use cases are the places where this happens, and they might or might not be directly linked to the external API of the system. 
 
-The simplest use case we can create is one that fetches all the rooms stored in the repository and returns them. In this first part we will not implement the filters to narrow the search. That part will be introduced in the next chapter when we will discuss error management.
+The simplest use case we can create is one that fetches all the rooms stored in the repository and returns them. In this first part, we will not implement the filters to narrow the search. That part will be introduced in the next chapter when we will discuss error management.
 
-The repository is our storage component, and according to the clean architecture it will be implemented in an outer level (external systems). We will access it as an interface, which in Python means that we will receive an object that we expect will expose a certain API. From the testing point of view the best way to run code that accesses an interface is to mock the latter. Put this code in the `tests/use_cases/test_room_list_use_case.py`
+The repository is our storage component, and according to the clean architecture it will be implemented in an outer level (external systems). We will access it as an interface, which in Python means that we will receive an object that we expect will expose a certain API. From the testing point of view, the best way to run code that accesses an interface is to mock the latter. Put this code in the `tests/use_cases/test_room_list_use_case.py`
 
 I will make use of pytest's powerful fixtures, but I will not introduce them. I highly recommend reading the [official documentation](https://docs.pytest.org/en/latest/fixture.html), which is very good and covers many different use cases.
 
@@ -320,9 +320,9 @@ def test_room_list_without_parameters(domain_rooms):
     assert result == domain_rooms
 ```
 
-The test is straightforward. First we mock the repository so that it provides a `list` method that returns the list of models we created above the test. Then we initialise the use case with the repository and execute it, collecting the result. The first thing we check is that the repository method was called without any parameter, and the second is the effective correctness of the result.
+The test is straightforward. First, we mock the repository so that it provides a `list` method that returns the list of models we created above the test. Then we initialise the use case with the repository and execute it, collecting the result. The first thing we check is that the repository method was called without any parameter, and the second is the effective correctness of the result.
 
-Calling the `list` method of the repository is an outgoing query action that the use case is supposed to perform, and according to the unit testing rules we should not test outgoing queries. We should however test how our system runs the outgoing query, that is the parameters used to run the query.
+Calling the `list` method of the repository is an outgoing query action that the use case is supposed to perform, and according to the unit testing rules, we should not test outgoing queries. We should, however, test how our system runs the outgoing query, that is the parameters used to run the query.
 
 Put the implementation of the use case in the `rentomatic/use_cases/room_list_use_case.py`
 
@@ -336,22 +336,22 @@ class RoomListUseCase:
         return self.repo.list()
 ```
 
-This might seem too simple, but this particular use case is just a wrapper around a specific function of the repository. As a matter of fact, this use case doesn't contain any error check, which is something we didn't take into account yet. In the next chapter we will discuss requests and responses, and the use case will become slightly more complicated.
+This might seem too simple, but this particular use case is just a wrapper around a specific function of the repository. As a matter of fact, this use case doesn't contain any error check, which is something we didn't take into account yet. In the next chapter, we will discuss requests and responses, and the use case will become slightly more complicated.
 
 {icon: github}
 B> Git tag: [chapter-2-use-cases](https://github.com/pycabook/rentomatic/tree/chapter-2-use-cases)
 
 ## The storage system
 
-During the development of the use case we assumed it would receive an object that contains the data and exposes a `list` function. This object is generally speaking nicknamed "repository", being the source of information for the use case. It has nothing to do with the Git repository, though, so be careful not to mix the two nomenclatures.
+During the development of the use case, we assumed it would receive an object that contains the data and exposes a `list` function. This object is generally speaking nicknamed "repository", being the source of information for the use case. It has nothing to do with the Git repository, though, so be careful not to mix the two nomenclatures.
 
-The storage lives in the third layer of the clean architecture, the external systems. The elements in this layer are accessed by internal elements through an interface, which in Python just translates in exposing a given set of methods (in this case only `list`). It is worth noting that the level of abstraction provided by a repository in a clean architecture is higher than that provided by an ORM in a framework or by a tool like SQLAlchemy. The repository provides only the endpoints that the application needs, with an interface which is tailored on the specific business problems the application implements.
+The storage lives in the third layer of the clean architecture, the external systems. The elements in this layer are accessed by internal elements through an interface, which in Python just translates in exposing a given set of methods (in this case only `list`). It is worth noting that the level of abstraction provided by a repository in a clean architecture is higher than that provided by an ORM in a framework or by a tool like SQLAlchemy. The repository provides only the endpoints that the application needs, with an interface which is tailored to the specific business problems the application implements.
 
 To clarify the matter in terms of concrete technologies, SQLAlchemy is a wonderful tool to abstract the access to an SQL database, so the internal implementation of the repository could use it to access a PostgreSQL database, for example. But the external API of the layer is not that provided by SQLAlchemy. The API is a reduced set of functions that the use cases call to get the data, and the internal implementation can use a wide range of solutions to achieve the same goal, from raw SQL queries to a complex system of remote calls through a RabbitMQ network.
 
 A very important feature of the repository is that it can return domain models, and this is in line with what framework ORMs usually do. The elements in the third layer have access to all the elements defined in the internal layers, which means that domain models and use cases can be called and used directly from the repository.
 
-For the sake of this simple example we will not deploy and use a real database system. Given what we said, we are free to implement the repository with the system that better suits our needs, and in this case I want to keep everything simple. We will thus create a very simple in-memory storage system loaded with some predefined data.
+For the sake of this simple example, we will not deploy and use a real database system. Given what we said, we are free to implement the repository with the system that better suits our needs, and in this case I want to keep everything simple. We will thus create a very simple in-memory storage system loaded with some predefined data.
 
 The first thing to do is to write some tests that document the public API of the repository. The file containing the tests is `tests/repository/test_memrepo.py`.
 
@@ -404,7 +404,7 @@ def test_repository_list_without_parameters(room_dicts):
     assert repo.list() == rooms
 ```
 
-In this case we need a single test that checks the behaviour of the `list` method. The implementation that passes the test goes in the file `rentomatic/repository/memrepo.py`
+In this case, we need a single test that checks the behaviour of the `list` method. The implementation that passes the test goes in the file `rentomatic/repository/memrepo.py`
 
 ``` python
 from rentomatic.domain import room as r
@@ -423,13 +423,13 @@ B> Git tag: [chapter-2-storage-system](https://github.com/pycabook/rentomatic/tr
 
 You can easily imagine this class being the wrapper around a real database or any other storage type. While the code might become more complex, the structure of the repository is the same, with a single public method `list`. I will dig into database repositories in a later chapter.
 
-## A command line interface
+## A command-line interface
 
 So far we created the domain models, the serializers, the use cases and the repository, but we are still missing a system that glues everything together. This system has to get the call parameters from the user, initialise a use case with a repository, run the use case that fetches the domain models from the repository, and return them to the user.
 
-Let's see now how the architecture that we just created can interact with an external system like a CLI. The power of a clean architecture is that the external systems are pluggable, which means that we can defer the decision about the detail of the system we want to use. In this case we want to give the user an interface to query the system and to get a list of the rooms contained in the storage system, and the simplest choice is a command line tool.
+Let's see now how the architecture that we just created can interact with an external system like a CLI. The power of a clean architecture is that the external systems are pluggable, which means that we can defer the decision about the detail of the system we want to use. In this case, we want to give the user an interface to query the system and to get a list of the rooms contained in the storage system, and the simplest choice is a command-line tool.
 
-Later we will create a REST endpoint and we will expose it though a Web server, and it will be clear why the architecture that we created is so powerful.
+Later we will create a REST endpoint and we will expose it through a Web server, and it will be clear why the architecture that we created is so powerful.
 
 For the time being, create a file `cli.py` in the same directory that contains `setup.py`. This is a simple Python script that doesn't need any specific option to run, as it just queries the storage for all the domain models contained there. The content of the file is the following
 
@@ -458,7 +458,7 @@ $ ./cli.py
 
 which is correct as the `MemRepo` class in the `cli.py` file has been initialised with an empty list. The simple in-memory storage that we use has no persistence, so every time we create it we have to load some data in it. This has been done to keep the storage layer simple, but keep in mind that if the storage was a proper database this part of the code would connect to it but there would be no need to load data in it.
 
-The important part of the script are the three lines
+The important part of the script is the three lines
 
 ``` python
 repo = mr.MemRepo([])
@@ -511,7 +511,7 @@ print([room.to_dict() for room in result])
 {icon: github}
 B> Git tag: [chapter-2-command-line-interface-step-2](https://github.com/pycabook/rentomatic/tree/chapter-2-command-line-interface-step-2)
 
-Again, remember that this is due to the trivial nature of our storage, and not to the architecture of the system. Note that I changed the `print` instruction as the repository returns domain models and it printing them would result in a list of strings like `<rentomatic.domain.room.Room object at 0x7fb815ec04e0>`, which is not really helpful.
+Again, remember that this is due to the trivial nature of our storage, and not to the architecture of the system. Note that I changed the `print` instruction as the repository returns domain models and printing them would result in a list of strings like `<rentomatic.domain.room.Room object at 0x7fb815ec04e0>`, which is not really helpful.
 
 If you run the command line tool now, you will get a richer result than before
 
@@ -525,11 +525,11 @@ $ ./cli.py
 
 ## HTTP API
 
-In this section I will go through the creation of an HTTP endpoint for the room list use case. An HTTP endpoint is a URL exposed by a Web server that runs a specific logic and returns values, often formatted as JSON, which is a widely used format for this type of API.
+In this section, I will go through the creation of an HTTP endpoint for the room list use case. An HTTP endpoint is a URL exposed by a Web server that runs a specific logic and returns values, often formatted as JSON, which is a widely used format for this type of API.
 
-The semantic of URLs, that is their structure and the requests they can accept, comes from the REST recommendations. REST is however not part of the clean architecture, which means that you can choose to model your URLs according to whatever scheme you might prefer.
+The semantics of URLs, their structure and the requests they can accept, comes from the REST recommendations. REST is however not part of the clean architecture, which means that you can choose to model your URLs according to whatever scheme you might prefer.
 
-To expose the HTTP endpoint we need a web server written in Python, and in this case I chose Flask. Flask is a lightweight web server with a modular structure that provides just the parts that the user needs. In particular, we will not use any database/ORM, since we already implemented our own repository layer. The clean architecture works perfectly with other frameworks, like Django, web2py, Pylons, and so on.
+To expose the HTTP endpoint we need a web server written in Python, and in this case, I chose Flask. Flask is a lightweight web server with a modular structure that provides just the parts that the user needs. In particular, we will not use any database/ORM, since we already implemented our own repository layer. The clean architecture works perfectly with other frameworks, like Django, web2py, Pylons, and so on.
 
 Let us start updating the requirements files. The `requirements/prod.txt` file shall contain Flask, as this package contains a script that runs a local webserver that we can use to expose the endpoint
 
@@ -553,7 +553,7 @@ B> Git tag: [chapter-2-http-api-step-1](https://github.com/pycabook/rentomatic/t
 
 Remember to run `pip install -r requirements/dev.txt` again after those changes to install the new packages in your virtual environment.
 
-The setup of a Flask application is not complex, but a lot of concepts are involved, and since this is not a tutorial on Flask I will run quickly through these steps. I will however provide links to the Flask documentation for every concept.
+The setup of a Flask application is not complex, but a lot of concepts are involved, and since this is not a tutorial on Flask I will run quickly through these steps. I will, however, provide links to the Flask documentation for every concept.
 
 I usually define different configurations for my testing, development, and production environments. Since the Flask application can be configured using a plain Python object ([documentation](http://flask.pocoo.org/docs/latest/api/#flask.Config.from_object)), I created the file `rentomatic/flask_settings.py` to host those objects
 
@@ -599,9 +599,9 @@ def create_app(config_object=DevConfig):
     return app
 ```
 
-Before we create the proper setup of the webserver we want to create the endpoint that will be exposed. Endpoints are ultimately functions that are run when a user sends a request to a certain URL, so we can still work with TDD, as the final goal is to have code that produces certain results.
+Before we create the proper setup of the webserver, we want to create the endpoint that will be exposed. Endpoints are ultimately functions that are run when a user sends a request to a certain URL, so we can still work with TDD, as the final goal is to have code that produces certain results.
 
-The problem we have testing an endpoint is that we need the webserver to be up and running when we hit the test URLs. This time the webserver is not an external system, that we can mock to test the correct use of its API, but is part of our system, so we need to run it. This is what the `pytest-flask` extension provides, in the form of pytest fixtures, in particular the `client` fixture.
+The problem we have testing an endpoint is that we need the webserver to be up and running when we hit the test URLs. This time, the webserver is not an external system that we can mock to test the correct use of its API, but is part of our system, so we need to run it. This is what the `pytest-flask` extension provides, in the form of pytest fixtures, in particular, the `client` fixture.
 
 This fixture hides a lot of automation, so it might be considered a bit "magic" at a first glance. When you install the `pytest-flask` extension the fixture is available automatically, so you don't need to import it. Moreover, it tries to access another fixture named `app` that you have to define. This is thus the first thing to do.
 
@@ -626,7 +626,7 @@ First of all the fixture has been defined with the scope of a function, which me
 
 The function itself runs the app factory to create a Flask app, using the `TestConfig` configuration from `flask_settings`, which sets the `TESTING` flag to `True`. You can find the description of these flags in the [official documentation](http://flask.pocoo.org/docs/1.0/config/).
 
-At this point we can write the test for our endpoint. Create the file `tests/rest/test_get_rooms_list.py`
+At this point, we can write the test for our endpoint. Create the file `tests/rest/test_get_rooms_list.py`
 
 ``` python
 import json
@@ -687,7 +687,7 @@ The first part contains imports and sets up a room from a dictionary. This way w
 def test_get(mock_use_case, client):
 ```
 
-This is the only test that we have for the time being. During the whole test we mock the use case, as we are not interested in running it. We are however interested in checking the arguments it is called with, and a mock can provide this information. The test receives the mock from the `patch` decorator and `client`, which is one of the fixtures provided by `pytest-flask`. The `client` fixture automatically loads the `app`, which we defined in `conftest.py`, and is an object that simulates an HTTP client that can access the API endpoints and store the responses of the server.
+This is the only test that we have for the time being. During the whole test, we mock the use case, as we are not interested in running it. We are however interested in checking the arguments it is called with, and a mock can provide this information. The test receives the mock from the `patch` decorator and `client`, which is one of the fixtures provided by `pytest-flask`. The `client` fixture automatically loads the `app`, which we defined in `conftest.py`, and is an object that simulates an HTTP client that can access the API endpoints and store the responses of the server.
 
 ``` python
     mock_use_case().execute.return_value = rooms
@@ -702,9 +702,9 @@ This is the only test that we have for the time being. During the whole test we 
 
 The first line initialises the `execute` method of the mock. Pay attention that `execute` is run on an instance of the `RoomListUseCase` class, and not on the class itself, which is why we call the mock (`mock_use_case()`) before accessing the method.
 
-The central part of the test is the line where we `get` the API endpoint, which sends an HTTP GET requests and collects the server's response.
+The central part of the test is the line where we `get` the API endpoint, which sends an HTTP GET request and collects the server's response.
 
-After this we check that the data contained in the response is actually a JSON that represents the `room_dict` structure, that the `execute` method has been called without any parameters, that the HTTP response status code is 200, and last that the server sends the correct mimetype back.
+After this, we check that the data contained in the response is a JSON that represents the `room_dict` structure, that the `execute` method has been called without any parameters, that the HTTP response status code is 200, and last that the server sends the correct MIME type back.
 
 It's time to write the endpoint, where we will finally see all the pieces of the architecture working together. Let me show you a template for the minimal Flask endpoint we can create
 
@@ -720,11 +720,11 @@ def room():
                     status=[STATUS])
 ```
 
-As you can see the structure is really simple. Apart from setting the blueprint, which is the way Flask registers endpoints, we create a simple function that runs the endpoint, and we decorate it assigning the `/rooms` endpoint that serves `GET` requests. The function will run some logic and eventually return a `Response` that contains JSON data, the correct mimetype, and an HTTP status that represents the success or failure of the logic.
+As you can see the structure is really simple. Apart from setting the blueprint, which is the way Flask registers endpoints, we create a simple function that runs the endpoint, and we decorate it assigning the `/rooms` endpoint that serves `GET` requests. The function will run some logic and eventually return a `Response` that contains JSON data, the correct MIME type, and an HTTP status that represents the success or failure of the logic.
 
 The above template becomes the following code that you can put in `rentomatic/rest/room.py` [^restroom]
 
-[^restroom]: The Rent-o-matic rest/room is obviously connected with Day of the Tentacle's Chron-O-John
+[^restroom]: The Rent-o-Matic rest/room is obviously connected with Day of the Tentacle's Chron-O-John
 
 ``` python
 import json
@@ -784,7 +784,7 @@ As I did before, I initialised the memory storage with some data to give the use
     result = use_case.execute()
 ```
 
-which is exactly the same code that we run in the command line interface. The rest of the code creates a proper HTTP response, serializing the result of the use case using the specific serializer that matches the domain model, and setting the HTTP status to 200 (success)
+which is exactly the same code that we run in the command-line interface. The rest of the code creates a proper HTTP response, serializing the result of the use case using the specific serializer that matches the domain model, and setting the HTTP status to 200 (success)
 
 ``` python
     return Response(json.dumps(result, cls=ser.RoomJsonEncoder),
@@ -794,9 +794,9 @@ which is exactly the same code that we run in the command line interface. The re
 
 This shows you the power of the clean architecture in a nutshell. Writing a CLI interface or a Web service is different only in the presentation layer, not in the logic, which is contained in the use case.
 
-Now that we defined the endpoint we can finalise the configuration of the webserver, so that we can access the endpoint with a browser. This is not strictly part of the clean architecture, but as already happened for the CLI interface I want you to see the final result, to get the whole picture and also to enjoy the effort you put in following the whole discussion up to this point.
+Now that we defined the endpoint, we can finalise the configuration of the webserver, so that we can access the endpoint with a browser. This is not strictly part of the clean architecture, but as with the CLI interface, I want you to see the final result, to get the whole picture and also to enjoy the effort you put in following the whole discussion up to this point.
 
-Python web applications expose a common interface called [Web Server Gateway Interface](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface) or WSGI. So to run the Flask development web server we have to define a `wsgi.py` file in the main folder of the project, i.e. in the same directory of the `cli.py` file
+Python web applications expose a common interface called [Web Server Gateway Interface](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface) or WSGI. So to run the Flask development web server, we have to define a `wsgi.py` file in the main folder of the project, i.e. in the same directory of the `cli.py` file
 
 ``` python
 from rentomatic.app import create_app
@@ -810,13 +810,13 @@ B> Git tag: [chapter-2-http-api-step-3](https://github.com/pycabook/rentomatic/t
 
 When the Flask Command Line Interface (http://flask.pocoo.org/docs/1.0/cli/) runs it looks for a file named `wsgi.py` and loads it, expecting it to contain an `app` variable that is an instance of the `Flask` object. As the `create_app` is a factory we just need to execute it.
 
-At this point you can execute `flask run` in the directory that contains this file and you should see a nice message like
+At this point, you can execute `flask run` in the directory that contains this file and you should see a nice message like
 
 ``` txt
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 
-At this point you can point your browser to
+At this point, you can point your browser to
 
 ```
 http://localhost:5000/rooms
