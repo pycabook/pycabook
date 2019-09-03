@@ -174,7 +174,7 @@ Now we have a standard way to pack input and output values, and the above patter
 
 The `filters` parameter that we want to add to the use case allows the caller to add conditions to narrow the results of the model list operation, using a notation `<attribute>__<operator>`. For example, specifying `filters={'price__lt': 100}` should return all the results with a price lower than 100. 
 
-Since the `Room` model has many attributes the number of possible filters is very high, so for simplicity's sake I will consider the following cases:
+Since the `Room` model has many attributes the number of possible filters is very high, simplicity's sake, I will consider the following cases:
 
 * The `code` attribute supports only `__eq`, which finds the room with the specific code if it exists
 * The `price` attribute supports `__eq`, `__lt`, and `__gt`
@@ -259,9 +259,9 @@ def test_build_room_list_request_object_rejected_filters(key):
     assert bool(request) is False
 ```
 
-As you can see I added the `assert request.filters is None` check to the original two tests, then I added 6 tests for the filters syntax. Remember that if you are following TDD you should add these tests one at a time and change the code accordingly, here I am only showing you the final result of the process.
+As you can see I added the `assert request.filters is None` check to the original two tests, then I added 6 tests for the filters syntax. Remember that if you are following TDD you should add these tests one at a time and change the code accordingly; here I am only showing you the final result of the process.
 
-In particular, note that I used the `pytest.mark.parametrize` decorator to run the same test on multiple value, the accepted filters in `test_build_room_list_request_object_accepted_filters` and the filters that we don't consider valid in `test_build_room_list_request_object_rejected_filters`.
+In particular, note that I used the `pytest.mark.parametrize` decorator to run the same test on multiple values, the accepted filters in `test_build_room_list_request_object_accepted_filters` and the filters that we don't consider valid in `test_build_room_list_request_object_rejected_filters`.
 
 The core idea here is that requests are customised for use cases, so they can contain the logic that validates the arguments used to instantiate them. The request is valid or invalid before it reaches the use case, so it is not the responsibility of this latter to check that the input values have proper values or a proper format.
 
@@ -549,7 +549,7 @@ def test_response_failure_from_invalid_request_object_with_errors():
     assert response.message == "path: Is mandatory\npath: can't be blank"
 ```
 
-The last three tests check that the `ResponseFailure` can create three specific errors, represented by the `RESOURCE_ERROR`, `PARAMETERS_ERROR`, and `SYSTEM_ERROR` class attributes. This categorization is an attempt to capture the different types of issues that can happen when dealing with an external system through an API. `RESOURCE_ERROR` contains all those errors that are related to the resources contained in the repository, for instance when you cannot find an entry given its unique id. `PARAMETERS_ERROR` describes all those errors that occur when the request parameters are wrong or missing. `SYSTEM_ERROR` encompass the errors that happen in the underlying system at an operating system level, such as a failure in a filesystem operation, or a network connection error while fetching data from the database.
+The last three tests check that the `ResponseFailure` can create three specific errors, represented by the `RESOURCE_ERROR`, `PARAMETERS_ERROR`, and `SYSTEM_ERROR` class attributes. This categorization is an attempt to capture the different types of issues that can happen when dealing with an external system through an API. `RESOURCE_ERROR` contains all those errors that are related to the resources contained in the repository, for instance when you cannot find an entry given its unique ID. `PARAMETERS_ERROR` describes all those errors that occur when the request parameters are wrong or missing. `SYSTEM_ERROR` encompass the errors that happen in the underlying system at an operating system level, such as a failure in a filesystem operation, or a network connection error while fetching data from the database.
 
 ``` python
 def test_response_failure_build_resource_error():
@@ -739,7 +739,7 @@ class RoomListUseCase(object):
 {icon: github}
 B> Git tag: [chapter-3-error-management-in-a-use-case](https://github.com/pycabook/rentomatic/tree/chapter-3-error-management-in-a-use-case)
 
-As you can see the first thing that the `execute()` method does is to check if the request is valid, otherwise, it returns a `ResponseFailure` built with the same request object. Then the actual business logic is implemented, calling the repository and returning a successful response. If something goes wrong in this phase the exception is caught and returned as an aptly formatted `ResponseFailure`.
+As you can see, the first thing that the `execute()` method does is to check if the request is valid. Otherwise, it returns a `ResponseFailure` built with the same request object. Then the actual business logic is implemented, calling the repository and returning a successful response. If something goes wrong in this phase the exception is caught and returned as an aptly formatted `ResponseFailure`.
 
 ## Integrating external systems
 
