@@ -516,7 +516,7 @@ def test_response_failure_contains_value(response_type, response_message):
 We sometimes want to create responses from Python exceptions that can happen in a use case, so we test that `ResponseFailure` objects can be initialised with a generic exception. We also check that the message is formatted properly
 
 ``` python
-def test_response_failure_initialisation_with_exception():
+def test_response_failure_initialisation_with_exception(response_type):
     response = res.ResponseFailure(
         response_type, Exception('Just an error message'))
 
