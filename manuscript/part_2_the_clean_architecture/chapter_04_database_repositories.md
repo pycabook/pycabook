@@ -48,7 +48,7 @@ class MemRepo:
         return result
 ```
 
-which interface is made of two parts: the initialisation and the `list` method. The `__init__` method accepts values because this specific object doesn't act as long-term storage, so we are forced to pass some data every time we instantiate the class.
+whose interface is made of two parts: the initialisation and the `list` method. The `__init__` method accepts values because this specific object doesn't act as long-term storage, so we are forced to pass some data every time we instantiate the class.
 
 A repository based on a proper database will not need to be filled with data when initialised, its main job being that of storing data between sessions, but will nevertheless need to be initialised at least with the database address and access credentials.
 
@@ -78,9 +78,9 @@ def test_dummy():
     pass
 ```
 
-The `pytestmark` module attribute labels every test in the module with the `integration` tag. To verify that this works I added a `test_dummy` test function which passes always. You can now run `py.test -svv -m integration` to ask pytest to run only the tests marked with that label. The `-m` option supports a rich syntax that you can learn reading the [documentation](https://docs.pytest.org/en/latest/example/markers.html).
+The `pytestmark` module attribute labels every test in the module with the `integration` tag. To verify that this works I added a `test_dummy` test function which always passes. You can now run `py.test -svv -m integration` to ask pytest to run only the tests marked with that label. The `-m` option supports a rich syntax that you can learn by reading the [documentation](https://docs.pytest.org/en/latest/example/markers.html).
 
-While this is enough to run integration tests selectively, it is not enough to skip them by default. To do this we can alter the pytest setup to label all those tests as skipped, but this will give us no means to run them. The standard way to implement this is to define a new command-line option and to process each marked test according to the value of this option.
+While this is enough to run integration tests selectively, it is not enough to skip them by default. To do this, we can alter the pytest setup to label all those tests as skipped, but this will give us no means to run them. The standard way to implement this is to define a new command-line option and to process each marked test according to the value of this option.
 
 To do it open the `tests/conftest.py` that we already created and add the following code
 
@@ -162,20 +162,20 @@ class Room(Base):
 
 This is the class that represents the `Room` in the database. It is important to understand that this is not the class we are using in the business logic, but the class that we want to map into the SQL database. The structure of this class is thus dictated by the needs of the storage layer, and not by the use cases. You might want for instance to store `longitude` and `latitude` in a JSON field, to allow for easier extendibility, without changing the definition of the domain model. In the simple case of the Rent-o-matic project, the two classes almost overlap, but this is not the case generally speaking.
 
-Obviously, this means that you have to keep in sync the storage and the domain levels and that you need to manage migrations on your own. You can use tools like Alembic, but the migrations will not come directly from domain model changes.
+Obviously, this means that you have to keep the storage and the domain levels in sync and that you need to manage migrations on your own. You can use tools like Alembic, but the migrations will not come directly from domain model changes.
 
 {icon: github}
 B> Git tag: [chapter-4-create-the-sqlalchemy-classes](https://github.com/pycabook/rentomatic/tree/chapter-4-create-the-sqlalchemy-classes)
 
 ### Spin up and tear down the database container
 
-When we run the integration tests the Postgres database engine must be already running in the background, and it must be already configured, for example with a pristine database ready to be used. Moreover, when all the tests have been executed the database should be removed and the database engine stopped.
+When we run the integration tests the Postgres database engine must be already running in the background, and it must be already configured, for example, with a pristine database ready to be used. Moreover, when all the tests have been executed the database should be removed and the database engine stopped.
 
 This is a perfect job for Docker, which can run complex systems in isolation with minimal configuration. We might orchestrate the creation and destruction of the database with bash, but this would mean wrapping the test suite in another script which is not my favourite choice.
 
 The structure that I show you here makes use of docker-compose through the `pytest-docker`, `pyyaml`, and `sqlalchemy-utils` packages. The idea is simple: given the configuration of the database (name, user, password), we create a temporary file containing the docker-compose configuration that spins up a Postgres database. Once the Docker container is running, we connect to the database engine with SQLAlchemy to create the database we will use for the tests and we populate it. When all the tests have been executed we tear down the Docker image and we leave the system in a clean status.
 
-Due to the complexity of the problem and a limitation of the `pytest-docker` package, the resulting setup is a bit convoluted. The `pytest-docker` plugin requires you to create a `docker_compose_file` fixture that should return the path of a file with the docker-compose configuration (YAML syntax). The plugin provides two fixtures, `docker_ip` and `docker_services`: the first one is simply the IP of the docker host (which can be different from localhost in case of remote execution) while the second is the actual routine that runs the containers through docker-compose and stops them after the test session. My setup to run this plugin is complex, but it allows me to keep all the database information in a single place.
+Due to the complexity of the problem and a limitation of the `pytest-docker` package, the resulting setup is a bit convoluted. The `pytest-docker` plugin requires you to create a `docker_compose_file` fixture that should return the path of a file with the docker-compose configuration (YAML syntax). The plugin provides two fixtures, `docker_ip` and `docker_services`: the first one is simply the IP of the Docker host (which can be different from localhost in case of remote execution) while the second is the actual routine that runs the containers through docker-compose and stops them after the test session. My setup to run this plugin is complex, but it allows me to keep all the database information in a single place.
 
 The first fixture goes in `tests/conftest.py` and contains the information about the PostgreSQL connection, namely the host, the database name, the user name, and the password
 
@@ -284,7 +284,7 @@ def pg_engine(docker_ip, docker_services, docker_setup):
     conn.close()
 ```
 
-As you can see the `pg_is_responsive` function relies on a setup dictionary like the one that we defined in the `docker_setup` fixture (the input argument is aptly named the same way) and returns a boolean after having checked if it is possible to establish a connection with the server.
+As you can see, the `pg_is_responsive` function relies on a setup dictionary like the one that we defined in the `docker_setup` fixture (the input argument is aptly named the same way) and returns a boolean after having checked if it is possible to establish a connection with the server.
 
 The second fixture receives `docker_services`, which spins up docker-compose automatically using the `docker_compose_file` fixture I defined previously. The `pg_is_responsive` function is used to wait for the container to reach a running state, then a connection is established and the database is created. To simplify this last operation I imported and used the package `sqlalchemy_utils`. The fixture yields the SQLAlchemy `engine` object, so it can be correctly closed once the session is finished.
 
@@ -389,7 +389,7 @@ def pg_session(pg_session_empty, pg_data):
     pg_session_empty.query(Room).delete()
 ```
 
-Note that this last fixture has a `function` scope, thus it is run for every test. Therefore, we delete all rooms after the yield returns, leaving the database in the same state it had before the test. This is not strictly necessary in this particular case, as during the tests we are only reading from the database, so we might add the rooms at the beginning of the test session and just destroy the container at the end of it. This doesn't, however, work in general, for instance when tests add entries to the database, so I preferred to show you a more generic solution.
+Note that this last fixture has a `function` scope, thus it is run for every test. Therefore, we delete all rooms after the yield returns, leaving the database in the same state it had before the test. This is not strictly necessary in this particular case, as during the tests we are only reading from the database, so we might add the rooms at the beginning of the test session and just destroy the container at the end of it. This doesn't generally work, however, such as when tests add entries to the database, so I preferred to show you a more generic solution.
 
 We can test this whole setup changing the `test_dummy` function so that it fetches all the rows of the `Room` table and verifying that the query returns 4 values.
 
@@ -411,9 +411,9 @@ B> Git tag: [chapter-4-database-fixtures](https://github.com/pycabook/rentomatic
 
 ### Integration tests
 
-At this point we can create the real tests in the `tests/repository/postgres/test_postgresrepo.py` file, replacing the `test_dummy` one. The first function is `test_repository_list_without_parameters` which runs the `list` method without any argument. The test receives the `docker_setup` fixture that allows us to initialise the `PostgresRepo` class, the `pg_data` fixture with the test data that we put in the database, and the `pg_session` fixture that creates the actual test database in the background. The actual test code compares the codes of the rooms returned by the `list` method and the test data of the `pg_data` fixture.
+At this point we can create the real tests in the `tests/repository/postgres/test_postgresrepo.py` file, replacing the `test_dummy` one. The first function is `test_repository_list_without_parameters`, which runs the `list` method without any argument. The test receives the `docker_setup` fixture that allows us to initialise the `PostgresRepo` class, the `pg_data` fixture with the test data that we put in the database, and the `pg_session` fixture that creates the actual test database in the background. The actual test code compares the codes of the rooms returned by the `list` method and the test data of the `pg_data` fixture.
 
-The file is basically a copy of `tests/repository/postgres/test_memrepo.py`, which is not surprising. Usually, you want to test the very same conditions, whatever the storage system. Towards the end of the chapter we will see however that while these files are initially the same, they can evolve differently as we find bugs or corner cases that come from the specific implementation (in-memory storage, PostgreSQL, and so on).
+The file is basically a copy of `tests/repository/postgres/test_memrepo.py`, which is not surprising. Usually, you want to test the very same conditions, whatever the storage system. Towards the end of the chapter we will see, however, that while these files are initially the same, they can evolve differently as we find bugs or corner cases that come from the specific implementation (in-memory storage, PostgreSQL, and so on).
 
 ``` python
 import pytest
@@ -507,7 +507,7 @@ def test_repository_list_with_price_between_filter(
     assert repo_rooms[0].code == '913694c6-435a-4366-ba0d-da5334a611b2'
 ```
 
-Remember that I introduced these tests one at a time and that I'm not showing you the full TDD workflow only for brevity's sake. The code of the `PostgresRepo` class has been developed following a strict TDD approach, and I recommend you to do the same. The resulting code goes in `rentomatic/repository/postgresrepo.py`, in the same directory where we create the `postgres_objects.py` file.
+Remember that I introduced these tests one at a time and that I'm not showing you the full TDD workflow only for brevity's sake. The code of the `PostgresRepo` class has been developed following a strict TDD approach, and I recommend you to do the same. The resulting code goes in `rentomatic/repository/postgresrepo.py`, the same directory we created the `postgres_objects.py` file.
 
 ``` python
 from sqlalchemy import create_engine
@@ -951,7 +951,7 @@ def docker_compose_file(docker_tmpfile, docker_setup):
 {icon: github}
 B> Git tag: [chapter-4-a-repository-based-on-mongodb-step-1](https://github.com/pycabook/rentomatic/tree/chapter-4-a-repository-based-on-mongodb-step-1)
 
-As you can see setting up MongoDB is not that different from PostgreSQL. Both systems are databases, and the way you connect to them is similar, at least in a testing environment, where you don't need specific settings for the engine.
+As you can see, setting up MongoDB is not that different from PostgreSQL. Both systems are databases, and the way you connect to them is similar, at least in a testing environment, where you don't need specific settings for the engine.
 
 With the above fixtures, we can write the `MongoRepo` class following TDD.
 The `tests/repository/mongodb/test_mongorepo.py` file contains all the tests for this class
@@ -1191,7 +1191,7 @@ collection = db.rooms
 collection.insert_many(data)
 ```
 
-After you saved it, run it with
+After you save it, run it with
 
 ``` sh
 $ python initial_mongo_setup.py
