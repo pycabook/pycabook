@@ -70,7 +70,7 @@ The clean architecture concepts are independent from the language, but the imple
 
 * Eleanor de Veras, who proofread the introduction.
 * Roberto Ciatti, who introduced me to clean architectures.
-* Max H. Gerlach, Paul Schwendenman, Eric Smith, Grant Moore, Hans Chen, who fixed typos and bad grammar submitting issues and pull requests.
+* Max H. Gerlach, Paul Schwendenman, Eric Smith, Grant Moore, Hans Chen, Ramces Chirino who fixed typos and bad grammar submitting issues and pull requests.
 * Faust Gertz and Michael O'Neill for spotting a bug in the code of the `calc` example. Fixing that and adding the test to the book is the best example of TDD I could give to the readers.
 * Łukasz Dziedzic, who developed the free "Lato" font ([Latofonts](http://www.latofonts.com)), used for the cover.
 
