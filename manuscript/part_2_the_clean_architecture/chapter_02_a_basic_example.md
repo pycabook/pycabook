@@ -1,8 +1,8 @@
 # Chapter 2 - A basic example
 
 {icon: quote-right}
-B> _Joshua/WOPR: Wouldn't you prefer a good game of chess?
-B> _David: Later. Let's play Global Thermonuclear War.__
+B> _Joshua/WOPR: Wouldn't you prefer a good game of chess?_
+B> _David: Later. Let's play Global Thermonuclear War._
 B> - Wargames (1983)
 
 ## Project overview
