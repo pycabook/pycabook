@@ -8,17 +8,17 @@ B> - Aliens (1986)
 
 In every software project, a great part of the code is dedicated to error management, and this code has to be rock solid. Error management is a complex topic, and there is always a corner case that we left out, or a condition that we supposed could never fail, while it does.
 
-In a clean architecture, the main process is the creation of use cases and their execution. This is therefore the main source of errors, and the use cases layer is where we have to implement the error management. Errors can obviously come from the domain models layer, but since those models are created by the use cases the errors that are not managed by the models themselves automatically become errors of the use cases.
+In a clean architecture, the main process is the creation of use cases and their execution. This is, therefore, the main source of errors, and the use cases layer is where we have to implement the error management. Errors can obviously come from the domain models layer, but since those models are created by the use cases the errors that are not managed by the models themselves automatically become errors of the use cases.
 
-To start working on possible errors and understand how to manage them, I will expand the `RoomListUseCase` to support filters that can be used to select a subset of the `Room` objects in the storage.
+To start working on possible errors and understand how to manage them, I will expand the `RoomListUseCase` to support filters that can be used to select a subset of the `Room` objects in storage.
 
-The `filters` argument could be for example a dictionary that contains attributes of the `Room` model and the thresholds to apply to them. Once we accept such a rich structure, we open our use case to all sorts of errors: attributes that do not exist in the `Room` model, thresholds of the wrong type, filters that make the storage layer crash, and so on. All these considerations have to be taken into account by the use case.
+The `filters` argument could be, for example, a dictionary that contains attributes of the `Room` model and the thresholds to apply to them. Once we accept such a rich structure, we open our use case to all sorts of errors: attributes that do not exist in the `Room` model, thresholds of the wrong type, filters that make the storage layer crash, and so on. All these considerations have to be taken into account by the use case.
 
-In particular we can divide the error management code in two different areas. The first one represents and manages requests, that is the input data that reaches our use case. The second one covers the way we return results from the use case through responses, the output data. These two concepts shouldn't be confused with HTTP requests and responses, even though there are similarities. We are considering here the way data can be passed to and received from use cases, and how to manage errors. This has nothing to do with a possible use of this architecture to expose an HTTP API.
+In particular, we can divide the error management code into two different areas. The first one represents and manages requests, that is, the input data that reaches our use case. The second one covers the way we return results from the use case through responses, the output data. These two concepts shouldn't be confused with HTTP requests and responses, even though there are similarities. We are considering here the way data can be passed to and received from use cases, and how to manage errors. This has nothing to do with the possible use of this architecture to expose an HTTP API.
 
 Request and response objects are an important part of a clean architecture, as they transport call parameters, inputs and results from outside the application into the use cases layer.
 
-More specifically, requests are objects created from incoming API calls, thus they shall deal with things like incorrect values, missing parameters, wrong formats, and so on. Responses, on the other hand, have to contain the actual results of the API calls, but shall also be able to represent error cases and to deliver rich information on what happened.
+More specifically, requests are objects created from incoming API calls, thus they shall deal with things like incorrect values, missing parameters, wrong formats, and so on. Responses, on the other hand, have to contain the actual results of the API calls, but shall also be able to represent error cases and deliver rich information on what happened.
 
 The actual implementation of request and response objects is completely free, the clean architecture says nothing about them. The decision on how to pack and represent data is up to us.
 
@@ -57,7 +57,7 @@ class RoomListRequestObject:
 {icon: github}
 B> Git tag: [chapter-3-basic-requests-and-responses-step-1](https://github.com/pycabook/rentomatic/tree/chapter-3-basic-requests-and-responses-step-1)
 
-The response object is also very simple, since for the moment we just need to return a successful result. Unlike the request, the response is not linked to any particular use case, so the test file can be named `tests/response_objects/test_response_objects.py`
+The response object is also very simple since for the moment we just need to return a successful result. Unlike the request, the response is not linked to any particular use case, so the test file can be named `tests/response_objects/test_response_objects.py`
 
 ``` python
 from rentomatic.response_objects import response_objects as res
@@ -82,7 +82,7 @@ class ResponseSuccess:
 {icon: github}
 B> Git tag: [chapter-3-basic-requests-and-responses-step-2](https://github.com/pycabook/rentomatic/tree/chapter-3-basic-requests-and-responses-step-2)
 
-With these two object we just laid the foundations for a richer management of input and outputs of the use case, especially in the case of error conditions.
+With these two objects, we just laid the foundations for richer management of input and outputs of the use case, especially in the case of error conditions.
 
 ## Requests and responses in a use case
 
@@ -168,15 +168,15 @@ class RoomListUseCase:
 {icon: github}
 B> Git tag: [chapter-3-requests-and-responses-in-a-use-case](https://github.com/pycabook/rentomatic/tree/chapter-3-requests-and-responses-in-a-use-case)
 
-Now we have a standard way to pack input and output values, and the above pattern is valid for every use case we can create. We are still missing some features however, because so far requests and responses are not used to perform error management.
+Now we have a standard way to pack input and output values, and the above pattern is valid for every use case we can create. We are still missing some features, however, because so far requests and responses are not used to perform error management.
 
 ## Request validation
 
-The `filters` parameter that we want to add to the use case allows the caller to add conditions to narrow the results of the model list operation, using a notation `<attribute>__<operator>`. For example specifying `filters={'price__lt': 100}` should return all the results with a price lower than 100. 
+The `filters` parameter that we want to add to the use case allows the caller to add conditions to narrow the results of the model list operation, using a notation `<attribute>__<operator>`. For example, specifying `filters={'price__lt': 100}` should return all the results with a price lower than 100. 
 
-Since the `Room` model has many attributes the number of possible filters is very high, so for simplicity's sake I will consider the following cases:
+Since the `Room` model has many attributes the number of possible filters is very high, simplicity's sake, I will consider the following cases:
 
-* The `code` attribute supports only `__eq`, which finds the room with the specific code, if it exists
+* The `code` attribute supports only `__eq`, which finds the room with the specific code if it exists
 * The `price` attribute supports `__eq`, `__lt`, and `__gt`
 * All other attributes cannot be used in filters
 
@@ -259,11 +259,11 @@ def test_build_room_list_request_object_rejected_filters(key):
     assert bool(request) is False
 ```
 
-As you can see I added the `assert request.filters is None` check to the original two tests, then I added 6 tests for the filters syntax. Remember that if you are following TDD you should add these tests one at a time and change the code accordingly, here I am only showing you the final result of the process.
+As you can see I added the `assert request.filters is None` check to the original two tests, then I added 6 tests for the filters syntax. Remember that if you are following TDD you should add these tests one at a time and change the code accordingly; here I am only showing you the final result of the process.
 
-In particular, note that I used the `pytest.mark.parametrize` decorator to run the same test on multiple value, the accepted filters in `test_build_room_list_request_object_accepted_filters` and the filters that we don't consider valid in `test_build_room_list_request_object_rejected_filters`.
+In particular, note that I used the `pytest.mark.parametrize` decorator to run the same test on multiple values, the accepted filters in `test_build_room_list_request_object_accepted_filters` and the filters that we don't consider valid in `test_build_room_list_request_object_rejected_filters`.
 
-The core idea here is that requests are customised for use cases, so they can contain the logic that validates the arguments used to instantiate them. The request is valid or invalid before it reaches the use case, so it is not responsibility of this latter to check that the input values have proper values or a proper format.
+The core idea here is that requests are customised for use cases, so they can contain the logic that validates the arguments used to instantiate them. The request is valid or invalid before it reaches the use case, so it is not the responsibility of the latter to check that the input values have proper values or a proper format.
 
 To make the tests pass we have to change our `RoomListRequestObject` class. There are obviously multiple possible solutions that you can come up with, and I recommend you to try to find your own. This is the one I usually employ. The file `rentomatic/request_objects/room_list_request_object.py` becomes
 
@@ -338,7 +338,7 @@ Last, the `from_dict()` method performs the validation of the `filters` paramete
 
 ## Responses and failures
 
-There is a wide range of errors that can happen while the use case code is executed. Validation errors, as we just discussed in the previous section, but also business logic errors or errors that come from the repository layer or other external systems that the use case interfaces with. Whatever the error, the use case shall always return an object with a known structure (the response), so we need a new object that provides a good support for different types of failures.
+There is a wide range of errors that can happen while the use case code is executed. Validation errors, as we just discussed in the previous section, but also business logic errors or errors that come from the repository layer or other external systems that the use case interfaces with. Whatever the error, the use case shall always return an object with a known structure (the response), so we need a new object that provides good support for different types of failures.
 
 As happened for the requests there is no unique way to provide such an object, and the following code is just one of the possible solutions.
 
@@ -396,7 +396,7 @@ def test_response_failure_contains_value(response_type, response_message):
         'type': response_type, 'message': response_message}
 
 
-def test_response_failure_initialisation_with_exception():
+def test_response_failure_initialisation_with_exception(response_type):
     response = res.ResponseFailure(
         response_type, Exception('Just an error message'))
 
@@ -495,7 +495,7 @@ def test_response_failure_is_false(response_type, response_message):
     assert bool(res.ResponseFailure(response_type, response_message)) is False
 ```
 
-A test to check that it can be initialised with a type and a message, and that those values are stores inside the object. A second test to verify the class exposes a `value` attribute that contains both the type and the message.
+A test to check that it can be initialised with a type and a message, and that those values are stored inside the object. A second test to verify the class exposes a `value` attribute that contains both the type and the message.
 
 ``` python
 def test_response_failure_has_type_and_message(
@@ -516,7 +516,7 @@ def test_response_failure_contains_value(response_type, response_message):
 We sometimes want to create responses from Python exceptions that can happen in a use case, so we test that `ResponseFailure` objects can be initialised with a generic exception. We also check that the message is formatted properly
 
 ``` python
-def test_response_failure_initialisation_with_exception():
+def test_response_failure_initialisation_with_exception(response_type):
     response = res.ResponseFailure(
         response_type, Exception('Just an error message'))
 
@@ -549,7 +549,7 @@ def test_response_failure_from_invalid_request_object_with_errors():
     assert response.message == "path: Is mandatory\npath: can't be blank"
 ```
 
-The last three tests check that the `ResponseFailure` can create three specific errors, represented by the `RESOURCE_ERROR`, `PARAMETERS_ERROR`, and `SYSTEM_ERROR` class attributes. This categorization is an attempt to capture the different types of issues that can happen when dealing with an external system through an API. `RESOURCE_ERROR` contains all those errors that are related to the resources contained in the repository, for instance when you cannot find an entry given its unique id. `PARAMETERS_ERROR` describes all those errors that occur when the request parameters are wrong or missing. `SYSTEM_ERROR` encompass the errors that happen in the underlying system at operating system level, such as a failure in a filesystem operation, or a network connection error while fetching data from the database.
+The last three tests check that the `ResponseFailure` can create three specific errors, represented by the `RESOURCE_ERROR`, `PARAMETERS_ERROR`, and `SYSTEM_ERROR` class attributes. This categorization is an attempt to capture the different types of issues that can happen when dealing with an external system through an API. `RESOURCE_ERROR` contains all those errors that are related to the resources contained in the repository, for instance when you cannot find an entry given its unique ID. `PARAMETERS_ERROR` describes all those errors that occur when the request parameters are wrong or missing. `SYSTEM_ERROR` encompass the errors that happen in the underlying system at an operating system level, such as a failure in a filesystem operation, or a network connection error while fetching data from the database.
 
 ``` python
 def test_response_failure_build_resource_error():
@@ -658,7 +658,7 @@ def test_room_list_without_parameters(domain_rooms):
     assert response.value == domain_rooms
 ```
 
-There are three new tests that we can add to check the behaviour of the use case when `filters` is not `None`. The first one checks that the value of the `filters` key in the dictionary used to create the request is actually used when calling the repository. This last two tests check the behaviour of the use case when the repository raises an exception or when the request is badly formatted.
+There are three new tests that we can add to check the behaviour of the use case when `filters` is not `None`. The first one checks that the value of the `filters` key in the dictionary used to create the request is actually used when calling the repository. These last two tests check the behaviour of the use case when the repository raises an exception or when the request is badly formatted.
 
 ``` python
 from rentomatic.response_objects import response_objects as res
@@ -739,13 +739,13 @@ class RoomListUseCase(object):
 {icon: github}
 B> Git tag: [chapter-3-error-management-in-a-use-case](https://github.com/pycabook/rentomatic/tree/chapter-3-error-management-in-a-use-case)
 
-As you can see the first thing that the `execute()` method does is to check if the request is valid, otherwise it returns a `ResponseFailure` built with the same request object. Then the actual business logic is implemented, calling the repository and returning a successful response. If something goes wrong in this phase the exception is caught and returned as an aptly formatted `ResponseFailure`.
+As you can see, the first thing that the `execute()` method does is to check if the request is valid. Otherwise, it returns a `ResponseFailure` built with the same request object. Then the actual business logic is implemented, calling the repository and returning a successful response. If something goes wrong in this phase the exception is caught and returned as an aptly formatted `ResponseFailure`.
 
 ## Integrating external systems
 
-I want to point out a big problem represented by mocks. As we are testing objects using mocks for external systems, like the repository, no tests fail at the moment, but trying to run the Flask development server would certainly return an error. As a matter of fact, neither the repository nor the HTTP server are in sync with the new API, but this cannot be shown by unit tests, if these are properly written. This is the reason why we need integration tests, since the real components are running only at that point, and this can raise issues that were masked by mocks.
+I want to point out a big problem represented by mocks. As we are testing objects using mocks for external systems, like the repository, no tests fail at the moment, but trying to run the Flask development server would certainly return an error. As a matter of fact, neither the repository nor the HTTP server is in sync with the new API, but this cannot be shown by unit tests if they are properly written. This is the reason why we need integration tests, since the real components are running only at that point, and this can raise issues that were masked by mocks.
 
-For this simple project my integration test is represented by the Flask development server, which at this point crashes with this exception
+For this simple project, my integration test is represented by the Flask development server, which at this point crashes with this exception
 
 ``` python
 TypeError: execute() missing 1 required positional argument: 'request_object'
@@ -821,7 +821,7 @@ def test_get(mock_use_case, client):
     mock_use_case().execute.return_value = res.ResponseSuccess(rooms)
 ```
 
-and the second is the assertion on the call of the same method. It should be called with a properly formatted request, but since we can't compare requests we need a way to look into the call arguments. This can be done with
+and the second is the assertion on the call of the same method. It should be called with a properly formatted request, but since we can't compare requests, we need a way to look into the call arguments. This can be done with
 
 ``` python
     mock_use_case().execute.assert_called()
@@ -829,7 +829,7 @@ and the second is the assertion on the call of the same method. It should be cal
     assert args[0].filters == {}
 ```
 
-as `execute` should receive as an argument a request with empty filters. The `test_get_with_filters` functions performs the same operation, but passing a querystring to the `/rooms` URL, which requires a different assertion
+as `execute` should receive as an argument a request with empty filters. The `test_get_with_filters` function performs the same operation but passing a query string to the `/rooms` URL, which requires a different assertion
 
 ``` python
     assert args[0].filters == {'price__gt': '2', 'price__lt': '6'}
@@ -1070,7 +1070,7 @@ class MemRepo:
 {icon: github}
 B> Git tag: [chapter-3-the-repository](https://github.com/pycabook/rentomatic/tree/chapter-3-the-repository)
 
-At this point you can fire up the Flask development webserver with `flask run`, and get the list of all your rooms at
+At this point, you can fire up the Flask development webserver with `flask run`, and get the list of all your rooms at
 
 ```
 http://localhost:5000/rooms
@@ -1092,6 +1092,6 @@ which return all the rooms with a price less than 50.
 
 ## Conclusions
 
-We now have a very robust system to manage input validation and error conditions, and it is generic enough to be used with any possible use case. Obviously we are free to add new types of errors to increase the granularity with which we manage failures, but the present version already covers everything that can happen inside a use case.
+We now have a very robust system to manage input validation and error conditions, and it is generic enough to be used with any possible use case. Obviously, we are free to add new types of errors to increase the granularity with which we manage failures, but the present version already covers everything that can happen inside a use case.
 
-In the next chapter we will have a look at repositories based on real database engines, showing how to test external systems with integration tests, and how the clean architecture allows us to simply switch between very different backends for services.
+In the next chapter, we will have a look at repositories based on real database engines, showing how to test external systems with integration tests, and how the clean architecture allows us to simply switch between very different backends for services.
