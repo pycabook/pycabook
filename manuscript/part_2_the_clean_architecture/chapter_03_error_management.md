@@ -1033,6 +1033,16 @@ def test_repository_list_with_price_between_filter(room_dicts):
 
     assert len(repo_rooms) == 1
     assert repo_rooms[0].code == '913694c6-435a-4366-ba0d-da5334a611b2'
+
+
+def test_repository_list_price_as_strings(room_dicts):
+    repo = memrepo.MemRepo(room_dicts)
+
+    repo.list(filters={'price__eq': '60'})
+
+    repo.list(filters={'price__lt': '60'})
+
+    repo.list(filters={'price__gt': '60'})
 ```
 
 As you can see, I added many tests. One test for each of the four accepted filters (`code__eq`, `price__eq`, `price__lt`, `price__gt`, see `rentomatic/request_objects/room_list_request_object.py`), and one final test that tries two different filters at the same time. The new version of the `rentomatic/repository/memrepo.py` file that passes all the tests is
@@ -1056,13 +1066,13 @@ class MemRepo:
             result = [r for r in result if r.code == filters['code__eq']]
 
         if 'price__eq' in filters:
-            result = [r for r in result if r.price == filters['price__eq']]
+            result = [r for r in result if r.price == int(filters['price__eq'])]
 
         if 'price__lt' in filters:
-            result = [r for r in result if r.price < filters['price__lt']]
+            result = [r for r in result if r.price < int(filters['price__lt'])]
 
         if 'price__gt' in filters:
-            result = [r for r in result if r.price > filters['price__gt']]
+            result = [r for r in result if r.price > int(filters['price__gt'])]
 
         return result
 ```
