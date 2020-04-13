@@ -444,7 +444,7 @@ B> Git tag: [first-version](https://github.com/pycabook/fileinfo/tree/first-vers
 
 As you can see the class is extremely simple, and the tests are straightforward. So far I didn't add anything new to what we discussed in the previous chapter.
 
-Now I want the `get_info()` function to return a tuple with the file name, the original path the class was instantiated with, and the absolute path of the file. Pretending we are in the `/some/absolute/path` directory, the class should work as shown here
+Now I want the method `get_info()` to return a tuple with the file name, the original path the class was instantiated with, and the absolute path of the file. Pretending we are in the `/some/absolute/path` directory, the class should work as shown here
 
 ``` python
 >>> fi = FileInfo('../book_list.txt')
@@ -504,7 +504,7 @@ class FileInfo:
         return (
             self.filename,
             self.original_path,
-            os.path.abspath(self.filename)
+            os.path.abspath(self.original_path)
         )
 ```
 
@@ -628,6 +628,40 @@ def test_get_info():
 ```
 
 Using more than one `with` statement, however, makes the code difficult to read, in my opinion, so in general I prefer to avoid complex `with` trees if I do not really need to use a limited scope of the patching.
+
+## Checking call parameters
+
+When you patch, your internal algorithm is not run, as the patched method just return the values they have been instructed to return. This is connected to what we said about testing external systems, so everything is good, but while we don't want to test the internals of the `os.path` module, we want to be sure that we are passing the correct values to the external methods.
+
+This is why mocks provide methods like `assert_called_with` (and other similar methods), through which we can check the values passed to a patched method when it is called. Let's add the checks to the test
+
+``` python
+@patch('os.path.getsize')
+@patch('os.path.abspath')
+def test_get_info(abspath_mock, getsize_mock):
+    test_abspath = 'some/abs/path'
+    abspath_mock.return_value = test_abspath
+
+    filename = 'somefile.ext'
+    original_path = '../{}'.format(filename)
+
+    test_size = 1234
+    getsize_mock.return_value = test_size
+
+    fi = FileInfo(original_path)
+    info = fi.get_info() 
+
+    abspath_mock.assert_called_with(original_path)
+    getsize_mock.assert_called_with(original_path)
+    assert info == (filename, original_path, test_abspath, test_size)
+```
+
+As you can see, I first invoke `fi.get_info()` storing the result in the variable `info`, check that the patched methods have been called witht the correct parameters, and then assert the format of its output.
+
+The test passes, confirming that we are passing the correct values.
+
+{icon: github}
+B> Git tag: [addding-checks-for-input-values](https://github.com/pycabook/fileinfo/tree/addding-checks-for-input-values)
 
 ## Patching immutable objects
 
