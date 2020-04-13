@@ -6,7 +6,10 @@ B> - Alien (1979)
 
 I will track here changes between releases of the book, following [Semantic Versioning](https://semver.org/). A change in the **major** number means an incompatible change, that is a big rewrite of the book, also known as 2nd edition, 3rd edition, and so on. I don't know if this will ever happen, but the version number comes for free. A change in the **minor** number means that something important was added to the content, like a new section or chapter. A change in the **patch** number signals minor fixes like typos in the text or the code, rewording of sentences, and so on.
 
-**Current version**: 1.0.11
+**Current version**: 1.0.12
+
+**Version 1.0.12 (2020-04-13)**
+* GitHub user [Vlad Blazhko](https://github.com/pisarik) found a bug in the `fileinfo` project and added a fix and a test condition. As a result, I expanded the chapter on mocks with a small section describing what he did. Many thanks Vlad!
 
 **Version 1.0.11 (2020-02-15)**
 * GitHub user [lrfuentesw](https://github.com/lrfuentesw) spotted an error in the memory repository. Price filters with a string value were not working because they were not converted into integers. Thank you!
