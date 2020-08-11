@@ -32,7 +32,7 @@ This is the inmost layer. Entities have mutual knowledge since they live in the 
 
 This layer contains the use cases implemented by the system. Use cases are the processes that happen in your application, where you use your domain models to work on real data. Examples can be a user logging in, a search with specific filters being performed, or a bank transaction happening when the user wants to buy the content of the cart.
 
-A use case should be as small a possible. It is very important to isolate small actions in use cases, as this makes the whole system easier to test, understand and maintain.
+A use case should be as small as possible. It is very important to isolate small actions in use cases, as this makes the whole system easier to test, understand and maintain.
 
 Use cases know the entities, so they can instantiate them directly and use them. They can also call each other, and it is common to create complex use cases that put together simpler ones.
 
