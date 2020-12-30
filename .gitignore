@@ -71,5 +71,10 @@ venv*
 sandbox
 site
 
-# Temporary directory for images, snippets, and thinkgs that shouldn't be published
-tmp/
+# AsciiDoc output
+*.pdf
+*.html
+*.xml
+
+pycabook.github.io
+asciidoctor-extensions-lab
