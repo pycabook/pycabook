@@ -5,7 +5,7 @@ ____
 Wait a minute. Wait a minute Doc, uh, are you telling me you built a time machine... out of a DeLorean?
 ____
 
-In this chapter I will analyse the set of software design principles collectively known as "clean architecture". While this specific name has been introduced by RObert Martin, the concepts it pushes are part of software engineering, and have been successfully used for decades.
+In this chapter I will analyse the set of software design principles collectively known as "clean architecture". While this specific name has been introduced by Robert Martin, the concepts it pushes are part of software engineering, and have been successfully used for decades.
 
 Before we dive into a possible implementation of them, which is the core of this book, we need to analyse more in depth the structure of the clean architecture and the components you can find in the system designed following it.
 
