@@ -11,7 +11,7 @@ The goal of the "Rent-o-Matic" project is to create a simple search engine for a
  
 A room is stored in the system through the following values:
  
-* An unique identifier
+* A unique identifier
 * A size in square meters
 * A renting price in Euro/day
 * Latitude and longitude
@@ -403,7 +403,7 @@ Such a solution might seem too simple, so let's discuss it. First of all, this u
 
 The next thing you might notice is that I used a simple function. In the first edition of this book I used a class for the use case, and thanks to the nudge of a couple of readers I started to question my choice, so I want to briefly discuss the options you have. 
 
-The use cases represents the business logic, a process, which means that the simplest implementation you can have in a programming language is a function: some code that receives input arguments and returns output data. A class is however another option, as in essence it is a collection of variables and functions. So, as in many other cases, the question is if you should use a function or a class, and my answer is that it depends on the degree of complexity of the algorithm that you are implementing.
+The use case represents the business logic, a process, which means that the simplest implementation you can have in a programming language is a function: some code that receives input arguments and returns output data. A class is however another option, as in essence it is a collection of variables and functions. So, as in many other cases, the question is if you should use a function or a class, and my answer is that it depends on the degree of complexity of the algorithm that you are implementing.
 
 Your business logic might be complicated, and require the connection with several external systems, though, each one with a specific initilisation, while in this simple case I just pass in the repository. So, in principle, I don't see anything wrong in using classes for use cases, should you need more structure for your algorithms, but be careful not to use them when a simpler solution (functions) can perform the same job, which is the mistake I made in the previous version of this code. Remember that code has to be maintained, so the simpler it is, the better.
 
