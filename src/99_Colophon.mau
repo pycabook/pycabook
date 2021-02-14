@@ -1,9 +1,13 @@
+:TIP:admonition,tip,lightbulb,"Tip"
+:GITHUB:admonition,note,github,"Source code"
+:gh-rentomatic:https://github.com/pycabook/rentomatic
+
 = Postface
 
 [quote, "Young Frankenstein, 1974"]
-____
+----
 In conclusion, it should be noted...
-____
+----
 
 Writing a book is a giant effort.
 
@@ -12,3 +16,5 @@ I don't want this to sound like an excuse for the many errors that I forgot to f
 I didn't follow every advice I received, but I carefully read all the issues and messages that people sent me. I'm sorry I didn't manage to put in the book everything I wanted or everything you suggested. I have no commitment with an editor, but a certain point even a self-published book has to be called done. There will be more editions, I hope, so I just postponed the work.
 
 Thanks for reading my book!
+
+

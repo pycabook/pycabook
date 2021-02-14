@@ -1,9 +1,13 @@
+:TIP:admonition,tip,lightbulb,"Tip"
+:GITHUB:admonition,note,github,"Source code"
+:gh-rentomatic:https://github.com/pycabook/rentomatic
+
 == Integration with a real external system - MongoDB
 
 [quote, "Jurassic Park, 1993"]
-____
+----
 There's, uh, another example.
-____
+----
 
 The previous chapter showed how to integrate a real external system with the core of the clean architecture. Unfortunately I also had to introduce a lot of code to manage the integration tests and to globally move forward to a proper setup. In this chapter I will leverage the work we just did to show only the part strictly connected with the external system. Swapping the database from PostgreSQL to MongoDB is the perfect way to show how flexible the clean architecture is, and how easy it is to introduce different approaches like a non-relational database instead of a relational one.
 
@@ -15,7 +19,7 @@ You will appreciate the benefits of the complex testing structure that I created
 
 Let's start defining the file `tests/repository/mongodb/conftest.py`, which will contains pytest fixtures for MongoDB, mirroring the file we created for PostgreSQL
 
-.tests/repository/mongodb/conftest.py
+. tests/repository/mongodb/conftest.py
 [source,python]
 ----
 import pymongo
@@ -88,8 +92,8 @@ As you can see these functions are very similar to the ones that we defined for 
 
 Since we are importing the PyMongo library we need to change the production requirements
 
-.requirements/prod.txt
-[source,text]
+. requirements/prod.txt
+[source]
 ----
 Flask
 SQLAlchemy
@@ -99,16 +103,16 @@ pymongo
 
 and run `pip install -r requirements/dev.txt`.
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c07-s01
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c07-s01
+----
 
 === Docker Compose configuration
 
 We need to add an ephemeral MongoDB container to the testing Docker Compose configuration. The MongoDB image needs only the variables `MONGO_INITDB_ROOT_USERNAME` and `MONGO_INITDB_ROOT_PASSWORD` as it doesn't create any initial database. As we did for the PostgreSQL container we assign a specific port that will be different from the standard one, to allow tests to be executed while other containers are running.
 
-.docker/testing.yml
+. docker/testing.yml
 [source,yaml]
 ----
 version: '3.8'
@@ -131,16 +135,16 @@ services:
       - "${MONGODB_PORT}:27017"
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c07-s02
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c07-s02
+----
 
 === Application configuration
 
 Docker Compose, the testing framework, and the application itself are configured through a single JSON file, that we need to update with the actual values we want to use for MongoDB
 
-.config/testing.json
+. config/testing.json
 [source,json]
 ----
 [
@@ -199,16 +203,16 @@ Since the standard port from MongoDB is 27017 I chose 27018 for the tests. Remem
 
 Please also note that I chose to use the same variable `APPLICATION_DB` for the name of the PostgreSQL and MongoDB databases. Again, this is a simple example, and you mileage my vary in more complex scenarios.
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c07-s03
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c07-s03
+----
 
 === Integration tests
 
 The integration tests are a mirror of the ones we wrote for Postgres, as we are covering the same use case. If you use multiple databases in the same system you probably want to serve different use cases, so in a real case this might probably be a more complicated step. It is completely reasonable, however, that you might want to simply provide support for multiple databases that your client can choose to plug into the system, and in that case you will do exactly what I did here, copying and adjusting the same test battery.
 
-.tests/repository/mongodb/test_mongorepo.py
+. tests/repository/mongodb/test_mongorepo.py
 [source,python]
 ----
 import pytest
@@ -308,16 +312,16 @@ def test_repository_list_with_price_as_string(
 
 I added a test called `test_repository_list_with_price_as_string` that checks what happens when the price in the filter is expressed as a string. Experimenting with the MongoDB shell I found that in this case the query wasn't working, so I included the test to be sure the implementation didn't forget to manage this condition.
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c07-s04
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c07-s04
+----
 
 === The MongoDB repository
 
 The `MongoRepo` class is obviously not the same as the Postgres interface, as the PyMongo library is different from SQLAlchemy, and the structure of a NoSQL database differs from the one of a relational one. The file `rentomatic/repository/mongorepo.py` is
 
-.rentomatic/repository/mongorepo.py
+. rentomatic/repository/mongorepo.py
 [source,python]
 ----
 import pymongo
@@ -372,12 +376,15 @@ class MongoRepo:
         return self._create_room_objects(result)
 ----
 
-which makes use of the similarity between the filters of the Rent-o-matic project and the ones of the MongoDB systemfootnote:[The similitude between the two systems is not accidental, as I was studying MongoDB at the time I wrote the first article about clean architectures, so I was obviously influenced by it.].
+:fn-similar:footnote:[The similitude between the two systems is not accidental, as I was studying MongoDB at the time I wrote the first article about clean architectures, so I was obviously influenced by it.]
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c07-s05
-====
+which makes use of the similarity between the filters of the Rent-o-matic project and the ones of the MongoDB system{fn-similar}.
+
+
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c07-s05
+----
 
 === Conclusions
 

@@ -1,9 +1,13 @@
+:TIP:admonition,tip,lightbulb,"Tip"
+:GITHUB:admonition,note,github,"Source code"
+:gh-rentomatic:https://github.com/pycabook/rentomatic
+
 == Run a production-ready system
 
 [quote, "Total Recall, 1990"]
-____
+----
 Vilos Cohaagen said troops would be used to ensure full production.
-____
+----
 
 Now that we developed a repository that connects with PostgreSQL we can discuss how to properly set up the application to run a production-ready system. This part is not strictly related to the clean architecture, but I think it's worth completing the example, showing how the system that we designed can end up being the core of a real web application.
 
@@ -17,13 +21,13 @@ To run a production-ready infrastructure we need to put a WSGI server in front o
 
 The steps towards a production-ready configuration are not complicated and the final setup won't be ultimately too different form what we already did for the tests. We need to
 
-. Create a JSON configuration with environment variables suitable for production
-. Create a suitable configuration for Docker Compose and configure the containers
-. Add commands to `manage.py` that allow us to control the processes
+# Create a JSON configuration with environment variables suitable for production
+# Create a suitable configuration for Docker Compose and configure the containers
+# Add commands to `manage.py` that allow us to control the processes
 
 Let's create the file `config/production.json`, which is very similar to the one we created for the tests
 
-.config/production.json
+. config/production.json
 [source,json]
 ----
 [
@@ -68,7 +72,7 @@ Let's define which containers we want to run in our production environment, and 
 
 The file `docker/production.yml` will contain the Docker Compose configuration, according to the convention we defined in `manage.py`
 
-.docker/production.yml
+. docker/production.yml
 [source,yaml]
 ----
 version: '3.8'
@@ -118,7 +122,7 @@ The last container is `nginx`, which we will use as it is directly from the Dock
 
 The Dockerfile for the web application is the following
 
-.docker/web/Dockerfile.production
+. docker/web/Dockerfile.production
 [source,docker]
 ----
 FROM python:3
@@ -135,8 +139,8 @@ RUN pip install -r /opt/requirements/prod.txt
 
 This is a very simple container that uses the standard `python:3` image, where I added the production requirements contained in `requirements/prod.txt`. To make the Docker container work we need to add `gunicorn` to this last file
 
-.requirements/prod.txt
-[source,text]
+. requirements/prod.txt
+[source]
 ----
 Flask
 SQLAlchemy
@@ -147,7 +151,7 @@ gunicorn
 
 The configuration for Nginx is
 
-.docker/nginx/nginx.conf
+. docker/nginx/nginx.conf
 [source,nginx]
 ----
 worker_processes 1;
@@ -181,7 +185,7 @@ As for the rest of the project, this configuration is very basic and lacks some 
 
 As we will use Docker Compose, the script `manage.py` needs a simple change, which is a command that wraps `docker-compose` itself. We need the script to just initialise environment variables according to the content of the JSON configuration file and then run Docker Compose. As we already have the function `docker_compose_cmdline` the job is pretty simple
 
-.manage.py
+. manage.py
 [source,python]
 ----
 # Ensure an environment variable exists and has a value
@@ -222,10 +226,10 @@ As you can see I forced the variable `APPLICATION_CONFIG` to be `production` if 
 
 The new command is `compose`, that leverages Click's `argument` decorator to collect subcommands and attach them to the Docker Compose command line. I also use the `signal` library, which I added to the imports, to control keyboard interruptions.
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c08-s01
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c08-s01
+----
 
 When all this changes are in place we can test the application Dockerfile building the container.
 
@@ -238,7 +242,7 @@ This command runs the Click command `compose` that first reads environment varia
 
 You output should be the following (with different image IDs)
 
-[source,text]
+[source]
 ----
 Building web
 Step 1/7 : FROM python:3
@@ -299,7 +303,7 @@ Thanks to the common interface between repositories moving from the memory-based
 
 First of all, let's move the application to the Postgres repository. The new version of the endpoint is
 
-.application/rest/room.py
+. application/rest/room.py
 [source,python]
 ----
 import os
@@ -359,7 +363,7 @@ As you can see the main change is that `repo = MemRepo(rooms)` becomes `repo = P
 
 This is enough to make the application connect to the Postgres database that we are running in a container, but as I mentioned we also need to initialise the database. The bare minimum that we need is an empty database with the correct name. Remember that in this particular setup we use for the application a different database (`APPLICATION_DB`) from the one that the Postgres container creates automatically at startup (`POSTGRES_DB`). I added a specific command to the management script to perform this task
 
-.manage.py
+. manage.py
 [source,python]
 ----
 @cli.command()
@@ -390,7 +394,7 @@ $ ./manage.py compose exec db psql -U postgres
 
 Please note that we need to specify the user `postgres` that has been created passing that value as `POSTGRES_USER` to the container. We can use the command `\l` to see the available databases
 
-[source,text]
+[source]
 ----
 psql (13.0 (Debian 13.0-1.pgdg100+1))
 Type "help" for help.
@@ -412,7 +416,7 @@ postgres=#
 
 and the command `\c` to connect to the database `application`, which is the one we want to write to
 
-[source,text]
+[source]
 ----
 postgres=# \c application 
 You are now connected to database "application" as user "postgres".
@@ -421,7 +425,7 @@ application=#
 
 Now we can list the available tables with `\dt` and describe a table with `\d`
 
-[source,text]
+[source]
 ----
 application=# \dt
         List of relations
@@ -467,10 +471,10 @@ application=# SELECT * FROM room;
 
 and open or refresh http://localhost:8080/rooms with the browser to see the value returned by our use case.
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c08-s02
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c08-s02
+----
 
 === Conclusions
 

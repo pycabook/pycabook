@@ -1,9 +1,13 @@
+:TIP:admonition,tip,lightbulb,"Tip"
+:GITHUB:admonition,note,github,"Source code"
+:gh-rentomatic:https://github.com/pycabook/rentomatic
+
 == Add a Web application
 
 [quote, "Groundhog Day, 1993"]
-____
+----
 For your information, Hairdo, a major network is interested in me.
-____
+----
 
 In this chapter, I will go through the creation of an HTTP endpoint for the room list use case. An HTTP endpoint is a URL exposed by a Web server that runs a specific logic and returns values in a standard format.
 
@@ -15,16 +19,16 @@ To expose the HTTP endpoint we need a web server written in Python, and in this 
 
 Let us start updating the requirements files. The file `requirements/prod.txt` shall mention Flask, as this package contains a script that runs a local webserver that we can use to expose the endpoint
 
-.requirements/prod.txt
-[source,text]
+. requirements/prod.txt
+[source]
 ----
 Flask
 ----
 
 The file `requirements/test.txt` will contain the pytest extension to work with Flask (more on this later)
 
-.requirements/test.txt
-[source,text]
+. requirements/test.txt
+[source]
 ----
 -r prod.txt
 pytest
@@ -34,18 +38,18 @@ pytest-cov
 pytest-flask
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c04-s01
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c04-s01
+----
 
 Remember to run `pip install -r requirements/dev.txt` again after those changes to install the new packages in your virtual environment.
 
-The setup of a Flask application is not complex, but there are a lot of concepts involved, and since this is not a tutorial on Flask I will run quickly through these steps. I will provide links to the Flask documentation for every concept, though. If you want to dig a bit deeper in this matter you can read my series of posts https://www.thedigitalcatonline.com/blog/2020/07/05/flask-project-setup-tdd-docker-postgres-and-more-part-1/[Flask Project Setup: TDD, Docker, Postgres and more].
+The setup of a Flask application is not complex, but there are a lot of concepts involved, and since this is not a tutorial on Flask I will run quickly through these steps. I will provide links to the Flask documentation for every concept, though. If you want to dig a bit deeper in this matter you can read my series of posts [link](https://www.thedigitalcatonline.com/blog/2020/07/05/flask-project-setup-tdd-docker-postgres-and-more-part-1/,"Flask Project Setup: TDD, Docker, Postgres and more").
 
-The Flask application can be configured using a plain Python object (http://flask.pocoo.org/docs/latest/api/#flask.Config.from_object[documentation]), so I created the file `applicaton/config.py` that contains this code
+The Flask application can be configured using a plain Python object ([link](http://flask.pocoo.org/docs/latest/api/#flask.Config.from_object,documentation)), so I created the file `applicaton/config.py` that contains this code
 
-.applicaton/config.py
+. applicaton/config.py
 [source,python]
 ----
 import os
@@ -71,11 +75,11 @@ class TestingConfig(Config):
     TESTING = True
 ----
 
-Read http://flask.pocoo.org/docs/latest/config/[this page] to know more about Flask configuration parameters.
+Read [link](http://flask.pocoo.org/docs/latest/config/,"this page") to know more about Flask configuration parameters.
 
-Now we need a function that initialises the Flask application (http://flask.pocoo.org/docs/latest/patterns/appfactories/[documentation]), configures it, and registers the blueprints (http://flask.pocoo.org/docs/latest/blueprints/[documentation]). The file `application/app.py` contains the following code, which is an app factory
+Now we need a function that initialises the Flask application ([link](http://flask.pocoo.org/docs/latest/patterns/appfactories/,documentation)), configures it, and registers the blueprints ([link](http://flask.pocoo.org/docs/latest/blueprints/,documentation)). The file `application/app.py` contains the following code, which is an app factory
 
-.application/app.py
+. application/app.py
 [source,python]
 ----
 from flask import Flask
@@ -96,22 +100,24 @@ def create_app(config_name):
     return app
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c04-s02
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c04-s02
+----
 
 === Test and create an HTTP endpoint
 
 Before we create the proper setup of the webserver, we want to create the endpoint that will be exposed. Endpoints are ultimately functions that are run when a user sends a request to a certain URL, so we can still work with TDD, as the final goal is to have code that produces certain results.
 
-The problem we have testing an endpoint is that we need the webserver to be up and running when we hit the test URLs. The webserver itself is an external system so we won't test it, but the code that provides the endpoint is part of our applicationfootnote:[We could, in theory, create a pure component that receives parameters and returns a JSON object, and then wrap this component into an endpoint. This way, the component would be strictly part of the internal system and the endpoint of the external one, but both would have to be created in the Gateway layer. This looks overkill, at least for the simple example we are discussing here, so I will keep them together and test them as a single component.]. It is actually a gateway, that is an interface that allows an HTTP framework to access the use cases.
+:fn-interface:[footnote](We could, in theory, create a pure component that receives parameters and returns a JSON object, and then wrap this component into an endpoint. This way, the component would be strictly part of the internal system and the endpoint of the external one, but both would have to be created in the Gateway layer. This looks overkill, at least for the simple example we are discussing here, so I will keep them together and test them as a single component.)
+
+The problem we have testing an endpoint is that we need the webserver to be up and running when we hit the test URLs. The webserver itself is an external system so we won't test it, but the code that provides the endpoint is part of our application{fn-interface}. It is actually a gateway, that is an interface that allows an HTTP framework to access the use cases.
 
 The extension `pytest-flask` allows us to run Flask, simulate HTTP requests, and test the HTTP responses. This extension hides a lot of automation, so it might be considered a bit "magic" at a first glance. When you install it some fixtures like `client` are available automatically, so you don't need to import them. Moreover, it tries to access another fixture named `app` that you have to define. This is thus the first thing to do.
 
 Fixtures can be defined directly in your test file, but if we want a fixture to be globally available the best place to define it is the file `conftest.py` which is automatically loaded by pytest. As you can see there is a great deal of automation, and if you are not aware of it you might be surprised by the results, or frustrated by the errors.
 
-.tests/conftest.py
+. tests/conftest.py
 [source,python]
 ----
 import pytest
@@ -127,11 +133,11 @@ def app():
     return app
 ----
 
-The function `app` runs the app factory to create a Flask app, using the configuration `testing`, which sets the flag `TESTING` to `True`. You can find the description of these flags in the http://flask.pocoo.org/docs/1.0/config/[official documentation].
+The function `app` runs the app factory to create a Flask app, using the configuration `testing`, which sets the flag `TESTING` to `True`. You can find the description of these flags in the [link](http://flask.pocoo.org/docs/1.0/config/,"official documentation").
 
 At this point, we can write the test for our endpoint.
 
-.tests/rest/test_room.py
+. tests/rest/test_room.py
 [source,python]
 ----
 import json
@@ -164,7 +170,7 @@ def test_get(mock_use_case, client):
 
 Let's comment it section by section.
 
-.tests/rest/test_room.py
+. tests/rest/test_room.py
 [source,python]
 ----
 import json
@@ -185,7 +191,7 @@ rooms = [Room.from_dict(room_dict)]
 
 The first part contains some imports and sets up a room from a dictionary. This way we can later directly compare the content of the initial dictionary with the result of the API endpoint. Remember that the API returns JSON content, and we can easily convert JSON data into simple Python structures, so starting from a dictionary will come in handy.
 
-.tests/rest/test_room.py
+. tests/rest/test_room.py
 [source,python]
 ----
 @mock.patch("application.rest.room.room_list_use_case")
@@ -194,7 +200,7 @@ def test_get(mock_use_case, client):
 
 This is the only test that we have for the time being. During the whole test, we mock the use case, as we are not interested in running it, as it has been already tested elsewhere. We are however interested in checking the arguments passed to the use case, and a mock can provide this information. The test receives the mock from the decorator `patch` and the fixture `client`, which is one of the fixtures provided by `pytest-flask`. The fixture automatically loads `app`, which we defined in `conftest.py`, and is an object that simulates an HTTP client that can access the API endpoints and store the responses of the server.
 
-.tests/rest/test_room.py
+. tests/rest/test_room.py
 [source,python]
 ----
     mock_use_case.return_value = rooms
@@ -230,7 +236,7 @@ As you can see the structure is really simple. Apart from setting the blueprint,
 
 The above template becomes the following code
 
-.application/rest/room.py
+. application/rest/room.py
 [source,python]
 ----
 import json
@@ -287,14 +293,14 @@ def room_list():
     )
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c04-s03
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c04-s03
+----
 
 Please note that I initialised the memory storage with the same list used for the script `cli.py`. Again, the need of initialising the storage with data (even with an empty list) is due to the limitations of the storage `MemRepo`. The code that runs the use case is
 
-.application/rest/room.py
+. application/rest/room.py
 [source,python]
 ----
 def room_list():
@@ -304,7 +310,7 @@ def room_list():
 
 which is exactly the same code that we used in the command-line interface. The last part of the code creates a proper HTTP response, serializing the result of the use case using `RoomJsonEncoder`, and setting the HTTP status to 200 (success)
 
-.application/rest/room.py
+. application/rest/room.py
 [source,python]
 ----
     return Response(
@@ -320,9 +326,9 @@ Now that we defined the endpoint, we can finalise the configuration of the webse
 
 === WSGI
 
-Python web applications expose a common interface called https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface[Web Server Gateway Interface] or WSGI. So to run the Flask development web server, we have to define a `wsgi.py` file in the main folder of the project, i.e. in the same directory of the file `cli.py`
+Python web applications expose a common interface called [link](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface,"Web Server Gateway Interface") or WSGI. So to run the Flask development web server, we have to define a `wsgi.py` file in the main folder of the project, i.e. in the same directory of the file `cli.py`
 
-.wsgi.py
+. wsgi.py
 [source,python]
 ----
 import os
@@ -332,16 +338,16 @@ from application.app import create_app
 app = create_app(os.environ["FLASK_CONFIG"])
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c04-s04
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c04-s04
+----
 
-When you run the Flask Command Line Interface (http://flask.pocoo.org/docs/1.0/cli/[documentation]), it automatically looks for a file named `wsgi.py` and loads it, expecting it to contain a variable named `app` that is an instance of the object `Flask`. As the function `create_app` is a factory we just need to execute it.
+When you run the Flask Command Line Interface ([link](http://flask.pocoo.org/docs/1.0/cli/,documentation)), it automatically looks for a file named `wsgi.py` and loads it, expecting it to contain a variable named `app` that is an instance of the object `Flask`. As the function `create_app` is a factory we just need to execute it.
 
 At this point, you can execute `FLASK_CONFIG="development" flask run` in the directory that contains this file and you should see a nice message like
 
-[source,text]
+[source]
 ----
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ----

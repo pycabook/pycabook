@@ -7,7 +7,12 @@ ____
 
 I will track here changes between releases of the book, following https://semver.org/[Semantic Versioning]. A change in the *major* number means an incompatible change, that is a big rewrite of the book, also known as 2nd edition, 3rd edition, and so on. A change in the *minor* number means that something important was added to the content, like a new section or chapter. A change in the *patch* number signals minor fixes like typos in the text or the code, rewording of sentences, and so on.
 
-*Current version*: 2.0.0
+*Current version*: 2.0.1
+
+*Version 2.0.1 (2021-02-14)*
+
+* GitHub users https://github.com/1110sillabo and the tireless https://github.com/soulfulfaust[Faust Gertz] kindly submitted some PRs to fix typos. Thanks!
+* First version converted from Mau sources into Asciidoctor
 
 *Version 2.0.0 (2020-12-30)*
 

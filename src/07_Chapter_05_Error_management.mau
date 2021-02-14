@@ -1,9 +1,13 @@
+:TIP:admonition,tip,lightbulb,"Tip"
+:GITHUB:admonition,note,github,"Source code"
+:gh-rentomatic:https://github.com/pycabook/rentomatic
+
 == Error management
 
 [quote, "Aliens, 1986"]
-____
+----
 You sent them out there and you didn't even warn them! Why didn't you warn them, Burke?
-____
+----
 
 In every software project, a great part of the code is dedicated to error management, and this code has to be rock solid. Error management is a complex topic, and there is always a corner case that we left out, or a condition that we supposed could never fail, while it does.
 
@@ -27,7 +31,7 @@ The filters could be, for example, represented by a dictionary that contains att
 
 We can implement structured requests before we expand the use case to accept filters. We just need a class `RoomListRequest` that can be initialised without parameters, so let us create the file `tests/requests/test_room_list.py` and put there a test for this object.
 
-.tests/requests/test_room_list.py
+. tests/requests/test_room_list.py
 [source,python]
 ----
 from rentomatic.requests.room_list import RoomListRequest
@@ -47,7 +51,7 @@ def test_build_room_list_request_from_empty_dict():
 
 While at the moment this request object is basically empty, it will come in handy as soon as we start having parameters for the list use case. The code of the class `RoomListRequest` is the following
 
-.rentomatic/requests/room_list.py
+. rentomatic/requests/room_list.py
 [source,python]
 ----
 class RoomListRequest:
@@ -59,14 +63,14 @@ class RoomListRequest:
         return True
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c05-s01
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c05-s01
+----
 
 The response object is also very simple since for the moment we just need to return a successful result. Unlike the request, the response is not linked to any particular use case, so the test file can be named `tests/test_responses.py`
 
-.tests/test_responses.py
+. tests/test_responses.py
 [source,python]
 ----
 from rentomatic.responses import ResponseSuccess
@@ -78,7 +82,7 @@ def test_response_success_is_true():
 
 and the actual response object is in the file `rentomatic/responses.py`
 
-.rentomatic/responses.py
+. rentomatic/responses.py
 [source,python]
 ----
 class ResponseSuccess:
@@ -89,10 +93,10 @@ class ResponseSuccess:
         return True
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c05-s02
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c05-s02
+----
 
 With these two objects, we just laid the foundations for richer management of input and outputs of the use case, especially in the case of error conditions.
 
@@ -100,7 +104,7 @@ With these two objects, we just laid the foundations for richer management of in
 
 Let's implement the request and response objects that we developed into the use case. To do this, we need to change the use case so that it accepts a request and return a response. The new version of `tests/use_cases/test_room_list.py` is the following
 
-.tests/use_cases/test_room_list.py
+. tests/use_cases/test_room_list.py
 [source,python]
 ----
 import pytest
@@ -164,7 +168,7 @@ def test_room_list_without_parameters(domain_rooms):
 
 And the changes in the use case are minimal. The new version of the file `rentomatic/use_cases/room_list.py` is the following
 
-.rentomatic/use_cases/room_list.py
+. rentomatic/use_cases/room_list.py
 [source,python]
 ----
 from rentomatic.responses import ResponseSuccess
@@ -175,10 +179,10 @@ def room_list_use_case(repo, request):
     return ResponseSuccess(rooms)
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c05-s03
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c05-s03
+----
 
 Now we have a standard way to pack input and output values, and the above pattern is valid for every use case we can create. We are still missing some features, however, because so far requests and responses are not used to perform error management.
 
@@ -198,7 +202,7 @@ This also means that building a request might result in two different objects, a
 
 The first thing to do is to change the existing tests to use the factory.
 
-.tests/requests/test_room_list.py
+. tests/requests/test_room_list.py
 [source,python]
 ----
 from rentomatic.requests.room_list import build_room_list_request
@@ -220,7 +224,7 @@ def test_build_room_list_request_with_empty_filters():
 
 Next, I will test that passing the wrong type of object as `filters` or that using incorrect keys results in an invalid request
 
-.tests/requests/test_room_list.py
+. tests/requests/test_room_list.py
 [source,python]
 ----
 def test_build_room_list_request_with_invalid_filters_parameter():
@@ -241,7 +245,7 @@ def test_build_room_list_request_with_incorrect_filter_keys():
 
 Last, I will test the supported and unsupported keys
 
-.tests/requests/test_room_list.py
+. tests/requests/test_room_list.py
 [source,python]
 ----
 import pytest
@@ -275,7 +279,7 @@ Note that I used the decorator `pytest.mark.parametrize` to run the same test on
 
 Following the TDD approach, adding those tests one by one and writing the code that passes them, I come up with the following code
 
-.rentomatic/requests/room_list.py
+. rentomatic/requests/room_list.py
 [source,python]
 ----
 from collections.abc import Mapping
@@ -326,7 +330,7 @@ def build_room_list_request(filters=None):
 
 The introduction of the factory makes one use case test fails. The new version of that test is
 
-.tests/use_cases/test_room_list.py
+. tests/use_cases/test_room_list.py
 [source,python]
 ----
 ...
@@ -348,10 +352,10 @@ def test_room_list_without_parameters(domain_rooms):
     assert response.value == domain_rooms
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c05-s04
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c05-s04
+----
 
 === Responses and failures
 
@@ -359,7 +363,7 @@ There is a wide range of errors that can happen while the use case code is execu
 
 As happened for the requests there is no unique way to provide such an object, and the following code is just one of the possible solutions. First of all, after some necessary imports, I test that responses have a boolean value
 
-.tests/test_responses.py
+. tests/test_responses.py
 [source,python]
 ----
 from rentomatic.responses import (
@@ -391,7 +395,7 @@ def test_response_failure_is_false():
 
 Then I test the structure of responses, checking `type` and `value`. `ResponseFailure` objects should also have an attribute `message`
 
-.tests/test_responses.py
+. tests/test_responses.py
 [source,python]
 ----
 def test_response_success_has_type_and_value():
@@ -416,7 +420,7 @@ def test_response_failure_has_type_and_message():
 
 The remaining tests are all about `ResponseFailure`. First, a test to check that it can be initialised with an exception
 
-.tests/test_responses.py
+. tests/test_responses.py
 [source,python]
 ----
 def test_response_failure_initialisation_with_exception():
@@ -431,7 +435,7 @@ def test_response_failure_initialisation_with_exception():
 
 Since we want to be able to build a response directly from an invalid request, getting all the errors contained in the latter, we need to test that case
 
-.tests/test_responses.py
+. tests/test_responses.py
 [source,python]
 ----
 def test_response_failure_from_empty_invalid_request():
@@ -457,7 +461,7 @@ def test_response_failure_from_invalid_request_with_errors():
 
 Let's write the classes that make the tests pass
 
-.rentomatic/responses.py
+. rentomatic/responses.py
 [source,python]
 ----
 class ResponseTypes:
@@ -510,10 +514,10 @@ Through the method `_format_message()` we enable the class to accept both string
 
 The error types contained in the class `ResponseTypes` are very similar to HTTP errors, and this will be useful later when we will return responses from the web framework. `PARAMETERS_ERROR` signals that something was wrong in the input parameters passed by the request. `RESOURCE_ERROR` signals that the process ended correctly, but the requested resource is not available, for example when reading a specific value from a data storage. Last, `SYSTEM_ERROR` signals that something went wrong with the process itself, and will be used mostly to signal an exception in the Python code.
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c05-s05
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c05-s05
+----
 
 === Error management in a use case
 
@@ -521,7 +525,7 @@ Our implementation of requests and responses is finally complete, so we can now 
 
 The test `test_room_list_without_parameters` must match the new API, so I added `filters=None` to `assert_called_with`
 
-.tests/use_cases/test_room_list.py
+. tests/use_cases/test_room_list.py
 [source,python]
 ----
 def test_room_list_without_parameters(domain_rooms):
@@ -539,7 +543,7 @@ def test_room_list_without_parameters(domain_rooms):
 
 There are three new tests that we can add to check the behaviour of the use case when `filters` is not `None`. The first one checks that the value of the key `filters` in the dictionary used to create the request is actually used when calling the repository. These last two tests check the behaviour of the use case when the repository raises an exception or when the request is badly formatted.
 
-.tests/use_cases/test_room_list.py
+. tests/use_cases/test_room_list.py
 [source,python]
 ----
 import pytest
@@ -598,7 +602,7 @@ def test_room_list_handles_bad_request():
 
 Now change the use case to contain the new use case implementation that makes all the tests pass
 
-.rentomatic/use_cases/room_list.py
+. rentomatic/use_cases/room_list.py
 [source,python]
 ----
 from rentomatic.responses import (
@@ -621,10 +625,10 @@ def room_list_use_case(repo, request):
 
 As you can see, the first thing that the use case does is to check if the request is valid. Otherwise, it returns a `ResponseFailure` built with the same request object. Then the actual business logic is implemented, calling the repository and returning a successful response. If something goes wrong in this phase the exception is caught and returned as an aptly formatted `ResponseFailure`.
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c05-s06
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c05-s06
+----
 
 === Integrating external systems
 
@@ -634,7 +638,7 @@ As we are testing objects using mocks for external systems, like the repository,
 
 For this simple project, my integration test is represented by the Flask development server, which at this point crashes. If you run `FLASK_CONFIG="development" flask run` and open http://127.0.0.1:5000/rooms with your browser you will get and Internal Server Error, and on the command line this exception
 
-[source,text]
+[source]
 ----
 TypeError: room_list_use_case() missing 1 required positional argument: 'request'
 ----
@@ -645,7 +649,7 @@ The same error is returned by the CLI interface. After the introduction of reque
 
 As we can see from the exception above the use case is called with the wrong parameters in the REST endpoint. The new version of the test is
 
-.tests/rest/test_rooms.py
+. tests/rest/test_rooms.py
 [source,python]
 ----
 import json
@@ -726,7 +730,7 @@ assert args[1].filters == {'price__gt': '2', 'price__lt': '6'}
 
 Both the tests pass with a new version of the endpoint `room_list`
 
-.application/rest/room.py
+. application/rest/room.py
 [source,python]
 ----
 import json
@@ -806,10 +810,10 @@ def room_list():
 
 Please note that I'm using a variable named `request_object` here to avoid clashing with the fixture `request` provided by `pytest-flask`. While `request` contains the HTTP request sent to the web framework by the browser, `request_object` is the request we send to the use case.
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c05-s07
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c05-s07
+----
 
 ==== The repository
 
@@ -820,13 +824,13 @@ If we run the Flask development webserver now and try to access the endpoint `/r
 {"type": "SystemError", "message": "TypeError: list() got an unexpected keyword argument 'filters'"}
 ----
 
-and if you look at the HTTP responsefootnote:[For example using the browser developer tools. In Chrome and Firefox, press F12 and open the Network tab, then refresh the page.] you can see an HTTP 500 error, which is exactly the mapping of our `SystemError` use case error, which in turn signals a Python exception, which is in the `message` part of the error.
+and if you look at the HTTP response[footnote](For example using the browser developer tools. In Chrome and Firefox, press F12 and open the Network tab, then refresh the page.) you can see an HTTP 500 error, which is exactly the mapping of our `SystemError` use case error, which in turn signals a Python exception, which is in the `message` part of the error.
 
 This error comes from the repository, which has not been migrated to the new API. We need then to change the method `list` of the class `MemRepo` to accept the parameter `filters` and to act accordingly. Pay attention to this point. The filters might have been considered part of the business logic and implemented in the use case itself, but we decided to leverage what the storage system can do, so we moved filtering in that external system. This is a reasonable choice as databases can usually perform filtering and ordering very well. Even though the in-memory storage we are currently using is not a database, we are preparing to use a real external storage.
 
 The new version of repository tests is
 
-.tests/repository/test_memrepo.py
+. tests/repository/test_memrepo.py
 [source,python]
 ----
 import pytest
@@ -944,7 +948,7 @@ Again, keep in mind that this is the API exposed by the storage, not the one exp
 
 The new version of the repository is
 
-.rentomatic/repository/memrepo.py
+. rentomatic/repository/memrepo.py
 [source,python]
 ----
 from rentomatic.domain.room import Room
@@ -982,12 +986,12 @@ class MemRepo:
         return result
 ----
 
-At this point, you can start the Flask development webserver with `FLASK_CONFIG="development" flask run`, and get the list of all your rooms at http://localhost:5000/rooms. You can also use filters in the URL, like http://localhost:5000/rooms?filter_code\__eq=f853578c-fc0f-4e65-81b8-566c5dffa35a which returns the room with the given code or http://localhost:5000/rooms?filter_price__lt=50 which returns all the rooms with a price less than 50.
+At this point, you can start the Flask development webserver with `FLASK_CONFIG="development" flask run`, and get the list of all your rooms at http://localhost:5000/rooms. You can also use filters in the URL, like http://localhost:5000/rooms?filter_code\\__eq=f853578c-fc0f-4e65-81b8-566c5dffa35a which returns the room with the given code or http://localhost:5000/rooms?filter_price__lt=50 which returns all the rooms with a price less than 50.
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c05-s08
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c05-s08
+----
 
 ==== The CLI
 
@@ -1040,10 +1044,10 @@ response = room_list_use_case(repo, request)
 print([room.to_dict() for room in response.value])
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c05-s09
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c05-s09
+----
 
 === Conclusions
 

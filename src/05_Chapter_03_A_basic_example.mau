@@ -1,15 +1,20 @@
+:TIP:admonition,tip,lightbulb,"Tip"
+:GITHUB:admonition,note,github,"Source code"
+:gh-rentomatic:https://github.com/pycabook/rentomatic
+
 == A basic example
 
 [quote, "Wargames, 1983"]
-____
+----
 Joshua/WOPR: Wouldn't you prefer a good game of chess?
+
 David: Later. Let's play Global Thermonuclear War.
-____
+----
 
 The goal of the "Rent-o-Matic" project is to create a simple search engine for a room renting company. Objects in the dataset (rooms) are described by some attributes and the search engine shall allow the user to set some filters to narrow the search.
-
+ 
 A room is stored in the system through the following values:
-
+ 
 * A unique identifier
 * A size in square meters
 * A renting price in Euro/day
@@ -21,7 +26,7 @@ As pushed by the clean architecture model, we are interested in separating the d
 
 === Project setup
 
-Clone the https://github.com/pycabook/rentomatic[project repository] and move to the branch `second-edition`. The full solution is contained in the branch `second-edition-top`, and the tags I will mention are there. I strongly advise to code along and to resort to my tags only to spot errors.
+Clone the [link](https://github.com/pycabook/rentomatic,"project repository") and move to the branch `second-edition`. The full solution is contained in the branch `second-edition-top`, and the tags I will mention are there. I strongly advise to code along and to resort to my tags only to spot errors.
 
 [source,sh]
 ----
@@ -46,7 +51,7 @@ $ pytest -svv
 
 and get an output like
 
-[source,text]
+[source]
 ----
 =========================== test session starts ===========================
 platform linux -- Python XXXX, pytest-XXXX, py-XXXX, pluggy-XXXX --
@@ -70,10 +75,10 @@ In this chapter, I will not explicitly state when I run the test suite, as I con
 
 You may notice that I configured the project to use black with an unorthodox line length of 75. I chose that number trying to find a visually pleasant way to present code in the book, avoiding wrapped lines that can make the code difficult to read.
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/second-edition
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/second-edition
+----
 
 === Domain models
 
@@ -81,7 +86,7 @@ Let us start with a simple definition of the model `Room`. As said before, the c
 
 Following the TDD methodology, the first thing that I write are the tests. This test ensures that the model can be initialised with the correct values
 
-.tests/domain/test_room.py
+. tests/domain/test_room.py
 [source,python]
 ----
 import uuid
@@ -109,7 +114,7 @@ Remember to create an empty file `\\__init__.py` in every subdirectory of `tests
 
 Now let's write the class `Room` in the file `rentomatic/domain/room.py`.
 
-.rentomatic/domain/room.py
+. rentomatic/domain/room.py
 [source,python]
 ----
 import uuid
@@ -125,16 +130,16 @@ class Room:
     latitude: float
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c03-s01
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c03-s01
+----
 
 The model is very simple and requires little explanation. I'm using dataclasses as they are a compact way to implement simple models like this, but you are free to use standard classes and to implement the method `\\__init__` explicitly.
 
 Given that we will receive data to initialise this model from other layers, and that this data is likely to be a dictionary, it is useful to create a method that allows us to initialise the model from this type of structure. The code can go into the same file we created before, and is 
 
-.tests/domain/test_room.py
+. tests/domain/test_room.py
 [source,python]
 ----
 def test_room_model_from_dict():
@@ -158,7 +163,7 @@ def test_room_model_from_dict():
 
 A simple implementation of it is then
 
-.rentomatic/domain/room.py
+. rentomatic/domain/room.py
 [source,python]
 ----
 @dataclasses.dataclass
@@ -174,14 +179,14 @@ class Room:
         return self(**d)
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c03-s02
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c03-s02
+----
 
 For the same reason mentioned before, it is useful to be able to convert the model into a dictionary, so that we can easily serialise it into JSON or similar language-agnostic formats. The test for the method `to_dict` goes again in `tests/domain/test_room.py`
 
-.tests/domain/test_room.py
+. tests/domain/test_room.py
 [source,python]
 ----
 def test_room_model_to_dict():
@@ -200,7 +205,7 @@ def test_room_model_to_dict():
 
 and the implementation is trivial using dataclasses
 
-.rentomatic/domain/room.py
+. rentomatic/domain/room.py
 [source,python]
 ----
     def to_dict(self):
@@ -209,14 +214,14 @@ and the implementation is trivial using dataclasses
 
 If you are not using dataclasses you need to explicitly create the dictionary, but that doesn't pose any challenge either. Note that this is not yet a serialisation of the object, as the result is still a Python data structure and not a string.
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c03-s03
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c03-s03
+----
 
 It is also very useful to be able to compare instances of a model. The test goes in the same file as the previous test
 
-.tests/domain/test_room.py
+. tests/domain/test_room.py
 [source,python]
 ----
 def test_room_model_comparison():
@@ -236,10 +241,10 @@ def test_room_model_comparison():
 
 Again, dataclasses make this very simple, as they provide an implementation of `\\__eq__` out of the box. If you implement the class without using dataclasses you have to define this method to make it pass the test.
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c03-s04
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c03-s04
+----
 
 === Serializers
 
@@ -249,7 +254,7 @@ The typical serialization format is JSON, as this is a broadly accepted standard
 
 This is the test for the JSON serialization of our class `Room`
 
-.tests/serializers/test_room.py
+. tests/serializers/test_room.py
 [source,python]
 ----
 import json
@@ -289,7 +294,7 @@ Here we create the object `Room` and write the expected JSON output (please note
 
 Put in the file `rentomatic/serializers/room.py` the code that makes the test pass
 
-.rentomatic/serializers/room.py
+. rentomatic/serializers/room.py
 [source,python]
 ----
 import json
@@ -310,10 +315,10 @@ class RoomJsonEncoder(json.JSONEncoder):
             return super().default(o)
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c03-s05
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c03-s05
+----
 
 Providing a class that inherits from `json.JSONEncoder` let us use the syntax `json_room = json.dumps(room, cls=RoomJsonEncoder)` to serialize the model. Note that we are not using the method `as_dict`, as the UUID code is not directly JSON serialisable. This means that there is a slight degree of code repetition in the two classes, which in my opinion is acceptable, being covered by tests. If you prefer, however, you can call the method `as_dict` and then adjust the code field converting it with `str`.
 
@@ -325,9 +330,9 @@ The simplest use case we can create is one that fetches all the rooms stored in 
 
 The repository is our storage component, and according to the clean architecture it will be implemented in an outer level (external systems). We will access it as an interface, which in Python means that we will receive an object that we expect will expose a certain API. From the testing point of view the best way to run code that accesses an interface is to mock the latter. Put this code in the file `tests/use_cases/test_room_list.py`
 
-I will make use of pytest's powerful fixtures, but I will not introduce them. I highly recommend reading the https://docs.pytest.org/en/latest/fixture.html[official documentation], which is very good and covers many different use cases.
+I will make use of pytest's powerful fixtures, but I will not introduce them. I highly recommend reading the [link](https://docs.pytest.org/en/latest/fixture.html,"official documentation"), which is very good and covers many different use cases.
 
-.tests/use_cases/test_room_list.py
+. tests/use_cases/test_room_list.py
 [source,python]
 ----
 import pytest
@@ -391,7 +396,7 @@ Calling the method `list` of the repository is an outgoing query action that the
 
 Put the implementation of the use case in the file `rentomatic/use_cases/room_list.py`
 
-.rentomatic/use_cases/room_list.py
+. rentomatic/use_cases/room_list.py
 [source,python]
 ----
 def room_list_use_case(repo):
@@ -406,10 +411,10 @@ The use case represents the business logic, a process, which means that the simp
 
 Your business logic might be complicated, and require the connection with several external systems, though, each one with a specific initialisation, while in this simple case I just pass in the repository. So, in principle, I don't see anything wrong in using classes for use cases, should you need more structure for your algorithms, but be careful not to use them when a simpler solution (functions) can perform the same job, which is the mistake I made in the previous version of this code. Remember that code has to be maintained, so the simpler it is, the better.
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c03-s06
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c03-s06
+----
 
 === The storage system
 
@@ -425,7 +430,7 @@ For the sake of this simple example, we will not deploy and use a real database 
 
 The first thing to do is to write some tests that document the public API of the repository. The file containing the tests is `tests/repository/test_memrepo.py`.
 
-.tests/repository/test_memrepo.py
+. tests/repository/test_memrepo.py
 [source,python]
 ----
 import pytest
@@ -478,7 +483,7 @@ def test_repository_list_without_parameters(room_dicts):
 
 In this case, we need a single test that checks the behaviour of the method `list`. The implementation that passes the test goes in the file `rentomatic/repository/memrepo.py`
 
-.rentomatic/repository/memrepo.py
+. rentomatic/repository/memrepo.py
 [source,python]
 ----
 from rentomatic.domain.room import Room
@@ -492,10 +497,10 @@ class MemRepo:
         return [Room.from_dict(i) for i in self.data]
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c03-s07
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c03-s07
+----
 
 You can easily imagine this class being the wrapper around a real database or any other storage type. While the code might become more complex, its basic structure would remain the same, with a single public method `list`. I will dig into database repositories in a later chapter.
 
@@ -509,7 +514,7 @@ Later we will create a REST endpoint and we will expose it through a Web server,
 
 For the time being, create a file `cli.py` in the same directory that contains `setup.py`. This is a simple Python script that doesn't need any specific option to run, as it just queries the storage for all the domain models contained there. The content of the file is the following
 
-.cli.py
+. cli.py
 [source,python]
 ----
 #!/usr/bin/env python
@@ -523,10 +528,10 @@ result = room_list_use_case(repo)
 print(result)
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c03-s08
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c03-s08
+----
 
 You can execute this file with `python cli.py` or, if you prefer, run `chmod +x cli.py` (which makes it executable) and then run it with `./cli.py` directly. The expected result is an empty list
 
@@ -540,7 +545,7 @@ which is correct as the class `MemRepo` in the file `cli.py` has been initialise
 
 The important part of the script is the lines
 
-.cli.py
+. cli.py
 [source,python]
 ----
 repo = MemRepo([])
@@ -551,7 +556,7 @@ which initialise the repository and run the use case. This is in general how you
 
 For the sake of demonstration, let's define some data in the file and load them in the repository
 
-.cli.py
+. cli.py
 [source,python]
 ----
 #!/usr/bin/env python
@@ -596,10 +601,10 @@ result = room_list_use_case(repo)
 print([room.to_dict() for room in result])
 ----
 
-[NOTE.github]
-====
-https://github.com/pycabook/rentomatic/tree/ed2-c03-s09
-====
+[{GITHUB}]
+----
+{gh-rentomatic}/tree/ed2-c03-s09
+----
 
 Again, remember that we need to hardcode data due to the trivial nature of our storage, and not to the architecture of the system. Note that I changed the instruction `print` as the repository returns domain models and printing them would result in a list of strings like `<rentomatic.domain.room.Room object at 0x7fb815ec04e0>`, which is not really helpful.
 
