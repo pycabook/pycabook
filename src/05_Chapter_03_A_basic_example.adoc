@@ -203,8 +203,8 @@ and the implementation is trivial using dataclasses
 .rentomatic/domain/room.py
 [source,python]
 ----
-    def to_dict(self):
-        return dataclasses.asdict(self)
+def to_dict(self):
+    return dataclasses.asdict(self)
 ----
 
 If you are not using dataclasses you need to explicitly create the dictionary, but that doesn't pose any challenge either. Note that this is not yet a serialisation of the object, as the result is still a Python data structure and not a string.
