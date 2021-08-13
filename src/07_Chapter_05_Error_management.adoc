@@ -991,7 +991,7 @@ https://github.com/pycabook/rentomatic/tree/ed2-c05-s08
 
 ==== The CLI
 
-At this point fixing the CLI is extremely simple, as we just need to imitate what we did for the HTTP server, only without considering the filters as they were not par tof the command line tool.
+At this point fixing the CLI is extremely simple, as we just need to imitate what we did for the HTTP server, only without considering the filters as they were not part of the command line tool.
 
 .cli.py
 [source,python]
