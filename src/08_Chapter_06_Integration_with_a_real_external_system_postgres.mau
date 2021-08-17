@@ -823,7 +823,7 @@ At this point we can create the real tests in the file `test_postgresrepo.py`, r
 
 The tests for this repository are basically a copy of the ones created for `MemRepo`, which is not surprising. Usually, you want to test the very same conditions, whatever the storage system. Towards the end of the chapter we will see, however, that while these files are initially the same, they can evolve differently as we find bugs or corner cases that come from the specific implementation (in-memory storage, PostgreSQL, and so on).
 
-. rentomatic/repository/postgres/test_postgresrepo.py
+. tests/repository/postgres/test_postgresrepo.py
 [source,python]
 ----
 import pytest
