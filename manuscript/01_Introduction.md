@@ -1,27 +1,17 @@
-:pelican.title:Introduction
-:pelican.date:2021-04-23 10:00:00 +0100
-:pelican.modified:2021-08-20 16:00:00 +0100
-:pelican.slug:pycabook-introduction
-:pelican.series:Clean Architectures in Python
-:pelican.series_info:The clean architecture is the opposite of spaghetti code, where everything is interlaced and there are no single elements that can be easily detached from the rest and replaced without the whole system collapsing. The main point of the clean architecture is to make clear "what is where and why", and this should be your first concern while you design and implement a software system, whatever architecture or development methodology you want to follow.
-:pelican.series_buy_url:https://leanpub.com/clean-architectures-in-python
-:pelican.series_index:1
-:pelican.image:pycabook/card
+# Introduction
 
-:TIP:admonition,tip,lightbulb
-:NOTE:admonition,note,github,"Source code"
-:gh-rentomatic:https://github.com/pycabook/rentomatic
-
-[quote, "Star Wars, 1977"]
-----
+{blurb, icon: quote-right}
 Learn about the Force, Luke.
-----
+
+Star Wars, 1977
+{/blurb}
+
 
 This book is about a software design methodology. A methodology is a set of guidelines that help you to reach your goal effectively, thus saving time, implementing far-sighted solutions, and avoiding the need to reinvent the wheel time and again.
 
-As other professionals around the world face problems and try to solve them, some of them, having discovered a good way to solve a problem, decide to share their experience, usually in the form of a "best practices" post on a blog, or talk at a conference. We also speak of _patterns_[footnote](From the seminal book "Design Patterns: Elements of Reusable Object-Oriented Software" by Gamma, Vlissides, Johnson, and Helm.), which are formalised best practices, and _anti-patterns_, when it comes to advice about what not to do and why it is better to avoid a certain solution.
+As other professionals around the world face problems and try to solve them, some of them, having discovered a good way to solve a problem, decide to share their experience, usually in the form of a "best practices" post on a blog, or talk at a conference. We also speak of *patterns*[^footnote1], which are formalised best practices, and *anti-patterns*, when it comes to advice about what not to do and why it is better to avoid a certain solution.
 
-Often, when best practices encompass a wide scope, they are designated a _methodology_. The definition of a methodology is to convey a method, more than a specific solution to a problem. The very nature of methodologies means they are not connected to any specific case, in favour of a wider and more generic approach to the subject matter. This also means that applying methodologies without thinking shows that one didn't grasp the nature of a methodology, which is to help to find a solution and not to provide it.
+Often, when best practices encompass a wide scope, they are designated a *methodology*. The definition of a methodology is to convey a method, more than a specific solution to a problem. The very nature of methodologies means they are not connected to any specific case, in favour of a wider and more generic approach to the subject matter. This also means that applying methodologies without thinking shows that one didn't grasp the nature of a methodology, which is to help to find a solution and not to provide it.
 
 This is why the main advice I have to give is: be reasonable; try to understand why a methodology leads to a solution and adopt it if it fits your need. I'm saying this at the very beginning of this book because this is how I'd like you to approach this work of mine.
 
@@ -35,7 +25,7 @@ I will try as much as possible to give reasons for the proposed solutions, so yo
 
 Spoiler alert: there is no such a thing.
 
-== What is a software architecture?
+## What is a software architecture?
 
 Every production system, be it a software package, a mechanical device, or a simple procedure, is made of components and connections between them. The purpose of the connections is to use the output of some components as inputs of other components, in order to perform a certain action or set of actions.
 
@@ -61,15 +51,15 @@ This example can easily be translated into the software realm. Our shop is a pro
 
 Remember that an architecture tries to detail how a process is implemented at a certain granularity, given certain assumptions or requirements. The quality of an architecture can then be judged on the basis of parameters such as its cost, the quality of the outputs, its simplicity or "elegance", the amount of effort required to change it, and so on.
 
-== Why is it called "clean"?
+## Why is it called "clean"?
 
-The architecture explained in this book has many names, but the one that is mainly in use nowadays is "clean architecture". This is the name used by Robert Martin in [link](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html, "his seminal post") where he clearly states this structure is not a novelty, but has been promoted by many software designers over the years. I believe the adjective "clean" describes one of the fundamental aspects of both the software structure and the development approach of this architecture. It is clean, that is, it is easy to understand what happens.
+The architecture explained in this book has many names, but the one that is mainly in use nowadays is "clean architecture". This is the name used by Robert Martin in [his seminal post](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) where he clearly states this structure is not a novelty, but has been promoted by many software designers over the years. I believe the adjective "clean" describes one of the fundamental aspects of both the software structure and the development approach of this architecture. It is clean, that is, it is easy to understand what happens.
 
 The clean architecture is the opposite of spaghetti code, where everything is interlaced and there are no single elements that can be easily detached from the rest and replaced without the whole system collapsing. The main point of the clean architecture is to make clear "what is where and why", and this should be your first concern while you design and implement a software system, whatever architecture or development methodology you want to follow.
 
 The clean architecture is not the perfect architecture and cannot be applied unthinkingly. Like any other solution, it addresses a set of problems and tries to solve them, but there is no panacea that will solve all issues. As already stated, it's better to understand how the clean architecture solves some problems and decide if the solution suits your need.
 
-== Why "architectures"?
+## Why "architectures"?
 
 While I was writing the first edition of the book it became clear to me that the goal of this book is to begin a journey and not to define the specific steps through which each software designer has to go through. The concepts explained here are rooted in some design principles that are much more important than the resulting physical structure of the system that you will create.
 
@@ -77,7 +67,7 @@ This is why I wanted to stress that what I show in this book can (and hopefully 
 
 Or maybe I just wanted to avoid looking like a clone of Robert Martin.
 
-== Why Python?
+## Why Python?
 
 I have been working with Python for 20 years, along with other languages, but I came to love its simplicity and power and so I ended up using it on many projects. When I was first introduced to the clean architecture I was working on a Python application that was meant to glue together the steps of a processing chain for satellite imagery, so my journey with the concepts I will explain started with this language.
 
@@ -85,13 +75,14 @@ I will therefore speak of Python in this book, but the main concepts are valid f
 
 The clean architecture concepts are independent of the language, but the implementation obviously leverages what a specific language allows you to do, so this book is about the clean architecture and an implementation of it that I devised using Python. I really look forward to seeing more books about the clean architecture that explore other implementations in Python and in other languages.
 
-== Acknowledgments
+## Acknowledgments
+
 
 * Eleanor de Veras, who proofread the introduction.
 * Roberto Ciatti, who introduced me to clean architectures.
 * Readers Eric Smith, Faust Gertz, Giovanni Natale, Grant Moore, Hans Chen, Max H. Gerlach, Michael O'Neill, Paul Schwendenman, Ramces Chirino, Rodrigo Monte, Simon Weiss, Thiago C. D'Ávila, robveijk, mathisheeren, 4myhw, Jakob Waibel, 1110sillabo, Maxim Ivanov who fixed bugs, typos and bad grammar submitting issues and pull requests.
-* Łukasz Dziedzic, who developed the free "Lato" font (http://www.latofonts.com), used for the cover.
+* Łukasz Dziedzic, who developed the free "Lato" font (<http://www.latofonts.com>), used for the cover.
 
-The cover photograph is by [link](https://pxhere.com/en/photo/1453753,pxhere). A detail of the Sagrada Familia in Barcelona, one of the world's best contemporary artworks, a bright example of architecture in which every single element has a meaning and a purpose. Praise to Antoni Gaudí, brilliant architect and saint, who will always inspire me with his works and his life.
+The cover photograph is by [pxhere](https://pxhere.com/en/photo/1453753). A detail of the Sagrada Familia in Barcelona, one of the world's best contemporary artworks, a bright example of architecture in which every single element has a meaning and a purpose. Praise to Antoni Gaudí, brilliant architect and saint, who will always inspire me with his works and his life.
 
-::footnotes:
+[^footnote1]: From the seminal book "Design Patterns: Elements of Reusable Object-Oriented Software" by Gamma, Vlissides, Johnson, and Helm.

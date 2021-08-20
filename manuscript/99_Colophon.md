@@ -1,18 +1,11 @@
-:pelican.title:Colophon
-:pelican.date:2021-04-23 10:00:00 +0100
-:pelican.modified:2021-08-20 16:00:00 +0100
-:pelican.slug:pycabook-colophon
-:pelican.series:Clean Architectures in Python
-:pelican.series_index:99
+# Colophon
 
-:TIP:admonition,tip,lightbulb
-:GITHUB:admonition,note,github,"Source code"
-:gh-rentomatic:https://github.com/pycabook/rentomatic
-
-[quote, "Young Frankenstein, 1974"]
-----
+{blurb, icon: quote-right}
 In conclusion, it should be noted...
-----
+
+Young Frankenstein, 1974
+{/blurb}
+
 
 Writing a book is a giant effort.
 
@@ -21,5 +14,3 @@ I don't want this to sound like an excuse for the many errors that I forgot to f
 I didn't follow every advice I received, but I carefully read all the issues and messages that people sent me. I'm sorry I didn't manage to put in the book everything I wanted or everything you suggested. I have no commitment with an editor, but a certain point even a self-published book has to be called done. There will be more editions, I hope, so I just postponed the work. In the meanwhile, why don't you write a blog post on the clean architecture?
 
 Thanks for reading my book!
-
-

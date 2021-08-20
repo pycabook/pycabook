@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="170.60002mm"
+   height="170.60002mm"
+   viewBox="0 0 170.60002 170.60002"
+   version="1.1"
+   id="svg1508"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="bcircles03_use_cases.svg">
+  <defs
+     id="defs1502" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.384527"
+     inkscape:cx="158.95728"
+     inkscape:cy="275.94059"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1375"
+     inkscape:window-x="0"
+     inkscape:window-y="36"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata1505">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-98.156093,-126.36415)">
+    <circle
+       id="path3713"
+       cx="183.4561"
+       cy="211.66415"
+       style="display:inline;opacity:1;fill:#eedcff;fill-opacity:1;stroke:#8f8f8f;stroke-width:0.60000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       r="85.000008" />
+    <circle
+       id="path3713-3"
+       cx="183.4561"
+       cy="211.66415"
+       style="display:inline;opacity:1;fill:#bcceff;fill-opacity:1;stroke:#8f8f8f;stroke-width:0.60000002;stroke-miterlimit:4;stroke-dasharray:2.40000003, 2.40000003000000017;stroke-dashoffset:0;stroke-opacity:1"
+       r="64.865692" />
+    <circle
+       id="path3713-3-6"
+       cx="183.4561"
+       cy="211.66415"
+       style="display:inline;opacity:1;fill:#d1f7ff;fill-opacity:1;stroke:#000000;stroke-width:0.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       r="44.792835" />
+    <circle
+       id="path3713-3-6-7"
+       cx="183.4561"
+       cy="211.66415"
+       style="display:inline;opacity:1;fill:#a2ffc1;fill-opacity:1;stroke:#8f8f8f;stroke-width:0.60000002;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       r="24.833677" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Asimov;-inkscape-font-specification:'Asimov, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="183.34523"
+       y="288.2746"
+       id="text6055"><tspan
+         sodipodi:role="line"
+         id="tspan6053"
+         x="183.34523"
+         y="288.2746"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:7.05555534px;font-family:Asimov;-inkscape-font-specification:'Asimov, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.26458332;fill:#8f8f8f;fill-opacity:1">External systems</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Asimov;-inkscape-font-specification:'Asimov, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="183.4142"
+       y="268.23346"
+       id="text6055-5"><tspan
+         sodipodi:role="line"
+         id="tspan6053-0"
+         x="183.4142"
+         y="268.23346"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:7.05555534px;font-family:Asimov;-inkscape-font-specification:'Asimov, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;fill:#8f8f8f;fill-opacity:1;stroke-width:0.26458332">Gateways</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Asimov;-inkscape-font-specification:'Asimov, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="183.36958"
+       y="248.68108"
+       id="text6055-2"><tspan
+         sodipodi:role="line"
+         id="tspan6053-1"
+         x="183.36958"
+         y="248.68108"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:7.05555534px;font-family:Asimov;-inkscape-font-specification:'Asimov, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.26458332;fill:#000000;fill-opacity:1">Use cases</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Asimov;-inkscape-font-specification:'Asimov, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;display:inline;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332;"
+       x="183.36958"
+       y="214.50807"
+       id="text6055-2-3"><tspan
+         sodipodi:role="line"
+         id="tspan6053-1-0"
+         x="183.36958"
+         y="214.50807"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:7.05555534px;font-family:Asimov;-inkscape-font-specification:'Asimov, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:center;writing-mode:lr-tb;text-anchor:middle;stroke-width:0.26458332;fill:#8f8f8f;fill-opacity:1">Entities</tspan></text>
+  </g>
+</svg>
