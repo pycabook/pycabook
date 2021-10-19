@@ -1,7 +1,7 @@
 # Clean Architectures in Python
 
 This is the repository with the source code of the book "Clean Architectures in Python".
-This is the **second edition** and the current full version is 2.0.0
+This is the **second edition** and the current full version is 2.1.1
 
 If for some reason you need to read the first edition you can find it using the branch `first-edition`.
 
