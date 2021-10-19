@@ -641,7 +641,7 @@ I want to point out a big problem represented by mocks.
 
 As we are testing objects using mocks for external systems, like the repository, no tests fail at the moment, but trying to run the Flask development server will certainly return an error. As a matter of fact, neither the repository nor the HTTP server are in sync with the new API, but this cannot be shown by unit tests if they are properly written. This is the reason why we need integration tests, since external systems that rely on a certain version of the API are running only at that point, and this can raise issues that were masked by mocks.
 
-For this simple project, my integration test is represented by the Flask development server, which at this point crashes. If you run `FLASK_CONFIG="development" flask run` and open http://127.0.0.1:5000/rooms with your browser you will get and Internal Server Error, and on the command line this exception
+For this simple project, my integration test is represented by the Flask development server, which at this point crashes. If you run `FLASK_CONFIG="development" flask run` and open [link]("http://127.0.0.1:5000/rooms") with your browser you will get and Internal Server Error, and on the command line this exception
 
 [source]
 ----
@@ -1019,7 +1019,7 @@ class MemRepo:
         return result
 ----
 
-At this point, you can start the Flask development webserver with `FLASK_CONFIG="development" flask run`, and get the list of all your rooms at http://localhost:5000/rooms. You can also use filters in the URL, like http://localhost:5000/rooms?filter_code__eq=f853578c-fc0f-4e65-81b8-566c5dffa35a which returns the room with the given code or http://localhost:5000/rooms?filter_price__lt=50 which returns all the rooms with a price less than 50.
+At this point, you can start the Flask development webserver with `FLASK_CONFIG="development" flask run`, and get the list of all your rooms at [link]("http://localhost:5000/rooms"). You can also use filters in the URL, like [link]("http://localhost:5000/rooms?filter_code__eq=f853578c-fc0f-4e65-81b8-566c5dffa35a") which returns the room with the given code or [link]("http://localhost:5000/rooms?filter_price__lt=50") which returns all the rooms with a price less than 50.
 
 [{GITHUB}]
 ----

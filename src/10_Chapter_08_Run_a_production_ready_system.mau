@@ -298,7 +298,7 @@ production_web                                  production_web_1
 
 Note that I removed several columns to make the output readable.
 
-At this point we can open http://localhost:8080/rooms with our browser and see the result of the HTTP request received by Nginx, passed to gunicorn, and processed by Flask using the use case `room_list_use_case`.
+At this point we can open [link]("http://localhost:8080/rooms") with our browser and see the result of the HTTP request received by Nginx, passed to gunicorn, and processed by Flask using the use case `room_list_use_case`.
 
 The application is not actually using the database yet, as the Flask endpoint `room_list` in `application/rest/room.py` initialises the class `MemRepo` and loads it with some static values, which are the ones we see in our browser.
 
@@ -451,7 +451,7 @@ postgres=# \l
 postgres=# 
 ----
 
-Please note that the two databases `template0` and `template1` are system databases created by Postgres (see [link](https://www.postgresql.org/docs/current/manage-ag-templatedbs.html,"the documentation")), `postgres` is the default database created by the Docker container (the name is `postgres` by default, but in this case it comes from the environment variable `POSTGRES_DB` in `config/production.json`) and `application` is the database created by `./manage.py init-postgres` (from `APPLICATION_DB`).
+Please note that the two databases `template0` and `template1` are system databases created by Postgres (see [link]("https://www.postgresql.org/docs/current/manage-ag-templatedbs.html", "the documentation")), `postgres` is the default database created by the Docker container (the name is `postgres` by default, but in this case it comes from the environment variable `POSTGRES_DB` in `config/production.json`) and `application` is the database created by `./manage.py init-postgres` (from `APPLICATION_DB`).
 
 We can connect to a database with the command `\c`
 
@@ -476,7 +476,7 @@ As you remember, we mapped entities to storage objects, and since we are using P
 
 === Migrations
 
-We need a way to create the tables that correspond to the objects that we defined in `rentomatic/repository/postgres_objects.py`. The best strategy, when we use an ORM like SQLAlchemy, is to create and run migrations, and for this we can use [link](https://alembic.sqlalchemy.org/,Alembic).
+We need a way to create the tables that correspond to the objects that we defined in `rentomatic/repository/postgres_objects.py`. The best strategy, when we use an ORM like SQLAlchemy, is to create and run migrations, and for this we can use [link]("https://alembic.sqlalchemy.org/", "Alembic").
 
 If you are still connected with `psql` please exit with `\q`, then edit `requirements/prod.txt` and add `alembic`
 
@@ -554,7 +554,7 @@ target_metadata = Base.metadata:@:
 # ... etc.
 ----
 
-Through `config.set_section_option` we are adding relevant configuration values to the main Alembic INI file section (`config.config_ini_section`), extracting them from the environment variables. We are also importing the file that contains the SQLAlchemy objects. You can find documentation on this procedure at [link](https://alembic.sqlalchemy.org/en/latest/api/config.html).
+Through `config.set_section_option` we are adding relevant configuration values to the main Alembic INI file section (`config.config_ini_section`), extracting them from the environment variables. We are also importing the file that contains the SQLAlchemy objects. You can find documentation on this procedure at [link]("https://alembic.sqlalchemy.org/en/latest/api/config.html").
 
 Once this is done we need to change the INI file to use the new variables
 
@@ -573,7 +573,7 @@ sqlalchemy.url = postgresql://%(POSTGRES_USER)s:%(POSTGRES_PASSWORD)s@%(POSTGRES
 # detail and examples
 ----
 
-The syntax `%(VARNAME)s` is the basic variable interpolation used by `ConfigParser` (see [link](https://docs.python.org/3.8/library/configparser.html#configparser.BasicInterpolation,"the documentation")).
+The syntax `%(VARNAME)s` is the basic variable interpolation used by `ConfigParser` (see [link]("https://docs.python.org/3.8/library/configparser.html#configparser.BasicInterpolation", "the documentation")).
 
 At this point we can run Alembic to migrate our database. In many cases, you can rely on Alembic's autogeneration functionality to generate the migrations, and this is what we can do to create the initial models. The Alembic command is `revision` with the `--autogenerate` flag, but we need to pass the environment variables on the command line. This is clearly a job for `migrate.py` but let's first run it to see what happens to the database. Later we will create a better setup to avoid passing variables manually
 
@@ -661,7 +661,7 @@ application=# select * from room;
 (0 rows)
 ----
 
-And indeed, if you open http://localhost:8080/rooms with your browser you will see a successful response, but no data.
+And indeed, if you open [link]("http://localhost:8080/rooms") with your browser you will see a successful response, but no data.
 
 To see some data we need to write something into the database. This is normally done through a form in the web application and a specific endpoint, but for the sake of simplicity in this case we can just add data manually to the database.
 
@@ -682,7 +682,7 @@ application=# SELECT * FROM room;
 (1 row)
 ----
 
-and open or refresh http://localhost:8080/rooms with the browser to see the value returned by our use case.
+and open or refresh [link]("http://localhost:8080/rooms") with the browser to see the value returned by our use case.
 
 [{GITHUB}]
 ----

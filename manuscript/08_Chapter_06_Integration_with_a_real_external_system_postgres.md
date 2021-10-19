@@ -2,6 +2,7 @@
 
 {blurb, icon: quote-right}
 Ooooh, I'm very sorry Hans. I didn't get that memo.
+
 Maybe you should've put it on the bulletin board.
 
 Die Hard, 1988

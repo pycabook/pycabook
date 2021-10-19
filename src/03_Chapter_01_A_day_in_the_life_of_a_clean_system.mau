@@ -18,7 +18,7 @@ In this chapter I will introduce the reader to a (very simple) system designed w
 
 == The data flow
 
-In the rest of the book, we will design together part of a simple web application that provides a room renting system. So, let's consider that our "Rent-o-Matic" application[footnote](I was inspired by the Sludge-O-Matic™ from Day of the Tentacle) is running at https://www.rentomatic.com, and that a user wants to see the available rooms. They open the browser and type the address, then clicking on menus and buttons they reach the page with the list of all the rooms that our company rents.
+In the rest of the book, we will design together part of a simple web application that provides a room renting system. So, let's consider that our "Rent-o-Matic" application[footnote](I was inspired by the Sludge-O-Matic™ from Day of the Tentacle) is running at [link]("https://www.rentomatic.com"), and that a user wants to see the available rooms. They open the browser and type the address, then clicking on menus and buttons they reach the page with the list of all the rooms that our company rents.
 
 Let's assume that this URL is `/rooms?status=available`. When the user's browser accesses that URL, an HTTP request reaches our system, where there is a component that is waiting for HTTP connections. Let's call this component "web framework"[footnote]("There are many more layers that the HTTP request has to go through before reaching the actual web framework, for example the web server, but since the purpose of those layers is mostly to increase performances, I am not going to consider them until the end of the book.").
 
@@ -69,7 +69,7 @@ For simplicity's sake, let's use a relational database like Postgres in this exa
 
 How does the use case connect with the storage system? Clearly, if we hard code into the use case the calls to a specific system (e.g. using SQL) the two components will be _strongly coupled_, which is something we try to avoid in system design. Coupled components are not independent, they are tightly connected, and changes occurring in one of the two force changes in the second one (and vice versa). This also means that testing components is more difficult, as one component cannot live without the other, and when the second component is a complex system like a database this can severely slow down development.
 
-For example, let's assume the use case called directly a specific Python library to access PostgreSQL such as [link](https://www.psycopg.org/,psycopg). This would couple the use case with that specific source, and a change of database would result in a change of its code. This is far from being ideal, as the use case contains the business logic, which has not changed moving from one database system to the other. Parts of the system that do not contain the business logic should be treated like implementation details.
+For example, let's assume the use case called directly a specific Python library to access PostgreSQL such as [link]("https://www.psycopg.org/", "psycopg"). This would couple the use case with that specific source, and a change of database would result in a change of its code. This is far from being ideal, as the use case contains the business logic, which has not changed moving from one database system to the other. Parts of the system that do not contain the business logic should be treated like implementation details.
 
 [{TIP},"Implementation detail"]
 ----

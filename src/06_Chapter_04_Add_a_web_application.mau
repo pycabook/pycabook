@@ -50,9 +50,9 @@ pytest-flask
 
 Remember to run `pip install -r requirements/dev.txt` again after those changes to install the new packages in your virtual environment.
 
-The setup of a Flask application is not complex, but there are a lot of concepts involved, and since this is not a tutorial on Flask I will run quickly through these steps. I will provide links to the Flask documentation for every concept, though. If you want to dig a bit deeper in this matter you can read my series of posts [link](https://www.thedigitalcatonline.com/blog/2020/07/05/flask-project-setup-tdd-docker-postgres-and-more-part-1/,"Flask Project Setup: TDD, Docker, Postgres and more").
+The setup of a Flask application is not complex, but there are a lot of concepts involved, and since this is not a tutorial on Flask I will run quickly through these steps. I will provide links to the Flask documentation for every concept, though. If you want to dig a bit deeper in this matter you can read my series of posts [link]("https://www.thedigitalcatonline.com/blog/2020/07/05/flask-project-setup-tdd-docker-postgres-and-more-part-1/", "Flask Project Setup: TDD, Docker, Postgres and more").
 
-The Flask application can be configured using a plain Python object ([link](http://flask.pocoo.org/docs/latest/api/#flask.Config.from_object,documentation)), so I created the file `application/config.py` that contains this code
+The Flask application can be configured using a plain Python object ([link]("http://flask.pocoo.org/docs/latest/api/#flask.Config.from_object", "documentation")), so I created the file `application/config.py` that contains this code
 
 . `application/config.py`
 [source,python]
@@ -80,9 +80,9 @@ class TestingConfig(Config):
     TESTING = True
 ----
 
-Read [link](http://flask.pocoo.org/docs/latest/config/,"this page") to know more about Flask configuration parameters.
+Read [link]("http://flask.pocoo.org/docs/latest/config/", "this page") to know more about Flask configuration parameters.
 
-Now we need a function that initialises the Flask application ([link](http://flask.pocoo.org/docs/latest/patterns/appfactories/,documentation)), configures it, and registers the blueprints ([link](http://flask.pocoo.org/docs/latest/blueprints/,documentation)). The file `application/app.py` contains the following code, which is an app factory
+Now we need a function that initialises the Flask application ([link]("http://flask.pocoo.org/docs/latest/patterns/appfactories/", "documentation")), configures it, and registers the blueprints ([link]("http://flask.pocoo.org/docs/latest/blueprints/", "documentation")). The file `application/app.py` contains the following code, which is an app factory
 
 . `application/app.py`
 [source,python]
@@ -138,7 +138,7 @@ def app():
     return app
 ----
 
-The function `app` runs the app factory to create a Flask app, using the configuration `testing`, which sets the flag `TESTING` to `True`. You can find the description of these flags in the [link](http://flask.pocoo.org/docs/1.0/config/,"official documentation").
+The function `app` runs the app factory to create a Flask app, using the configuration `testing`, which sets the flag `TESTING` to `True`. You can find the description of these flags in the [link]("http://flask.pocoo.org/docs/1.0/config/", "official documentation").
 
 At this point, we can write the test for our endpoint.
 
@@ -331,7 +331,7 @@ Now that we defined the endpoint, we can finalise the configuration of the webse
 
 == WSGI
 
-Python web applications expose a common interface called [link](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface,"Web Server Gateway Interface") or WSGI. So to run the Flask development web server, we have to define a `wsgi.py` file in the main folder of the project, i.e. in the same directory of the file `cli.py`
+Python web applications expose a common interface called [link]("https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface", "Web Server Gateway Interface") or WSGI. So to run the Flask development web server, we have to define a `wsgi.py` file in the main folder of the project, i.e. in the same directory of the file `cli.py`
 
 . `wsgi.py`
 [source,python]
@@ -348,7 +348,7 @@ app = create_app(os.environ["FLASK_CONFIG"])
 {gh-rentomatic}/tree/ed2-c04-s04
 ----
 
-When you run the Flask Command Line Interface ([link](http://flask.pocoo.org/docs/1.0/cli/,documentation)), it automatically looks for a file named `wsgi.py` and loads it, expecting it to contain a variable named `app` that is an instance of the object `Flask`. As the function `create_app` is a factory we just need to execute it.
+When you run the Flask Command Line Interface ([link]("http://flask.pocoo.org/docs/1.0/cli/", "documentation")), it automatically looks for a file named `wsgi.py` and loads it, expecting it to contain a variable named `app` that is an instance of the object `Flask`. As the function `create_app` is a factory we just need to execute it.
 
 At this point, you can execute `FLASK_CONFIG="development" flask run` in the directory that contains this file and you should see a nice message like
 
@@ -357,7 +357,7 @@ At this point, you can execute `FLASK_CONFIG="development" flask run` in the dir
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ----
 
-At this point, you can point your browser to http://127.0.0.1:5000/rooms and enjoy the JSON data returned by the first endpoint of your web application.
+At this point, you can point your browser to [link]("http://127.0.0.1:5000/rooms") and enjoy the JSON data returned by the first endpoint of your web application.
 
 ---
 

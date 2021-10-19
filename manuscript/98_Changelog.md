@@ -16,7 +16,7 @@ I will track here changes between releases of the book, following [Semantic Vers
 
 * This version is written in Mau but converted into Markua to publish the PDF using Leanpub's processing chain.
 * Chapter 8 has been improved with migrations that correctly create the tables in the production database.
-* [Maxim](https://github.com/ivanovmg) corrected many bugs both in the book and in the code repository, and fixed several inconsistencies between the two. An impressive job, thank you so much for your help!
+* [Maxim Ivanov](https://github.com/ivanovmg) corrected many bugs both in the book and in the code repository, and fixed several inconsistencies between the two. An impressive job, thank you so much for your help!
 * GitHub user [robveijk](https://github.com/robveijk) spotted a mention to a file that is not included in the second edition. Thanks!
 * GitHub user [mathisheeren](https://github.com/mathisheeren) corrected a typo. Thank you!
 * GitHub user [4myhw](https://github.com/4myhw) found a broken link and fixed the wrong use of `self` instead of `cls` in the code. Thanks!
@@ -53,7 +53,7 @@ I will track here changes between releases of the book, following [Semantic Vers
 ### Version 1.0.10 (2019-09-23)
 
 
-* GitHub user [Ramces Chirino](https://github.com/chirinosky) submitted a mega PR with many grammatical corrections. Thanks!
+* GitHub user [Ramces Chirino](https://github.com/chirinosky) submitted a mega PR fixing many grammatical corrections. Thanks!
 
 ### Version 1.0.9 (2019-04-12)
 

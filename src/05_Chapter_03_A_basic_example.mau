@@ -31,7 +31,7 @@ As pushed by the clean architecture model, we are interested in separating the d
 
 === Project setup
 
-Clone the [link](https://github.com/pycabook/rentomatic,"project repository") and move to the branch `second-edition`. The full solution is contained in the branch `second-edition-top`, and the tags I will mention are there. I strongly advise to code along and to resort to my tags only to spot errors.
+Clone the [link]("https://github.com/pycabook/rentomatic", "project repository") and move to the branch `second-edition`. The full solution is contained in the branch `second-edition-top`, and the tags I will mention are there. I strongly advise to code along and to resort to my tags only to spot errors.
 
 [source,sh]
 ----
@@ -335,7 +335,7 @@ The simplest use case we can create is one that fetches all the rooms stored in 
 
 The repository is our storage component, and according to the clean architecture it will be implemented in an outer level (external systems). We will access it as an interface, which in Python means that we will receive an object that we expect will expose a certain API. From the testing point of view the best way to run code that accesses an interface is to mock the latter. Put this code in the file `tests/use_cases/test_room_list.py`
 
-I will make use of pytest's powerful fixtures, but I will not introduce them. I highly recommend reading the [link](https://docs.pytest.org/en/stable/fixture.html,"official documentation"), which is very good and covers many different use cases.
+I will make use of pytest's powerful fixtures, but I will not introduce them. I highly recommend reading the [link]("https://docs.pytest.org/en/stable/fixture.html", "official documentation"), which is very good and covers many different use cases.
 
 . `tests/use_cases/test_room_list.py`
 [source,python]

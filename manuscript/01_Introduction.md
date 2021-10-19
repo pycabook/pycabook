@@ -85,4 +85,4 @@ The clean architecture concepts are independent of the language, but the impleme
 
 The cover photograph is by [pxhere](https://pxhere.com/en/photo/1453753). A detail of the Sagrada Familia in Barcelona, one of the world's best contemporary artworks, a bright example of architecture in which every single element has a meaning and a purpose. Praise to Antoni Gaudí, brilliant architect and saint, who will always inspire me with his works and his life.
 
-[^footnote1]: From the seminal book "Design Patterns: Elements of Reusable Object-Oriented Software" by Gamma, Vlissides, Johnson, and Helm.
+[^footnote1]: From the seminal book *Design Patterns: Elements of Reusable Object-Oriented Software* by Gamma, Vlissides, Johnson, and Helm.

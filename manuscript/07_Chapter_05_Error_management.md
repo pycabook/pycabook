@@ -971,7 +971,7 @@ class MemRepo:
 
         return result
 ```
-At this point, you can start the Flask development webserver with `FLASK_CONFIG="development" flask run`, and get the list of all your rooms at <http://localhost:5000/rooms.> You can also use filters in the URL, like <http://localhost:5000/rooms?filter>*code**eq=f853578c-fc0f-4e65-81b8-566c5dffa35a which returns the room with the given code or <http://localhost:5000/rooms?filter>*price**lt=50 which returns all the rooms with a price less than 50.
+At this point, you can start the Flask development webserver with `FLASK_CONFIG="development" flask run`, and get the list of all your rooms at <http://localhost:5000/rooms>. You can also use filters in the URL, like <http://localhost:5000/rooms?filter_code__eq=f853578c-fc0f-4e65-81b8-566c5dffa35a> which returns the room with the given code or <http://localhost:5000/rooms?filter_price__lt=50> which returns all the rooms with a price less than 50.
 
 {blurb, class: tip}
 **Source code**

@@ -2,6 +2,7 @@
 
 {blurb, icon: quote-right}
 Joshua/WOPR: Wouldn't you prefer a good game of chess?
+
 David: Later. Let's play Global Thermonuclear War.
 
 Wargames, 1983

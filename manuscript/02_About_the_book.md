@@ -9,7 +9,7 @@ The Blues Brothers, 1980
 
 In 2015 I was introduced to the clean architecture by a colleague of mine, Roberto Ciatti. I started working with him following a strict Test-Driven Development (TDD) approach and learning or better understanding many things I now consider pillars of my programming knowledge.
 
-Unfortunately the project was cancelled, but the clean architecture concepts stuck with me, so I revisited them for a simple open source project I started working on at the time[^footnote1]. Meanwhile I read "Object Oriented Software Engineering: A Use-Case Driven Approach" by Ivar Jacobson[^footnote2].
+Unfortunately the project was cancelled, but the clean architecture concepts stuck with me, so I revisited them for a simple open source project I started working on at the time. Meanwhile I read "Object Oriented Software Engineering: A Use-Case Driven Approach" by Ivar Jacobson[^footnote1].
 
 In 2013 I started writing a personal blog, [The Digital Cat](https://www.thedigitalcatonline.com/), and after having published many Python-related posts I began working on a post to show other programmers the beauty of the clean architecture concepts: "Clean Architectures in Python: a step by step example", published in 2016, which was well received by the Python community. For a couple of years I considered expanding the post, but I couldn't find the time to do it, and in the meanwhile I realised that many things I had written needed to be corrected, clarified, or simply updated. So I thought that a book could be the best way to present the whole picture effectively, and here we are.
 
@@ -103,4 +103,4 @@ So I decided to try to write my own parser and here we go. This version of the b
 
 I hope you will enjoy the effort I put into this new edition!
 
-[^footnote1]: <https://github.com/lgiordani/punch>[^footnote2]: <https://www.amazon.com/Object-Oriented-Software-Engineering-Approach/dp/0201544350>
+[^footnote1]: <https://www.amazon.com/Object-Oriented-Software-Engineering-Approach/dp/0201544350>

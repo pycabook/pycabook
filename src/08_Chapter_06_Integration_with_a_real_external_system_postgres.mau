@@ -78,7 +78,7 @@ Furthermore, we have to deal with a proper external system, so we have to devise
 
 == A repository based on PostgreSQL
 
-Let's start with a repository based on a popular SQL database, [link](https://www.postgresql.org,PostgreSQL). It can be accessed from Python in many ways, but the best one is probably through the [link](https://www.sqlalchemy.org,SQLAlchemy) interface. SQLAlchemy is an ORM, a package that maps objects (as in object-oriented) to a relational database. ORMs can normally be found in web frameworks like Django or in standalone packages like the one we are considering.
+Let's start with a repository based on a popular SQL database, [link]("https://www.postgresql.org", "PostgreSQL"). It can be accessed from Python in many ways, but the best one is probably through the [link]("https://www.sqlalchemy.org", "SQLAlchemy") interface. SQLAlchemy is an ORM, a package that maps objects (as in object-oriented) to a relational database. ORMs can normally be found in web frameworks like Django or in standalone packages like the one we are considering.
 
 :fn-query:[footnote](Unless you consider things like `sessionmaker_mock(\)(\).query.assert_called_with(Room\)` something attractive. And this was by far the simplest mock I had to write.)
 
@@ -117,7 +117,7 @@ markers =
         integration: integration tests
 ----
 
-You can now run `pytest -svv -m integration` to ask pytest to run only the tests marked with that label. The option `-m` supports a rich syntax that you can learn by reading the [link](https://docs.pytest.org/en/latest/example/markers.html,documentation).
+You can now run `pytest -svv -m integration` to ask pytest to run only the tests marked with that label. The option `-m` supports a rich syntax that you can learn by reading the [link]("https://docs.pytest.org/en/latest/example/markers.html", "documentation").
 
 [source]
 ----
@@ -289,7 +289,7 @@ Obviously, this means that you have to keep the storage and the domain levels in
 
 When we run the integration tests the Postgres database engine must be already running in the background, and it must be already configured, for example, with a pristine database ready to be used. Moreover, when all the tests have been executed the database should be removed and the database engine stopped.
 
-This is a perfect job for Docker, which can run complex systems in isolation with minimal configuration. We have a choice here: we might want to orchestrate the creation and destruction of the database with an external script or try to implement everything in the test suite. The first solution is what many frameworks use, and what I explored in my series of posts  [link](https://www.thedigitalcatonline.com/blog/2020/07/05/flask-project-setup-tdd-docker-postgres-and-more-part-1/,"Flask Project Setup: TDD, Docker, Postgres and more"), so in this chapter I will show an implementation of that solution.
+This is a perfect job for Docker, which can run complex systems in isolation with minimal configuration. We have a choice here: we might want to orchestrate the creation and destruction of the database with an external script or try to implement everything in the test suite. The first solution is what many frameworks use, and what I explored in my series of posts  [link]("https://www.thedigitalcatonline.com/blog/2020/07/05/flask-project-setup-tdd-docker-postgres-and-more-part-1/", "Flask Project Setup: TDD, Docker, Postgres and more"), so in this chapter I will show an implementation of that solution.
 
 As I explained in the posts I mentioned the plan is to create a management script that spins up and tears down the required containers, runs the tests in between. The management script can be used also to run the application itself, or to create development setups, but in this case I will simplify it to manage only the tests. I highly recommend that you read those posts if you want to get the big picture behind the setup I will use.
 
