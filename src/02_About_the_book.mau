@@ -41,7 +41,7 @@ def example():
     print("This is a code block")
 ----
 
-Note that the path of the file that contains the code is printed just before the source code. Code blocks don't include line numbers, as the part of code that are being discussed are usually repeated in the text. This also makes it possible to copy the code from the PDF directly.
+Note that the path of the file that contains the code is printed just before the source code.
 
 Shell commands are presented with a generic prompt `$`
 
