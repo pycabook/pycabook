@@ -193,7 +193,7 @@ Now we have a standard way to pack input and output values, and the above patter
 
 == Request validation
 
-The parameter `filters` that we want to add to the use case allows the caller to add conditions to narrow the results of the model list operation, using a notation like `&lt;attribute&gt;__&lt;operator&gt;`. For example, specifying `filters={'price__lt': 100}` should return all the results with a price lower than 100. 
+The parameter `filters` that we want to add to the use case allows the caller to add conditions to narrow the results of the model list operation, using a notation like `<attribute>__<operator>`. For example, specifying `filters={'price__lt': 100}` should return all the results with a price lower than 100.
 
 Since the model `Room` has many attributes, the number of possible filters is very high. For simplicity's sake, I will consider the following cases:
 
