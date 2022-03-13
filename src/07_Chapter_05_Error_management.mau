@@ -193,7 +193,7 @@ Now we have a standard way to pack input and output values, and the above patter
 
 == Request validation
 
-The parameter `filters` that we want to add to the use case allows the caller to add conditions to narrow the results of the model list operation, using a notation like `&lt;attribute&gt;__&lt;operator&gt;`. For example, specifying `filters={'price__lt': 100}` should return all the results with a price lower than 100. 
+The parameter `filters` that we want to add to the use case allows the caller to add conditions to narrow the results of the model list operation, using a notation like `<attribute>__<operator>`. For example, specifying `filters={'price__lt': 100}` should return all the results with a price lower than 100. 
 
 Since the model `Room` has many attributes, the number of possible filters is very high. For simplicity's sake, I will consider the following cases:
 
@@ -1087,3 +1087,5 @@ print([room.to_dict() for room in response.value])
 We now have a very robust system to manage input validation and error conditions, and it is generic enough to be used with any possible use case. Obviously, we are free to add new types of errors to increase the granularity with which we manage failures, but the present version already covers everything that can happen inside a use case.
 
 In the next chapter, we will have a look at repositories based on real database engines, showing how to test external systems with integration tests, using PostgreSQL as a database. In a later chapter I will show how the clean architecture allows us to switch very easily between different external systems, moving the system to MongoDB.
+
+::footnotes:

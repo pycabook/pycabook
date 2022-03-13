@@ -9,7 +9,7 @@ Star Wars, 1977
 
 This book is about a software design methodology. A methodology is a set of guidelines that help you to reach your goal effectively, thus saving time, implementing far-sighted solutions, and avoiding the need to reinvent the wheel time and again.
 
-As other professionals around the world face problems and try to solve them, some of them, having discovered a good way to solve a problem, decide to share their experience, usually in the form of a "best practices" post on a blog, or talk at a conference. We also speak of *patterns*[^footnote_fr-49836241_1], which are formalised best practices, and *anti-patterns*, when it comes to advice about what not to do and why it is better to avoid a certain solution.
+As other professionals around the world face problems and try to solve them, some of them, having discovered a good way to solve a problem, decide to share their experience, usually in the form of a "best practices" post on a blog, or talk at a conference. We also speak of *patterns*[^footnote_fr-23570094_1], which are formalised best practices, and *anti-patterns*, when it comes to advice about what not to do and why it is better to avoid a certain solution.
 
 Often, when best practices encompass a wide scope, they are designated a *methodology*. The definition of a methodology is to convey a method, more than a specific solution to a problem. The very nature of methodologies means they are not connected to any specific case, in favour of a wider and more generic approach to the subject matter. This also means that applying methodologies without thinking shows that one didn't grasp the nature of a methodology, which is to help to find a solution and not to provide it.
 
@@ -85,4 +85,4 @@ The clean architecture concepts are independent of the language, but the impleme
 
 The cover photograph is by [pxhere](https://pxhere.com/en/photo/1453753). A detail of the Sagrada Familia in Barcelona, one of the world's best contemporary artworks, a bright example of architecture in which every single element has a meaning and a purpose. Praise to Antoni Gaudí, brilliant architect and saint, who will always inspire me with his works and his life.
 
-[^footnote_fr-49836241_1]: From the seminal book *Design Patterns: Elements of Reusable Object-Oriented Software* by Gamma, Vlissides, Johnson, and Helm.
+[^footnote_fr-23570094_1]: From the seminal book *Design Patterns: Elements of Reusable Object-Oriented Software* by Gamma, Vlissides, Johnson, and Helm.

@@ -111,7 +111,7 @@ Your elements should talk outwards using interfaces, that is using only the expe
 
 ### APIs and shades of grey
 
-The word API is of uttermost importance in a clean architecture. Every layer may be accessed by elements living in inner layers by an API, that is a fixed[^footnote_fr-90636062_1] collection of entry points (methods or objects).
+The word API is of uttermost importance in a clean architecture. Every layer may be accessed by elements living in inner layers by an API, that is a fixed[^footnote_fr-23436319_1] collection of entry points (methods or objects).
 
 The separation between layers and the content of each layer is not always fixed and immutable. A well-designed system shall also cope with practical world issues such as performances, for example, or other specific needs. When designing an architecture it is very important to know "what is where and why", and this is even more important when you "bend" the rules. Many issues do not have a black-or-white answer, and many decisions are "shades of grey", that is it is up to you to justify why you put something in a given place.
 
@@ -122,3 +122,5 @@ If you do it, there should be a giant warning in your code and your documentatio
 For the sake of example, let's say that a use case is accessing the storage layer through an interface, but this turns out to be too slow. You decide then to access directly the API of the specific database you are using, but this breaks the data flow, as now an internal layer (use cases) is accessing an outer one (external interfaces). If someone in the future wants to replace the specific database you are using with a different one, they have to be aware of this, as the new database probably won't provide the same API entry point with the same data.
 
 If you end up breaking the data flow consistently maybe you should consider removing one layer of abstraction, merging the two layers that you are linking.
+
+[^footnote_fr-23436319_1]: Here "fixed" means "the same among every implementation". An API may obviously change in time.

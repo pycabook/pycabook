@@ -11,9 +11,9 @@ In this chapter I will introduce the reader to a (very simple) system designed w
 
 ## The data flow
 
-In the rest of the book, we will design together part of a simple web application that provides a room renting system. So, let's consider that our "Rent-o-Matic" application[^footnote_fr--9031690_1] is running at <https://www.rentomatic.com>, and that a user wants to see the available rooms. They open the browser and type the address, then clicking on menus and buttons they reach the page with the list of all the rooms that our company rents.
+In the rest of the book, we will design together part of a simple web application that provides a room renting system. So, let's consider that our "Rent-o-Matic" application[^footnote_fr-23997145_1] is running at <https://www.rentomatic.com>, and that a user wants to see the available rooms. They open the browser and type the address, then clicking on menus and buttons they reach the page with the list of all the rooms that our company rents.
 
-Let's assume that this URL is `/rooms?status=available`. When the user's browser accesses that URL, an HTTP request reaches our system, where there is a component that is waiting for HTTP connections. Let's call this component "web framework"[^footnote_fr--1648927_2].
+Let's assume that this URL is `/rooms?status=available`. When the user's browser accesses that URL, an HTTP request reaches our system, where there is a component that is waiting for HTTP connections. Let's call this component "web framework"[^footnote_fr--7251933_2].
 
 The purpose of the web framework is to understand the HTTP request and to retrieve the data that we need to provide a response. In this simple case there are two important parts of the request, namely the endpoint itself (`/rooms`), and a single query string parameter, `status=available`. Endpoints are like commands for our system, so when a user accesses one of them, they signal to the system that a specific service has been requested, which in this case is the list of all the rooms that are available for rent.
 
@@ -77,7 +77,7 @@ A relational database is hundred of times richer and more complex than an HTTP e
 
 How can we avoid strong coupling? A simple solution is called *inversion of control*, and I will briefly sketch it here, and show a proper implementation in a later section of the book, when we will implement this very example.
 
-Inversion of control happens in two phases. First, the called object (the database in this case) is wrapped with a standard interface. This is a set of functionalities shared by every implementation of the target, and each interface translates the functionalities to calls to the specific language[^footnote_fr-46855900_3] of the wrapped implementation.
+Inversion of control happens in two phases. First, the called object (the database in this case) is wrapped with a standard interface. This is a set of functionalities shared by every implementation of the target, and each interface translates the functionalities to calls to the specific language[^footnote_fr-76171191_3] of the wrapped implementation.
 
 {blurb, class: tip}
 **Inversion of control**
@@ -140,4 +140,6 @@ We know that the Web framework receives an HTTP request (1) with a specific targ
 * * *
 So, now that we had a 10,000 feet overview of the system, let's go deeper into its components and the concepts behind them. In the next chapter I will detail how the design principles called "clean architecture" help to implement and use effectively concepts like separation of concerns, abstraction, implementation, and inversion of control.
 
-[^footnote_fr--9031690_1]: I was inspired by the Sludge-O-Matic™ from Day of the Tentacle[^footnote_fr--1648927_2]: There are many more layers that the HTTP request has to go through before reaching the actual web framework, for example the web server, but since the purpose of those layers is mostly to increase performances, I am not going to consider them until the end of the book.[^footnote_fr-46855900_3]: The word *language*, here, is meant in its broader sense. It might be a programming language, but also an API, a data format, or a protocol.
+[^footnote_fr-23997145_1]: I was inspired by the Sludge-O-Matic™ from Day of the Tentacle
+[^footnote_fr--7251933_2]: There are many more layers that the HTTP request has to go through before reaching the actual web framework, for example the web server, but since the purpose of those layers is mostly to increase performances, I am not going to consider them until the end of the book.
+[^footnote_fr-76171191_3]: The word *language*, here, is meant in its broader sense. It might be a programming language, but also an API, a data format, or a protocol.

@@ -180,7 +180,7 @@ Now we have a standard way to pack input and output values, and the above patter
 
 ## Request validation
 
-The parameter `filters` that we want to add to the use case allows the caller to add conditions to narrow the results of the model list operation, using a notation like `&lt;attribute&gt;__&lt;operator&gt;`. For example, specifying `filters={'price__lt': 100}` should return all the results with a price lower than 100. 
+The parameter `filters` that we want to add to the use case allows the caller to add conditions to narrow the results of the model list operation, using a notation like `<attribute>__<operator>`. For example, specifying `filters={'price__lt': 100}` should return all the results with a price lower than 100. 
 
 Since the model `Room` has many attributes, the number of possible filters is very high. For simplicity's sake, I will consider the following cases:
 
@@ -818,7 +818,7 @@ If we run the Flask development webserver now and try to access the endpoint `/r
 ``` json
 {"type": "SystemError", "message": "TypeError: list() got an unexpected keyword argument 'filters'"}
 ```
-and if you look at the HTTP response[^footnote_fr--1174836_1] you can see an HTTP 500 error, which is exactly the mapping of our `SystemError` use case error, which in turn signals a Python exception, which is in the `message` part of the error.
+and if you look at the HTTP response[^footnote_fr-90271658_1] you can see an HTTP 500 error, which is exactly the mapping of our `SystemError` use case error, which in turn signals a Python exception, which is in the `message` part of the error.
 
 This error comes from the repository, which has not been migrated to the new API. We need then to change the method `list` of the class `MemRepo` to accept the parameter `filters` and to act accordingly. Pay attention to this point. The filters might have been considered part of the business logic and implemented in the use case itself, but we decided to leverage what the storage system can do, so we moved filtering in that external system. This is a reasonable choice as databases can usually perform filtering and ordering very well. Even though the in-memory storage we are currently using is not a database, we are preparing to use a real external storage.
 
@@ -1040,3 +1040,5 @@ print([room.to_dict() for room in response.value])
 We now have a very robust system to manage input validation and error conditions, and it is generic enough to be used with any possible use case. Obviously, we are free to add new types of errors to increase the granularity with which we manage failures, but the present version already covers everything that can happen inside a use case.
 
 In the next chapter, we will have a look at repositories based on real database engines, showing how to test external systems with integration tests, using PostgreSQL as a database. In a later chapter I will show how the clean architecture allows us to switch very easily between different external systems, moving the system to MongoDB.
+
+[^footnote_fr-90271658_1]: For example using the browser developer tools. In Chrome and Firefox, press F12 and open the Network tab, then refresh the page.
