@@ -4,6 +4,7 @@
 You sent them out there and you didn't even warn them! Why didn't you warn them, Burke?
 
 Aliens, 1986
+
 {/blurb}
 
 
@@ -818,7 +819,7 @@ If we run the Flask development webserver now and try to access the endpoint `/r
 ``` json
 {"type": "SystemError", "message": "TypeError: list() got an unexpected keyword argument 'filters'"}
 ```
-and if you look at the HTTP response[^footnote_fr-90271658_1] you can see an HTTP 500 error, which is exactly the mapping of our `SystemError` use case error, which in turn signals a Python exception, which is in the `message` part of the error.
+and if you look at the HTTP response[^footnote_fr-22cbfac6-1] you can see an HTTP 500 error, which is exactly the mapping of our `SystemError` use case error, which in turn signals a Python exception, which is in the `message` part of the error.
 
 This error comes from the repository, which has not been migrated to the new API. We need then to change the method `list` of the class `MemRepo` to accept the parameter `filters` and to act accordingly. Pay attention to this point. The filters might have been considered part of the business logic and implemented in the use case itself, but we decided to leverage what the storage system can do, so we moved filtering in that external system. This is a reasonable choice as databases can usually perform filtering and ordering very well. Even though the in-memory storage we are currently using is not a database, we are preparing to use a real external storage.
 
@@ -1041,4 +1042,5 @@ We now have a very robust system to manage input validation and error conditions
 
 In the next chapter, we will have a look at repositories based on real database engines, showing how to test external systems with integration tests, using PostgreSQL as a database. In a later chapter I will show how the clean architecture allows us to switch very easily between different external systems, moving the system to MongoDB.
 
-[^footnote_fr-90271658_1]: For example using the browser developer tools. In Chrome and Firefox, press F12 and open the Network tab, then refresh the page.
+[^footnote_fr-22cbfac6-1]: For example using the browser developer tools. In Chrome and Firefox, press F12 and open the Network tab, then refresh the page.
+

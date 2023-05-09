@@ -4,6 +4,7 @@
 There's, uh, another example.
 
 Jurassic Park, 1993
+
 {/blurb}
 
 
@@ -370,7 +371,7 @@ class MongoRepo:
 
         return self._create_room_objects(result)
 ```
-which makes use of the similarity between the filters of the Rent-o-matic project and the ones of the MongoDB systemfootnote:[The similitude between the two systems is not accidental, as I was studying MongoDB at the time I wrote the first article about clean architectures, so I was obviously influenced by it.].
+which makes use of the similarity between the filters of the Rent-o-matic project and the ones of the MongoDB system[^footnote_fr-b2a14453-1].
 
 {blurb, class: tip}
 **Source code**
@@ -383,4 +384,6 @@ which makes use of the similarity between the filters of the Rent-o-matic projec
 I think this very brief chapter clearly showed the merits of a layered approach and of a proper testing setup. So far we implemented and tested an interface towards two very different databases like PostgreSQL and MongoDB, but both interfaces are usable by the same use case, which ultimately means the same API endpoint.
 
 While we properly tested the integration with these external systems, we still don't have a way to run the whole system in what we call a production-ready environment, that is in a way that can be exposed to external users. In the next chapter I will show you how we can leverage the same setup we used for the tests to run Flask, PostgreSQL, and the use case we created in a way that can be used in production.
+
+[^footnote_fr-b2a14453-1]: The similitude between the two systems is not accidental, as I was studying MongoDB at the time I wrote the first article about clean architectures, so I was obviously influenced by it.
 

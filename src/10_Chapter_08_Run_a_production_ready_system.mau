@@ -9,10 +9,11 @@
 :GITHUB:admonition,note,github,"Source code"
 :gh-rentomatic:https://github.com/pycabook/rentomatic
 
-[quote, "Total Recall, 1990"]
+[quote]
 ----
 Vilos Cohaagen said troops would be used to ensure full production.
 ----
+Total Recall, 1990
 
 Now that we developed a repository that connects with PostgreSQL we can discuss how to properly set up the application to run a production-ready system. This part is not strictly related to the clean architecture, but I think it's worth completing the example, showing how the system that we designed can end up being the core of a real web application.
 
@@ -233,7 +234,7 @@ The new command is `compose`, that leverages Click's `argument` decorator to col
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c08-s01
+[link]({gh-rentomatic}/tree/ed2-c08-s01)
 ----
 
 When all this changes are in place we can test the application Dockerfile building the container.
@@ -686,7 +687,7 @@ and open or refresh [link]("http://localhost:8080/rooms") with the browser to se
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c08-s02
+[link]({gh-rentomatic}/tree/ed2-c08-s02)
 ----
 
 ---

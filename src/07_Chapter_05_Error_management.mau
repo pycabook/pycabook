@@ -9,10 +9,11 @@
 :GITHUB:admonition,note,github,"Source code"
 :gh-rentomatic:https://github.com/pycabook/rentomatic
 
-[quote, "Aliens, 1986"]
+[quote]
 ----
 You sent them out there and you didn't even warn them! Why didn't you warn them, Burke?
 ----
+Aliens, 1986
 
 In every software project, a great part of the code is dedicated to error management, and this code has to be rock solid. Error management is a complex topic, and there is always a corner case that we left out, or a condition that we supposed could never fail, while it does.
 
@@ -70,7 +71,7 @@ class RoomListRequest:
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c05-s01
+[link]({gh-rentomatic}/tree/ed2-c05-s01)
 ----
 
 The response object is also very simple since for the moment we just need to return a successful result. Unlike the request, the response is not linked to any particular use case, so the test file can be named `tests/test_responses.py`
@@ -100,7 +101,7 @@ class ResponseSuccess:
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c05-s02
+[link]({gh-rentomatic}/tree/ed2-c05-s02)
 ----
 
 With these two objects, we just laid the foundations for richer management of input and outputs of the use case, especially in the case of error conditions.
@@ -186,7 +187,7 @@ def room_list_use_case(repo, request):
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c05-s03
+[link]({gh-rentomatic}/tree/ed2-c05-s03)
 ----
 
 Now we have a standard way to pack input and output values, and the above pattern is valid for every use case we can create. We are still missing some features, however, because so far requests and responses are not used to perform error management.
@@ -359,7 +360,7 @@ def test_room_list_without_parameters(domain_rooms):
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c05-s04
+[link]({gh-rentomatic}/tree/ed2-c05-s04)
 ----
 
 == Responses and failures
@@ -521,7 +522,7 @@ The error types contained in the class `ResponseTypes` are very similar to HTTP 
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c05-s05
+[link]({gh-rentomatic}/tree/ed2-c05-s05)
 ----
 
 == Error management in a use case
@@ -632,7 +633,7 @@ As you can see, the first thing that the use case does is to check if the reques
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c05-s06
+[link]({gh-rentomatic}/tree/ed2-c05-s06)
 ----
 
 == Integrating external systems
@@ -850,7 +851,7 @@ Please note that I'm using a variable named `request_object` here to avoid clash
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c05-s07
+[link]({gh-rentomatic}/tree/ed2-c05-s07)
 ----
 
 === The repository
@@ -862,7 +863,12 @@ If we run the Flask development webserver now and try to access the endpoint `/r
 {"type": "SystemError", "message": "TypeError: list() got an unexpected keyword argument 'filters'"}
 ----
 
-and if you look at the HTTP response[footnote]("For example using the browser developer tools. In Chrome and Firefox, press F12 and open the Network tab, then refresh the page.") you can see an HTTP 500 error, which is exactly the mapping of our `SystemError` use case error, which in turn signals a Python exception, which is in the `message` part of the error.
+and if you look at the HTTP response[footnote](tools) you can see an HTTP 500 error, which is exactly the mapping of our `SystemError` use case error, which in turn signals a Python exception, which is in the `message` part of the error.
+
+[footnote, tools]
+----
+For example using the browser developer tools. In Chrome and Firefox, press F12 and open the Network tab, then refresh the page.
+----
 
 This error comes from the repository, which has not been migrated to the new API. We need then to change the method `list` of the class `MemRepo` to accept the parameter `filters` and to act accordingly. Pay attention to this point. The filters might have been considered part of the business logic and implemented in the use case itself, but we decided to leverage what the storage system can do, so we moved filtering in that external system. This is a reasonable choice as databases can usually perform filtering and ordering very well. Even though the in-memory storage we are currently using is not a database, we are preparing to use a real external storage.
 
@@ -1023,7 +1029,7 @@ At this point, you can start the Flask development webserver with `FLASK_CONFIG=
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c05-s08
+[link]({gh-rentomatic}/tree/ed2-c05-s08)
 ----
 
 === The CLI
@@ -1079,7 +1085,7 @@ print([room.to_dict() for room in response.value])
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c05-s09
+[link]({gh-rentomatic}/tree/ed2-c05-s09)
 ----
 
 ---

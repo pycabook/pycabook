@@ -9,12 +9,13 @@
 :GITHUB:admonition,note,github,"Source code"
 :gh-rentomatic:https://github.com/pycabook/rentomatic
 
-[quote, "Wargames, 1983"]
+[quote]
 ----
 Joshua/WOPR: Wouldn't you prefer a good game of chess?
 
 David: Later. Let's play Global Thermonuclear War.
 ----
+Wargames, 1983
 
 The goal of the "Rent-o-Matic" project is to create a simple search engine for a room renting company. Objects in the dataset (rooms) are described by some attributes and the search engine shall allow the user to set some filters to narrow the search.
  
@@ -82,7 +83,7 @@ You may notice that I configured the project to use black with an unorthodox lin
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/second-edition
+[link]({gh-rentomatic}/tree/second-edition)
 ----
 
 === Domain models
@@ -137,7 +138,7 @@ class Room:
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c03-s01
+[link]({gh-rentomatic}/tree/ed2-c03-s01)
 ----
 
 The model is very simple and requires little explanation. I'm using dataclasses as they are a compact way to implement simple models like this, but you are free to use standard classes and to implement the method `__init__` explicitly.
@@ -186,7 +187,7 @@ class Room:
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c03-s02
+[link]({gh-rentomatic}/tree/ed2-c03-s02)
 ----
 
 For the same reason mentioned before, it is useful to be able to convert the model into a dictionary, so that we can easily serialise it into JSON or similar language-agnostic formats. The test for the method `to_dict` goes again in `tests/domain/test_room.py`
@@ -221,7 +222,7 @@ If you are not using dataclasses you need to explicitly create the dictionary, b
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c03-s03
+[link]({gh-rentomatic}/tree/ed2-c03-s03)
 ----
 
 It is also very useful to be able to compare instances of a model. The test goes in the same file as the previous test
@@ -248,7 +249,7 @@ Again, dataclasses make this very simple, as they provide an implementation of `
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c03-s04
+[link]({gh-rentomatic}/tree/ed2-c03-s04)
 ----
 
 === Serializers
@@ -322,7 +323,7 @@ class RoomJsonEncoder(json.JSONEncoder):
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c03-s05
+[link]({gh-rentomatic}/tree/ed2-c03-s05)
 ----
 
 Providing a class that inherits from `json.JSONEncoder` let us use the syntax `json_room = json.dumps(room, cls=RoomJsonEncoder)` to serialize the model. Note that we are not using the method `as_dict`, as the UUID code is not directly JSON serialisable. This means that there is a slight degree of code repetition in the two classes, which in my opinion is acceptable, being covered by tests. If you prefer, however, you can call the method `as_dict` and then adjust the code field converting it with `str`.
@@ -418,7 +419,7 @@ Your business logic might be complicated, and require the connection with severa
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c03-s06
+[link]({gh-rentomatic}/tree/ed2-c03-s06)
 ----
 
 === The storage system
@@ -504,7 +505,7 @@ class MemRepo:
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c03-s07
+[link]({gh-rentomatic}/tree/ed2-c03-s07)
 ----
 
 You can easily imagine this class being the wrapper around a real database or any other storage type. While the code might become more complex, its basic structure would remain the same, with a single public method `list`. I will dig into database repositories in a later chapter.
@@ -535,7 +536,7 @@ print(result)
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c03-s08
+[link]({gh-rentomatic}/tree/ed2-c03-s08)
 ----
 
 You can execute this file with `python cli.py` or, if you prefer, run `chmod +x cli.py` (which makes it executable) and then run it with `./cli.py` directly. The expected result is an empty list
@@ -608,7 +609,7 @@ print([room.to_dict() for room in result])
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c03-s09
+[link]({gh-rentomatic}/tree/ed2-c03-s09)
 ----
 
 Again, remember that we need to hardcode data due to the trivial nature of our storage, and not to the architecture of the system. Note that I changed the instruction `print` as the repository returns domain models and printing them would result in a list of strings like `<rentomatic.domain.room.Room object at 0x7fb815ec04e0>`, which is not really helpful.

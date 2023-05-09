@@ -1,11 +1,10 @@
 # Chapter 02 Components of a clean architecture
 
-## Components of a clean architecture
-
 {blurb, icon: quote-right}
 Wait a minute. Wait a minute Doc, uh, are you telling me you built a time machine... out of a DeLorean?
 
 Back to the Future, 1985
+
 {/blurb}
 
 
@@ -111,7 +110,7 @@ Your elements should talk outwards using interfaces, that is using only the expe
 
 ### APIs and shades of grey
 
-The word API is of uttermost importance in a clean architecture. Every layer may be accessed by elements living in inner layers by an API, that is a fixed[^footnote_fr-23436319_1] collection of entry points (methods or objects).
+The word API is of uttermost importance in a clean architecture. Every layer may be accessed by elements living in inner layers by an API, that is a fixed[^footnote_fr-68478dee-1] collection of entry points (methods or objects).
 
 The separation between layers and the content of each layer is not always fixed and immutable. A well-designed system shall also cope with practical world issues such as performances, for example, or other specific needs. When designing an architecture it is very important to know "what is where and why", and this is even more important when you "bend" the rules. Many issues do not have a black-or-white answer, and many decisions are "shades of grey", that is it is up to you to justify why you put something in a given place.
 
@@ -123,4 +122,5 @@ For the sake of example, let's say that a use case is accessing the storage laye
 
 If you end up breaking the data flow consistently maybe you should consider removing one layer of abstraction, merging the two layers that you are linking.
 
-[^footnote_fr-23436319_1]: Here "fixed" means "the same among every implementation". An API may obviously change in time.
+[^footnote_fr-68478dee-1]: Here "fixed" means "the same among every implementation". An API may obviously change in time.
+

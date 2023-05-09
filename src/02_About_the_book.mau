@@ -9,14 +9,20 @@
 :NOTE:admonition,note,github,"Source code"
 :gh-rentomatic:https://github.com/pycabook/rentomatic
 
-[quote, "The Blues Brothers, 1980"]
+[quote]
 ----
 We'll put the band back together, do a few gigs, we get some bread. Bang! Five thousand bucks.
 ----
+The Blues Brothers, 1980
 
 In 2015 I was introduced to the clean architecture by a colleague of mine, Roberto Ciatti. I started working with him following a strict Test-Driven Development (TDD) approach and learning or better understanding many things I now consider pillars of my programming knowledge.
 
-Unfortunately the project was cancelled, but the clean architecture concepts stuck with me, so I revisited them for a simple open source project I started working on at the time. Meanwhile I read "Object Oriented Software Engineering: A Use-Case Driven Approach" by Ivar Jacobson[footnote](https://www.amazon.com/Object-Oriented-Software-Engineering-Approach/dp/0201544350).
+Unfortunately the project was cancelled, but the clean architecture concepts stuck with me, so I revisited them for a simple open source project I started working on at the time. Meanwhile I read "Object Oriented Software Engineering: A Use-Case Driven Approach" by Ivar Jacobson[footnote](jacobson).
+
+[footnote, jacobson]
+----
+[link]("https://www.amazon.com/Object-Oriented-Software-Engineering-Approach/dp/0201544350")
+----
 
 In 2013 I started writing a personal blog, [link]("https://www.thedigitalcatonline.com/","The Digital Cat"), and after having published many Python-related posts I began working on a post to show other programmers the beauty of the clean architecture concepts: "Clean Architectures in Python: a step by step example", published in 2016, which was well received by the Python community. For a couple of years I considered expanding the post, but I couldn't find the time to do it, and in the meanwhile I realised that many things I had written needed to be corrected, clarified, or simply updated. So I thought that a book could be the best way to present the whole picture effectively, and here we are.
 
@@ -41,7 +47,7 @@ def example():
     print("This is a code block")
 ----
 
-Note that the path of the file that contains the code is printed just before the source code. Code blocks don't include line numbers, as the part of code that are being discussed are usually repeated in the text. This also makes it possible to copy the code from the PDF directly.
+Note that the path of the file that contains the code is printed just before the source code.
 
 Shell commands are presented with a generic prompt `$`
 
@@ -58,7 +64,7 @@ This box provides a link to the commit or the tag that contains the code that wa
 
 [{NOTE}]
 ----
-{gh-rentomatic}/tree/master
+[link]("{gh-rentomatic}/tree/master")
 ----
 
 This box highlights a concept explained in detail in the current chapter

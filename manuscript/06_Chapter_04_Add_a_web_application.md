@@ -4,6 +4,7 @@
 For your information, Hairdo, a major network is interested in me.
 
 Groundhog Day, 1993
+
 {/blurb}
 
 
@@ -103,7 +104,7 @@ def create_app(config_name):
 
 Before we create the proper setup of the webserver, we want to create the endpoint that will be exposed. Endpoints are ultimately functions that are run when a user sends a request to a certain URL, so we can still work with TDD, as the final goal is to have code that produces certain results.
 
-The problem we have testing an endpoint is that we need the webserver to be up and running when we hit the test URLs. The webserver itself is an external system so we won't test it, but the code that provides the endpoint is part of our application[^footnote_fr--6320733_1]. It is actually a gateway, that is an interface that allows an HTTP framework to access the use cases.
+The problem we have testing an endpoint is that we need the webserver to be up and running when we hit the test URLs. The webserver itself is an external system so we won't test it, but the code that provides the endpoint is part of our application[^footnote_fr-6b9e9c63-1]. It is actually a gateway, that is an interface that allows an HTTP framework to access the use cases.
 
 The extension `pytest-flask` allows us to run Flask, simulate HTTP requests, and test the HTTP responses. This extension hides a lot of automation, so it might be considered a bit "magic" at a first glance. When you install it some fixtures like `client` are available automatically, so you don't need to import them. Moreover, it tries to access another fixture named `app` that you have to define. This is thus the first thing to do.
 
@@ -333,4 +334,5 @@ I hope you can now appreciate the power of the layered architecture that we crea
 
 The use case I presented is purposely very simple. It doesn't require any input and it cannot return error conditions, so the code we wrote completely ignored input validation and error management. These topics are however extremely important, so we need to discuss how a clean architecture can deal with them.
 
-[^footnote_fr--6320733_1]: We could, in theory, create a pure component that receives parameters and returns a JSON object, and then wrap this component into an endpoint. This way, the component would be strictly part of the internal system and the endpoint of the external one, but both would have to be created in the Gateway layer. This looks overkill, at least for the simple example we are discussing here, so I will keep them together and test them as a single component.
+[^footnote_fr-6b9e9c63-1]: We could, in theory, create a pure component that receives parameters and returns a JSON object, and then wrap this component into an endpoint. This way, the component would be strictly part of the internal system and the endpoint of the external one, but both would have to be created in the Gateway layer. This looks overkill, at least for the simple example we are discussing here, so I will keep them together and test them as a single component.
+

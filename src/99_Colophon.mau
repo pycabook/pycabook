@@ -9,10 +9,11 @@
 :GITHUB:admonition,note,github,"Source code"
 :gh-rentomatic:https://github.com/pycabook/rentomatic
 
-[quote, "Young Frankenstein, 1974"]
+[quote]
 ----
 In conclusion, it should be noted...
 ----
+Young Frankenstein, 1974
 
 Writing a book is a giant effort.
 

@@ -9,14 +9,24 @@
 :GITHUB:admonition,note,github,"Source code"
 :gh-rentomatic:https://github.com/pycabook/rentomatic
 
-[quote, "Alien, 1979"]
+[quote]
 ----
 What's the last thing you do remember? Hmm?
 ----
+Alien, 1979
 
 I will track here changes between releases of the book, following [link]("https://semver.org/", "Semantic Versioning"). A change in the *major* number means an incompatible change, that is a big rewrite of the book, also known as 2nd edition, 3rd edition, and so on. A change in the *minor* number means that something important was added to the content, like a new section or chapter. A change in the *patch* number signals minor fixes like typos in the text or the code, rewording of sentences, and so on.
 
-*Current version*: 2.1.2
+*Current version*: 2.1.3
+
+=== Version 2.1.3 (2023-05-XX)
+
+* This version has been ported to Mau version 3, which at the time of writing is still in development but will be published soon.
+* [link]("https://github.com/isparks", "Ian Sparks") spotted a typo that prevented a foot note from being rendered in chapter 7. Thank Ian!
+* GitHub users [link]("https://github.com/Robert-at-GE", "Robert-at-GE") and [link]("https://github.com/halbow", "halbow") noticed that line numbers have been introduced in code snippets while the section "Typographic conventions" still mentioned there are no numbers. I fixed it now, thanks both!
+* [link]("https://github.com/ar-qun", "Alex") noticed a typo in chapter 2. This was fixed a while ago but I forgot to mention the contribution. Thanks Alex!
+* [link]("https://github.com/rabbl", "Ralf Junghanns") found a bug in the code of `tests/repository/postgres/conftest.py` where `connection.close()` was just mentioned and not called. I fixed that in the [link]("https://github.com/pycabook/rentomatic", "code repository") and in the book. Thanks Ralf!
+* The title of chapter 2 was incorrectly repeated and had been fixed now.
 
 === Version 2.1.2 (2022-01-06)
 

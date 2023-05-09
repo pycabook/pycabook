@@ -4,12 +4,23 @@
 What's the last thing you do remember? Hmm?
 
 Alien, 1979
+
 {/blurb}
 
 
 I will track here changes between releases of the book, following [Semantic Versioning](https://semver.org/). A change in the **major** number means an incompatible change, that is a big rewrite of the book, also known as 2nd edition, 3rd edition, and so on. A change in the **minor** number means that something important was added to the content, like a new section or chapter. A change in the **patch** number signals minor fixes like typos in the text or the code, rewording of sentences, and so on.
 
-**Current version**: 2.1.2
+**Current version**: 2.1.3
+
+### Version 2.1.3 (2023-05-XX)
+
+
+* This version has been ported to Mau version 3, which at the time of writing is still in development but will be published soon.
+* [Ian Sparks](https://github.com/isparks) spotted a typo that prevented a foot note from being rendered in chapter 7. Thank Ian!
+* GitHub users [Robert-at-GE](https://github.com/Robert-at-GE) and [halbow](https://github.com/halbow) noticed that line numbers have been introduced in code snippets while the section "Typographic conventions" still mentioned there are no numbers. I fixed it now, thanks both!
+* [Alex](https://github.com/ar-qun) noticed a typo in chapter 2. This was fixed a while ago but I forgot to mention the contribution. Thanks Alex!
+* [Ralf Junghanns](https://github.com/rabbl) found a bug in the code of `tests/repository/postgres/conftest.py` where `connection.close()` was just mentioned and not called. I fixed that in the [code repository](https://github.com/pycabook/rentomatic) and in the book. Thanks Ralf!
+* The title of chapter 2 was incorrectly repeated and had been fixed now.
 
 ### Version 2.1.2 (2022-01-06)
 

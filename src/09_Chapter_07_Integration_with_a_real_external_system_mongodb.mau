@@ -9,10 +9,11 @@
 :GITHUB:admonition,note,github,"Source code"
 :gh-rentomatic:https://github.com/pycabook/rentomatic
 
-[quote, "Jurassic Park, 1993"]
+[quote]
 ----
 There's, uh, another example.
 ----
+Jurassic Park, 1993
 
 The previous chapter showed how to integrate a real external system with the core of the clean architecture. Unfortunately I also had to introduce a lot of code to manage the integration tests and to globally move forward to a proper setup. In this chapter I will leverage the work we just did to show only the part strictly connected with the external system. Swapping the database from PostgreSQL to MongoDB is the perfect way to show how flexible the clean architecture is, and how easy it is to introduce different approaches like a non-relational database instead of a relational one.
 
@@ -110,7 +111,7 @@ and run `pip install -r requirements/dev.txt`.
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c07-s01
+[link]({gh-rentomatic}/tree/ed2-c07-s01)
 ----
 
 == Docker Compose configuration
@@ -142,7 +143,7 @@ services:
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c07-s02
+[link]({gh-rentomatic}/tree/ed2-c07-s02)
 ----
 
 == Application configuration
@@ -210,7 +211,7 @@ Please also note that I chose to use the same variable `APPLICATION_DB` for the 
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c07-s03
+[link]({gh-rentomatic}/tree/ed2-c07-s03)
 ----
 
 == Integration tests
@@ -319,7 +320,7 @@ I added a test called `test_repository_list_with_price_as_string` that checks wh
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c07-s04
+[link]({gh-rentomatic}/tree/ed2-c07-s04)
 ----
 
 == The MongoDB repository
@@ -381,14 +382,16 @@ class MongoRepo:
         return self._create_room_objects(result)
 ----
 
-:fn-similar:footnote:[The similitude between the two systems is not accidental, as I was studying MongoDB at the time I wrote the first article about clean architectures, so I was obviously influenced by it.]
+which makes use of the similarity between the filters of the Rent-o-matic project and the ones of the MongoDB system[footnote](similar).
 
-which makes use of the similarity between the filters of the Rent-o-matic project and the ones of the MongoDB system{fn-similar}.
-
+[footnote, similar]
+----
+The similitude between the two systems is not accidental, as I was studying MongoDB at the time I wrote the first article about clean architectures, so I was obviously influenced by it.
+----
 
 [{GITHUB}]
 ----
-{gh-rentomatic}/tree/ed2-c07-s05
+[link]({gh-rentomatic}/tree/ed2-c07-s05)
 ----
 
 ---
