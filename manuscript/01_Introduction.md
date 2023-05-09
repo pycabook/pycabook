@@ -81,7 +81,7 @@ The clean architecture concepts are independent of the language, but the impleme
 
 * Eleanor de Veras, who proofread the introduction.
 * Roberto Ciatti, who introduced me to clean architectures.
-* Readers Eric Smith, Faust Gertz, Giovanni Natale, Grant Moore, Hans Chen, Max H. Gerlach, Michael O'Neill, Paul Schwendenman, Ramces Chirino, Rodrigo Monte, Simon Weiss, Thiago C. D'Ávila, robveijk, mathisheeren, 4myhw, Jakob Waibel, 1110sillabo, Maxim Ivanov who fixed bugs, typos and bad grammar submitting issues and pull requests.
+* Readers Eric Smith, Faust Gertz, Giovanni Natale, Grant Moore, Hans Chen, Max H. Gerlach, Michael O'Neill, Paul Schwendenman, Ramces Chirino, Rodrigo Monte, Simon Weiss, Thiago C. D'Ávila, robveijk, mathisheeren, 4myhw, Jakob Waibel, 1110sillabo, Maxim Ivanov and many others who fixed bugs, typos and bad grammar submitting issues and pull requests. See the changelog at the end of the book for a full report of readers' contributions.
 * Łukasz Dziedzic, who developed the free "Lato" font (<http://www.latofonts.com>), used for the cover.
 
 The cover photograph is by [pxhere](https://pxhere.com/en/photo/1453753). A detail of the Sagrada Familia in Barcelona, one of the world's best contemporary artworks, a bright example of architecture in which every single element has a meaning and a purpose. Praise to Antoni Gaudí, brilliant architect and saint, who will always inspire me with his works and his life.

@@ -12,7 +12,7 @@ I will track here changes between releases of the book, following [Semantic Vers
 
 **Current version**: 2.1.3
 
-### Version 2.1.3 (2023-05-XX)
+### Version 2.1.3 (2023-05-09)
 
 
 * This version has been ported to Mau version 3, which at the time of writing is still in development but will be published soon.
