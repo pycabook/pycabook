@@ -9,7 +9,7 @@ If for some reason you need to read the first edition you can find it using the 
 
 ## Editions
 
-My recommendation is to read the book online at TODO. The HTML version is beautifully formatted thanks to [Asciidoctor](https://asciidoctor.org/), and you can easily copy and paste code. If you prefer a printable version you can download the PDF version from [Leanpub](https://leanpub.com/clean-architectures-in-python).
+My recommendation is to read the book online at [The Digital Cat Books](https://www.thedigitalcatbooks.com/pycabook-introduction/). The HTML version is beautifully formatted thanks to [Asciidoctor](https://asciidoctor.org/), and you can easily copy and paste code. If you prefer a printable version you can download the PDF version from [Leanpub](https://leanpub.com/clean-architectures-in-python).
 
 ## Contributions
 
